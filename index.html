@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How Iran Built a Kill Switch for 87 Million People</title>
+    <title>Iran Internet Blackout: 87 Million People at Risk</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -111,6 +111,12 @@
             margin-bottom: 32px;
             position: relative;
             z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .hero-question {
@@ -182,6 +188,102 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(8px); }
+        }
+
+        /* Current Status Banner */
+        .current-status {
+            background: linear-gradient(135deg, #1a2a1a 0%, #0f0f12 100%);
+            padding: 80px 24px;
+            border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .status-dot.warning {
+            background: var(--accent-orange);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .status-label.warning {
+            color: var(--accent-orange);
+        }
+
+        .status-title {
+            color: white;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 16px;
+        }
+
+        .status-date {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .status-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .status-card-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .status-card-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            color: white;
+        }
+
+        .status-card-value.highlight {
+            color: var(--accent-green);
+        }
+
+        .status-card-value.warning {
+            color: var(--accent-orange);
+        }
+
+        .status-card-note {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 8px;
         }
 
         /* Story sections */
@@ -1235,22 +1337,22 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-warning">
-            <span>Human Rights Issue</span>
+            <span>Human Rights Crisis</span>
         </div>
-        <h1 class="hero-question">How Iran Built a <span class="highlight">Kill Switch</span> for 87 Million People</h1>
-        <p class="hero-subtitle">A technical breakdown of how a government engineered the ability to silence an entire nation&mdash;and what people can do about it.</p>
+        <h1 class="hero-question">Iran's Internet <span class="highlight">Blackout</span></h1>
+        <p class="hero-subtitle">Understanding how 87 million people can be disconnected from the world&mdash;and the ongoing threat they face.</p>
         <div class="hero-stats">
             <div class="hero-stat">
+                <div class="hero-stat-value">87M</div>
+                <div class="hero-stat-label">People affected</div>
+            </div>
+            <div class="hero-stat">
                 <div class="hero-stat-value">1</div>
-                <div class="hero-stat-label">Chokepoint</div>
+                <div class="hero-stat-label">Single point of failure</div>
             </div>
             <div class="hero-stat">
-                <div class="hero-stat-value">7</div>
-                <div class="hero-stat-label">Days blacked out (2019)</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">100+</div>
-                <div class="hero-stat-label">Hours offline (2022)</div>
+                <div class="hero-stat-value">4,026</div>
+                <div class="hero-stat-label">Network routes at risk</div>
             </div>
         </div>
         <div class="scroll-hint">
@@ -1261,11 +1363,52 @@
         </div>
     </section>
 
+    <!-- Current Status - January 2026 -->
+    <section class="current-status">
+        <div class="wide-container">
+            <div class="status-header">
+                <div class="status-dot"></div>
+                <span class="status-label">Live Status - January 2026</span>
+            </div>
+
+            <h2 class="status-title fade-in">Current State of Iran's Internet</h2>
+            <p class="status-date fade-in">Data collected January 13, 2026 via RIPE RIS</p>
+
+            <div class="status-grid fade-in">
+                <div class="status-card">
+                    <div class="status-card-label">Global Visibility</div>
+                    <div class="status-card-value highlight">99.7%</div>
+                    <div class="status-card-note">320 of 321 peers seeing routes</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-card-label">IPv4 Prefixes</div>
+                    <div class="status-card-value">4,026</div>
+                    <div class="status-card-note">Active route announcements</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-card-label">Gateway Status</div>
+                    <div class="status-card-value warning">AS49666</div>
+                    <div class="status-card-note">Single chokepoint active</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-card-label">International Upstreams</div>
+                    <div class="status-card-value">12</div>
+                    <div class="status-card-note">All through TIC gateway</div>
+                </div>
+            </div>
+
+            <div class="critical-box fade-in" style="margin-top: 40px; background: rgba(244, 162, 97, 0.2); border: 1px solid rgba(244, 162, 97, 0.3);">
+                <div class="critical-label" style="color: var(--accent-orange);">Current Risk Assessment</div>
+                <p class="critical-text" style="color: rgba(255,255,255,0.8);">While connectivity appears normal today, the infrastructure for a complete blackout remains in place. All 4,026 routes pass through a single government-controlled gateway. A shutdown could occur within hours if ordered.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Part 1: The Basics -->
     <section class="story-section">
         <div class="container">
-            <span class="section-number fade-in">Part 1</span>
-            <h2 class="story-title fade-in">First, understand what "the internet" actually is</h2>
+            <span class="section-number fade-in">Understanding the Problem</span>
+            <h2 class="story-title fade-in">What is an internet blackout?</h2>
 
             <p class="story-text fade-in">The internet isn't one thing. It's thousands of separate networks all agreeing to pass traffic to each other. Your home WiFi is a network. Your mobile carrier is a network. Google runs networks. So does every country.</p>
 
@@ -1278,45 +1421,45 @@
 
             <p class="story-text fade-in">Most countries have <strong>multiple connections</strong> to the global internet through different providers in different locations. This redundancy makes the internet resilient. If one path fails, traffic finds another way.</p>
 
-            <p class="story-text fade-in"><strong>Iran deliberately destroyed this redundancy.</strong></p>
+            <p class="story-text fade-in">In Iran, this redundancy has been systematically eliminated. All international traffic now flows through <strong>one single point</strong>&mdash;making a nationwide blackout trivially easy to execute.</p>
         </div>
     </section>
 
     <!-- Part 2: The Chokepoint -->
     <section class="story-section dark">
         <div class="container">
-            <span class="section-number fade-in">Part 2</span>
-            <h2 class="story-title fade-in">Iran funneled everything through one door</h2>
+            <span class="section-number fade-in">The Vulnerability</span>
+            <h2 class="story-title fade-in">A single point of failure for 87 million people</h2>
 
-            <p class="story-text fade-in">Over the past decade, Iran systematically restructured its internet infrastructure. Instead of allowing networks to connect to the outside world independently, the government forced <strong>all international traffic</strong> through a single gateway: <strong>AS49666</strong>, operated by the state-controlled Telecommunication Infrastructure Company (TIC).</p>
+            <p class="story-text fade-in">All of Iran's international internet traffic passes through one gateway: <strong>AS49666</strong>, operated by the state-controlled Telecommunication Infrastructure Company (TIC). Every mobile user, every home connection, every business&mdash;all dependent on this single point.</p>
 
             <div class="chokepoint-visual fade-in">
-                <div class="chokepoint-title">Iran's Engineered Chokepoint Architecture</div>
+                <div class="chokepoint-title">Iran's Network Architecture (January 2026)</div>
                 <div class="chokepoint-diagram">
                     <div class="isp-row">
                         <div class="isp-node">
                             <div class="isp-icon">📱</div>
                             <div class="isp-name">MCI</div>
                             <div class="isp-type">Mobile</div>
-                            <div class="isp-users">~50M users</div>
+                            <div class="isp-users">905 prefixes</div>
                         </div>
                         <div class="isp-node">
                             <div class="isp-icon">📱</div>
                             <div class="isp-name">Irancell</div>
                             <div class="isp-type">Mobile</div>
-                            <div class="isp-users">~45M users</div>
+                            <div class="isp-users">461 prefixes</div>
                         </div>
                         <div class="isp-node">
                             <div class="isp-icon">🏠</div>
                             <div class="isp-name">Shatel</div>
                             <div class="isp-type">Fixed ISP</div>
-                            <div class="isp-users">~2M users</div>
+                            <div class="isp-users">184 prefixes</div>
                         </div>
                         <div class="isp-node">
                             <div class="isp-icon">📱</div>
                             <div class="isp-name">Rightel</div>
                             <div class="isp-type">Mobile</div>
-                            <div class="isp-users">~8M users</div>
+                            <div class="isp-users">90 prefixes</div>
                         </div>
                     </div>
 
@@ -1329,11 +1472,11 @@
                     </div>
 
                     <div class="chokepoint-gate">
-                        <div class="gate-warning">Government Controlled Chokepoint</div>
-                        <div class="gate-icon">🚨</div>
+                        <div class="gate-warning">Single Point of Failure</div>
+                        <div class="gate-icon">⚠️</div>
                         <div class="gate-name">TIC Gateway</div>
                         <div class="gate-asn">AS49666</div>
-                        <div class="gate-owner">Telecommunication Infrastructure Company</div>
+                        <div class="gate-owner">16 downstream networks dependent</div>
                     </div>
 
                     <div class="intl-connection"></div>
@@ -1357,250 +1500,146 @@
                         </div>
                     </div>
 
-                    <div class="world-label">Global Internet</div>
+                    <div class="world-label">Global Internet (12 upstream providers)</div>
                 </div>
             </div>
 
             <div class="critical-box fade-in">
-                <div class="critical-label">Why this is dangerous</div>
-                <p class="critical-text">By forcing all traffic through one point, the government doesn't need to negotiate with dozens of companies or physically cut cables in multiple locations. They control one gateway, they control everything. This was not an accident&mdash;it was deliberate engineering to enable censorship and shutdowns.</p>
+                <div class="critical-label">Why this matters</div>
+                <p class="critical-text">With only one gateway, disconnecting an entire nation requires just one action. There's no redundancy, no backup path, no resilience. When this gateway stops announcing routes, Iran disappears from the internet.</p>
             </div>
-
-            <p class="story-text fade-in">This single point of control is called a <strong>chokepoint</strong>. It transforms the internet from a resilient, distributed network into something that can be switched off with a single command.</p>
         </div>
     </section>
 
     <!-- Part 3: How BGP Works -->
     <section class="story-section">
         <div class="container">
-            <span class="section-number fade-in">Part 3</span>
-            <h2 class="story-title fade-in">How they actually "turn off" the internet</h2>
+            <span class="section-number fade-in">The Technical Reality</span>
+            <h2 class="story-title fade-in">How a blackout actually happens</h2>
 
-            <p class="story-text fade-in">The internet uses a protocol called <strong>BGP</strong> (Border Gateway Protocol) to know how to route traffic. Think of BGP as a global address book that every network constantly updates. When a network wants to be reachable, it "announces" its addresses to its neighbors, who pass the information along.</p>
+            <p class="story-text fade-in">The internet uses a protocol called <strong>BGP</strong> (Border Gateway Protocol) to know how to route traffic. Think of BGP as a global address book that every network constantly updates. When a network wants to be reachable, it "announces" its addresses to its neighbors.</p>
 
-            <p class="story-text fade-in">When Iran wants to disappear from the internet, they don't "block" anything. They simply <strong>stop announcing their addresses</strong>. The rest of the world's routers gradually forget Iran exists. It's not that they refuse to connect&mdash;they literally don't know how to reach Iran anymore.</p>
+            <p class="story-text fade-in">During a blackout, Iranian networks <strong>stop announcing their addresses</strong>. The rest of the world's routers gradually forget how to reach Iran. It's not blocking&mdash;it's erasure.</p>
 
             <div class="bgp-visual fade-in">
-                <h3 class="bgp-title">What happens to BGP during a shutdown</h3>
+                <h3 class="bgp-title">What happens to BGP during a blackout</h3>
                 <p class="bgp-subtitle">Simplified view of route announcements</p>
 
                 <div class="bgp-comparison">
                     <div class="bgp-state normal">
                         <div class="bgp-state-header">
                             <div class="bgp-state-icon">✓</div>
-                            <div class="bgp-state-title">Normal Operation</div>
+                            <div class="bgp-state-title">Normal State (Now)</div>
                         </div>
                         <div class="bgp-message">
                             <span class="keyword">ANNOUNCE</span> prefix <span class="value">185.143.232.0/22</span><br>
                             <span class="keyword">PATH:</span> AS49666 → AS6762 → ...<br>
                             <span class="keyword">NEXT_HOP:</span> <span class="value">185.143.232.1</span>
                         </div>
-                        <p class="bgp-result"><strong>Result:</strong> Global routers know "to reach 185.143.232.x, send traffic toward AS49666 (Iran's gateway)"</p>
+                        <p class="bgp-result"><strong>Result:</strong> Global routers know how to reach Iranian networks</p>
                     </div>
 
                     <div class="bgp-state shutdown">
                         <div class="bgp-state-header">
                             <div class="bgp-state-icon">✕</div>
-                            <div class="bgp-state-title">During Shutdown</div>
+                            <div class="bgp-state-title">During Blackout</div>
                         </div>
                         <div class="bgp-message">
                             <span class="keyword">WITHDRAW</span> prefix <span class="withdrawn">185.143.232.0/22</span><br>
                             <span class="keyword">PATH:</span> <span class="withdrawn">[removed]</span><br>
                             <span class="keyword">NEXT_HOP:</span> <span class="withdrawn">[none]</span>
                         </div>
-                        <p class="bgp-result"><strong>Result:</strong> Global routers delete Iran from their routing tables. Traffic to Iranian IPs gets dropped&mdash;there's nowhere to send it.</p>
+                        <p class="bgp-result"><strong>Result:</strong> Iran is erased from global routing tables. Traffic has nowhere to go.</p>
                     </div>
                 </div>
             </div>
 
             <div class="analogy-box fade-in">
                 <div class="analogy-label">Think of it this way</div>
-                <p class="analogy-text">Imagine if a country could erase itself from every GPS system and map in the world simultaneously. Delivery drivers wouldn't refuse to go there&mdash;they simply couldn't find it. That's what BGP withdrawal does to internet traffic.</p>
+                <p class="analogy-text">Imagine a country being erased from every GPS and map in the world simultaneously. People wouldn't refuse to go there&mdash;they simply couldn't find it. That's what BGP withdrawal does.</p>
             </div>
-
-            <p class="story-text fade-in">During the November 2019 shutdown, Iran withdrew approximately <strong>15,000 network prefixes</strong> from global routing tables. Within hours, international visibility of Iranian networks dropped from 100% to just 5%.</p>
-
-            <p class="story-text fade-in">The domestic "National Information Network" (NIN) continued working because it doesn't rely on international BGP announcements. This allowed government services and approved domestic apps to function while the outside world was completely cut off.</p>
         </div>
     </section>
 
-    <!-- Part 4: November 2019 -->
+    <!-- Part 4: Historical Pattern -->
     <section class="story-section dark">
         <div class="container">
-            <span class="section-number fade-in">Part 4</span>
-            <h2 class="story-title fade-in">November 2019: Seven days of silence</h2>
+            <span class="section-number fade-in">What Has Happened</span>
+            <h2 class="story-title fade-in">Timeline: From 2019 to January 2026</h2>
 
-            <p class="story-text fade-in">On November 16, 2019, following protests over fuel price increases, Iran executed a near-total internet shutdown. It wasn't a technical failure&mdash;it was a <strong>coordinated, deliberate silencing</strong> of 87 million people.</p>
-
-            <p class="story-text fade-in">The shutdown followed a calculated sequence: <strong>mobile networks first</strong> (harder to circumvent, used by protesters on the streets), then fixed-line ISPs. Within 6 hours, international connectivity dropped from 100% to 5%.</p>
+            <p class="story-text fade-in">This infrastructure has been used repeatedly to silence dissent. Here's the documented pattern of blackouts and the current state.</p>
 
             <div class="timeline-visual fade-in">
-                <h3 class="timeline-title">The coordinated shutdown sequence</h3>
-                <p class="timeline-subtitle">November 16-23, 2019 (times in local Iran time)</p>
+                <h3 class="timeline-title">Documented Blackouts and Current Status</h3>
+                <p class="timeline-subtitle">Key events from 2019 to present</p>
 
                 <div class="timeline">
                     <div class="timeline-track"></div>
 
                     <div class="timeline-event">
                         <div class="timeline-dot">
-                            <div class="dot"></div>
-                            <div class="timeline-time">14:00</div>
+                            <div class="dot danger"></div>
+                            <div class="timeline-time">Nov 2019</div>
                         </div>
                         <div class="timeline-content">
-                            <div class="timeline-event-title">Irancell goes dark</div>
-                            <div class="timeline-event-desc">First mobile network disconnected. <span class="timeline-percent">-33%</span> visibility</div>
+                            <div class="timeline-event-title">Total Blackout - 7 Days</div>
+                            <div class="timeline-event-desc">Following fuel price protests. Visibility dropped to <span class="timeline-percent">5%</span> within 6 hours. Near-complete isolation for a week.</div>
                         </div>
                     </div>
 
                     <div class="timeline-event">
                         <div class="timeline-dot">
                             <div class="dot warning"></div>
-                            <div class="timeline-time">14:30</div>
+                            <div class="timeline-time">Sep 2022</div>
                         </div>
                         <div class="timeline-content">
-                            <div class="timeline-event-title">MCI disconnected</div>
-                            <div class="timeline-event-desc">Largest mobile carrier (~50M users) goes offline. <span class="timeline-percent">67%</span></div>
+                            <div class="timeline-event-title">"Digital Curfew" - 13 Days</div>
+                            <div class="timeline-event-desc">After Mahsa Amini protests. Daily mobile shutdowns 4PM-midnight. <span class="timeline-percent">100+ hours</span> of cumulative blackout.</div>
                         </div>
                     </div>
 
                     <div class="timeline-event">
                         <div class="timeline-dot">
                             <div class="dot warning"></div>
-                            <div class="timeline-time">15:00</div>
+                            <div class="timeline-time">2022-2025</div>
                         </div>
                         <div class="timeline-content">
-                            <div class="timeline-event-title">Rightel drops</div>
-                            <div class="timeline-event-desc">All three mobile operators now offline. <span class="timeline-percent">55%</span></div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-event">
-                        <div class="timeline-dot">
-                            <div class="dot danger"></div>
-                            <div class="timeline-time">16:30</div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-event-title">TIC backbone withdraws routes</div>
-                            <div class="timeline-event-desc">Main infrastructure provider disconnects. <span class="timeline-percent">40%</span></div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-event">
-                        <div class="timeline-dot">
-                            <div class="dot danger"></div>
-                            <div class="timeline-time">17:00</div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-event-title">Shatel, ParsOnline disconnected</div>
-                            <div class="timeline-event-desc">Major fixed-line ISPs go dark. <span class="timeline-percent">25%</span></div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-event">
-                        <div class="timeline-dot">
-                            <div class="dot danger"></div>
-                            <div class="timeline-time">20:00</div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-event-title">Near-total blackout</div>
-                            <div class="timeline-event-desc">Only government/military networks remain. <span class="timeline-percent">5%</span></div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-event">
-                        <div class="timeline-dot">
-                            <div class="dot danger"></div>
-                            <div class="timeline-time">Nov 17-20</div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-event-title">Total information blackout</div>
-                            <div class="timeline-event-desc">5 days with no outside visibility. News can't get out. <span class="timeline-percent">5%</span></div>
+                            <div class="timeline-event-title">Ongoing Restrictions</div>
+                            <div class="timeline-event-desc">Continuous blocking of platforms, VPNs, and encrypted protocols. Regional outages during unrest.</div>
                         </div>
                     </div>
 
                     <div class="timeline-event">
                         <div class="timeline-dot">
                             <div class="dot"></div>
-                            <div class="timeline-time">Nov 23</div>
+                            <div class="timeline-time">Jan 2026</div>
                         </div>
                         <div class="timeline-content">
-                            <div class="timeline-event-title">Gradual restoration</div>
-                            <div class="timeline-event-desc">Services slowly return. Damage already done. <span class="timeline-percent">90%</span></div>
+                            <div class="timeline-event-title">Current State - Infrastructure Ready</div>
+                            <div class="timeline-event-desc">Visibility at <span class="timeline-percent" style="background: rgba(42, 157, 143, 0.1); color: var(--accent-teal);">99.7%</span> but single chokepoint remains. 4,026 prefixes through AS49666. Blackout capability intact.</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="critical-box fade-in">
-                <div class="critical-label">The human cost</div>
-                <p class="critical-text">During the blackout, the outside world had almost no visibility into what was happening inside Iran. Families couldn't reach relatives abroad. Journalists couldn't report. Evidence of violence was trapped inside. The shutdown was designed to enable a crackdown in darkness.</p>
-            </div>
+            <p class="story-text fade-in">The pattern is clear: when protests occur, the internet goes dark. The infrastructure exists specifically to enable this.</p>
         </div>
     </section>
 
-    <!-- Part 5: September 2022 -->
+    <!-- Part 5: How it was built -->
     <section class="story-section">
         <div class="container">
-            <span class="section-number fade-in">Part 5</span>
-            <h2 class="story-title fade-in">September 2022: The "digital curfew"</h2>
+            <span class="section-number fade-in">How We Got Here</span>
+            <h2 class="story-title fade-in">The systematic elimination of redundancy</h2>
 
-            <p class="story-text fade-in">Following the death of Mahsa Amini and subsequent protests, Iran deployed a more insidious approach. Instead of a total blackout (which drew international criticism in 2019), they implemented <strong>scheduled daily shutdowns</strong>.</p>
+            <p class="story-text fade-in">Iran didn't always have this vulnerability. Over a decade, the number of international gateways was deliberately reduced from five to one, concentrating all control in state hands.</p>
 
-            <p class="story-text fade-in">Every day from <strong>4 PM to midnight</strong>&mdash;exactly when protests typically occurred&mdash;mobile internet would go dark. This "digital curfew" was designed to suppress coordination among protesters while maintaining plausible deniability that a shutdown was occurring.</p>
-
-            <div class="curfew-visual fade-in">
-                <div class="curfew-title">Daily Mobile Shutdown Pattern (Sept 21 - Oct 3, 2022)</div>
-
-                <div class="clock-ring">
-                    <div class="clock-bg"></div>
-                    <div class="clock-inner">
-                        <div class="clock-time">4PM-12AM</div>
-                        <div class="clock-label-text">Daily blackout</div>
-                    </div>
-                    <div class="clock-markers">
-                        <span class="clock-marker top">00:00</span>
-                        <span class="clock-marker right">06:00</span>
-                        <span class="clock-marker bottom">12:00</span>
-                        <span class="clock-marker left">18:00</span>
-                    </div>
-                </div>
-
-                <div class="curfew-legend">
-                    <div class="legend-item">
-                        <div class="legend-color online"></div>
-                        <span>Online</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color offline"></div>
-                        <span>Forced offline</span>
-                    </div>
-                </div>
-
-                <div class="curfew-stat">
-                    <strong>100+</strong> hours of mobile blackout over 13 days
-                </div>
-            </div>
-
-            <p class="story-text fade-in">The regime also layered additional restrictions: blocking WhatsApp, Instagram, encrypted DNS, app stores, and even browser extension repositories (to prevent VPN installation). They blocked <strong>HTTP/3 and QUIC protocols</strong> entirely&mdash;cutting off modern encrypted connections.</p>
-
-            <p class="story-text fade-in">Notably, <strong>fixed-line internet stayed connected</strong>. This was strategic: protesters on the streets (using mobile) couldn't coordinate, but businesses could continue operating. The regime learned to be surgical in their suppression.</p>
-        </div>
-    </section>
-
-    <!-- Part 6: Evolution -->
-    <section class="story-section dark">
-        <div class="container">
-            <span class="section-number fade-in">Part 6</span>
-            <h2 class="story-title fade-in">How they built this trap over a decade</h2>
-
-            <p class="story-text fade-in">This capability didn't appear overnight. Iran spent years systematically <strong>eliminating redundancy</strong> and <strong>centralizing control</strong>. What once required coordinating with multiple independent providers now requires controlling just one.</p>
-
-            <div class="evolution-visual fade-in" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
-                <h3 class="evolution-title" style="color: white;">The deliberate narrowing of Iran's internet</h3>
-                <p class="evolution-subtitle" style="color: rgba(255,255,255,0.4);">International gateway count over time</p>
+            <div class="evolution-visual fade-in">
+                <h3 class="evolution-title">International gateway count over time</h3>
+                <p class="evolution-subtitle">Each "door" represents an independent path to the global internet</p>
 
                 <div class="evolution-grid">
-                    <div class="evolution-item" style="background: rgba(61, 90, 128, 0.2);">
+                    <div class="evolution-item">
                         <div class="evolution-year">2014</div>
                         <div class="evolution-doors">
                             <div class="door-icon"></div>
@@ -1609,11 +1648,11 @@
                             <div class="door-icon"></div>
                             <div class="door-icon"></div>
                         </div>
-                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">5 gateways</div>
-                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Distributed</div>
+                        <div class="evolution-label">5 gateways</div>
+                        <div class="evolution-event">Distributed</div>
                     </div>
 
-                    <div class="evolution-item" style="background: rgba(61, 90, 128, 0.15);">
+                    <div class="evolution-item">
                         <div class="evolution-year">2016</div>
                         <div class="evolution-doors">
                             <div class="door-icon"></div>
@@ -1621,58 +1660,51 @@
                             <div class="door-icon"></div>
                             <div class="door-icon"></div>
                         </div>
-                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">4 gateways</div>
-                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Consolidating</div>
+                        <div class="evolution-label">4 gateways</div>
+                        <div class="evolution-event">Consolidating</div>
                     </div>
 
-                    <div class="evolution-item danger" style="background: rgba(232, 93, 76, 0.15);">
+                    <div class="evolution-item danger">
                         <div class="evolution-year">2017</div>
                         <div class="evolution-doors">
                             <div class="door-icon"></div>
                             <div class="door-icon"></div>
                         </div>
-                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">2 gateways</div>
-                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">NIN launched</div>
+                        <div class="evolution-label">2 gateways</div>
+                        <div class="evolution-event">NIN launched</div>
                     </div>
 
-                    <div class="evolution-item danger" style="background: rgba(232, 93, 76, 0.2);">
+                    <div class="evolution-item danger">
                         <div class="evolution-year">2019</div>
                         <div class="evolution-doors">
                             <div class="door-icon"></div>
                         </div>
-                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">1 gateway</div>
-                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Total blackout</div>
+                        <div class="evolution-label">1 gateway</div>
+                        <div class="evolution-event">First blackout</div>
                     </div>
 
-                    <div class="evolution-item danger" style="background: rgba(232, 93, 76, 0.25);">
-                        <div class="evolution-year">Today</div>
+                    <div class="evolution-item danger">
+                        <div class="evolution-year">2026</div>
                         <div class="evolution-doors">
                             <div class="door-icon"></div>
                         </div>
-                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">1 gateway</div>
-                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Full control</div>
+                        <div class="evolution-label">1 gateway</div>
+                        <div class="evolution-event">Still vulnerable</div>
                     </div>
                 </div>
             </div>
 
-            <p class="story-text fade-in">In 2017, Iran launched its "National Information Network" (NIN), which separates domestic traffic from international traffic. This means during a shutdown:</p>
-
-            <ul class="story-text fade-in" style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> Government websites stay accessible</li>
-                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> Approved domestic apps continue working</li>
-                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> Banking and essential services remain online</li>
-                <li style="padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> <strong>But the outside world is completely cut off</strong></li>
-            </ul>
+            <p class="story-text fade-in">The "National Information Network" (NIN), launched in 2017, was marketed as improving domestic internet speed. In reality, it created a two-tier system: domestic services continue during blackouts while international access is severed.</p>
         </div>
     </section>
 
-    <!-- Part 7: Bypass Methods -->
+    <!-- Part 6: Bypass Methods -->
     <section class="story-section danger">
         <div class="container">
-            <span class="section-number fade-in">Part 7</span>
-            <h2 class="story-title fade-in" style="color: white;">How people try to bypass the blockade</h2>
+            <span class="section-number fade-in">Circumvention</span>
+            <h2 class="story-title fade-in" style="color: white;">How people try to stay connected</h2>
 
-            <p class="story-text fade-in">Despite the chokepoint architecture, people continue to find ways around restrictions. However, each method has significant limitations&mdash;and Iran actively works to block them.</p>
+            <p class="story-text fade-in">Despite the chokepoint architecture, people continue to find ways around restrictions. However, each method has significant limitations.</p>
 
             <div class="dpi-visual fade-in">
                 <div class="dpi-title">Deep Packet Inspection (DPI): The Other Layer of Control</div>
@@ -1699,7 +1731,7 @@
                 </div>
             </div>
 
-            <p class="story-text fade-in">Even when the gateway is "open," Iran uses <strong>Deep Packet Inspection (DPI)</strong> to analyze traffic patterns. DPI can identify VPN protocols, Tor connections, and other circumvention tools&mdash;even when encrypted&mdash;by looking at packet sizes, timing, and other fingerprints.</p>
+            <p class="story-text fade-in">Even when the gateway is "open," Deep Packet Inspection analyzes traffic patterns to identify and block VPNs, Tor, and other tools.</p>
 
             <div class="bypass-grid fade-in">
                 <div class="bypass-card">
@@ -1710,14 +1742,14 @@
                             <div class="bypass-difficulty hard">Technical / Slow</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Encodes data inside DNS queries, which are often allowed through firewalls. DNS is essential for basic internet function, so it's hard to block completely.</p>
+                    <p class="bypass-desc">Encodes data inside DNS queries. DNS is essential for basic internet function, so it's harder to block completely.</p>
                     <div class="bypass-how">
                         <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Your data is encoded into fake DNS lookups (like "d2f3a7.tunnel.example.com"). A server outside Iran decodes these requests and fetches the real content, sending it back via DNS responses. Tools: iodine, dnscat2.</div>
+                        <div class="bypass-how-text">Data is encoded into fake DNS lookups. A server outside Iran decodes these and fetches real content. Tools: iodine, dnscat2.</div>
                     </div>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Extremely slow (often &lt;50 kbps). Only useful for text. Iran has begun monitoring anomalous DNS patterns.</div>
+                        <div class="bypass-limitation-text">Extremely slow (&lt;50 kbps). Only useful for text.</div>
                     </div>
                 </div>
 
@@ -1729,14 +1761,14 @@
                             <div class="bypass-difficulty medium">Moderate difficulty</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Tor's "pluggable transports" (obfs4, meek, Snowflake) disguise Tor traffic to look like normal HTTPS or video calls, evading DPI detection.</p>
+                    <p class="bypass-desc">Tor's "pluggable transports" (obfs4, meek, Snowflake) disguise traffic to look like normal HTTPS or video calls.</p>
                     <div class="bypass-how">
                         <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Instead of connecting directly to Tor, you connect to "bridges" that obfuscate the traffic. Snowflake uses WebRTC (video call protocol) to tunnel through. Meek disguises traffic as connections to allowed services like Azure.</div>
+                        <div class="bypass-how-text">Connects to "bridges" that obfuscate traffic. Snowflake uses WebRTC (video call protocol) to tunnel through.</div>
                     </div>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Iran actively blocks known bridge IPs. Meek domains get blocked. Connection can be slow and unreliable. Requires technical setup.</div>
+                        <div class="bypass-limitation-text">Bridge IPs get blocked. Connection unreliable. Requires setup.</div>
                     </div>
                 </div>
 
@@ -1748,14 +1780,14 @@
                             <div class="bypass-difficulty hard">High risk / Expensive</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Satellite connections bypass terrestrial infrastructure entirely. Starlink has activated service over Iran despite no official presence.</p>
+                    <p class="bypass-desc">Satellite connections bypass terrestrial infrastructure entirely. Starlink has activated service over Iran.</p>
                     <div class="bypass-how">
                         <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Satellite dishes communicate directly with orbiting satellites, skipping all ground-based chokepoints. Data goes to ground stations outside Iran.</div>
+                        <div class="bypass-how-text">Dishes communicate directly with satellites, skipping ground-based chokepoints entirely.</div>
                     </div>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Equipment must be smuggled in. Dishes are detectable. Possession is illegal. Iran uses jamming. Expensive ($600+ equipment, $120/month). Risky to use.</div>
+                        <div class="bypass-limitation-text">Equipment must be smuggled. Dishes detectable. Possession illegal. Iran uses jamming.</div>
                     </div>
                 </div>
 
@@ -1767,33 +1799,14 @@
                             <div class="bypass-difficulty easy">Requires nearby users</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Phone-to-phone communication via Bluetooth or WiFi, without internet. Messages hop between devices to reach recipients.</p>
+                    <p class="bypass-desc">Phone-to-phone communication via Bluetooth or WiFi, without internet. Messages hop between devices.</p>
                     <div class="bypass-how">
                         <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Apps like Briar create encrypted local networks. Your message passes through nearby phones until it reaches someone who can relay it further. Works during total shutdowns.</div>
+                        <div class="bypass-how-text">Apps create encrypted local networks. Messages pass through nearby phones until reaching recipients.</div>
                     </div>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Only works for local communication. Requires many users in physical proximity. Range limited to ~100m per hop. Can't access global internet.</div>
-                    </div>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🎭</div>
-                        <div>
-                            <div class="bypass-title">Domain Fronting</div>
-                            <div class="bypass-difficulty hard">Mostly blocked</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Makes censored traffic appear to go to allowed services (like Google or Amazon) by exploiting how CDNs route HTTPS requests.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">The outer TLS connection shows "google.com" (allowed), but the encrypted HTTP header inside requests "blocked-site.com". The CDN sees the real destination and routes accordingly.</div>
-                    </div>
-                    <div class="bypass-limitation">
-                        <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Google and Amazon disabled this in 2018. Most major CDNs have followed. Few viable fronting domains remain. Requires specialized setup.</div>
+                        <div class="bypass-limitation-text">Only local communication. Requires many users nearby. Can't access global internet.</div>
                     </div>
                 </div>
 
@@ -1805,21 +1818,40 @@
                             <div class="bypass-difficulty easy">User friendly</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Purpose-built circumvention tools that automatically try multiple bypass techniques and rotate through servers.</p>
+                    <p class="bypass-desc">Purpose-built circumvention tools that automatically try multiple bypass techniques and rotate servers.</p>
                     <div class="bypass-how">
                         <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">These tools combine VPN, SSH tunneling, and obfuscation. They maintain networks of thousands of servers and automatically switch when one is blocked. Designed for hostile environments.</div>
+                        <div class="bypass-how-text">Combines VPN, SSH tunneling, and obfuscation. Maintains thousands of servers, auto-switches when blocked.</div>
                     </div>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Iran specifically targets these tools. Download is blocked (must get APK through unofficial channels). Connection speed varies. Some users report intermittent blocking.</div>
+                        <div class="bypass-limitation-text">Downloads blocked. Must get APK through unofficial channels. Speed varies.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🎭</div>
+                        <div>
+                            <div class="bypass-title">Domain Fronting</div>
+                            <div class="bypass-difficulty hard">Mostly blocked</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Makes traffic appear to go to allowed services (like Google) by exploiting CDN routing.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">Outer connection shows "google.com" but encrypted header requests blocked site. CDN routes accordingly.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Google, Amazon disabled this in 2018. Few viable domains remain.</div>
                     </div>
                 </div>
             </div>
 
             <div class="critical-box fade-in" style="background: rgba(42, 157, 143, 0.15); border: 1px solid rgba(42, 157, 143, 0.3);">
-                <div class="critical-label" style="color: var(--accent-teal);">Important</div>
-                <p class="critical-text" style="color: rgba(255,255,255,0.8);">No single bypass method is reliable in Iran. The most resilient approach is to have <strong>multiple tools ready</strong> before a shutdown occurs. Download Tor, Psiphon, and mesh apps in advance. Share tools via Bluetooth or SD card when app stores are blocked.</p>
+                <div class="critical-label" style="color: var(--accent-teal);">Preparation is key</div>
+                <p class="critical-text" style="color: rgba(255,255,255,0.8);">No single method is reliable. The best approach is to have <strong>multiple tools ready</strong> before a blackout occurs. Download Tor, Psiphon, and mesh apps in advance. Share via Bluetooth when app stores are blocked.</p>
             </div>
         </div>
     </section>
@@ -1827,25 +1859,25 @@
     <!-- Summary -->
     <section class="summary-section">
         <div class="wide-container">
-            <h2 class="summary-title fade-in">What you need to understand</h2>
+            <h2 class="summary-title fade-in">The Ongoing Threat</h2>
 
             <div class="summary-grid">
                 <div class="summary-card fade-in">
-                    <div class="summary-icon coral">🚨</div>
-                    <h3>This was engineered</h3>
-                    <p>Iran's single chokepoint isn't an accident. It took a decade of deliberate infrastructure consolidation to build a kill switch for 87 million people. This is censorship infrastructure.</p>
+                    <div class="summary-icon coral">⚠️</div>
+                    <h3>Vulnerability Remains</h3>
+                    <p>As of January 2026, all 4,026 network routes still pass through a single gateway. The infrastructure for a complete blackout is fully operational.</p>
                 </div>
 
                 <div class="summary-card fade-in">
                     <div class="summary-icon teal">🗺️</div>
-                    <h3>Erasure, not blocking</h3>
-                    <p>During shutdowns, Iran doesn't "block" the internet&mdash;it erases itself from global routing tables. The world's routers literally forget Iran exists. This makes shutdowns nearly impossible to circumvent.</p>
+                    <h3>Erasure, Not Blocking</h3>
+                    <p>During blackouts, Iran doesn't "block" the internet&mdash;it disappears from global routing tables. The world's routers literally forget how to reach it.</p>
                 </div>
 
                 <div class="summary-card fade-in">
-                    <div class="summary-icon gold">🎯</div>
-                    <h3>Increasingly surgical</h3>
-                    <p>Methods have evolved from total blackouts (2019) to targeted daily curfews (2022). The regime is learning to suppress with precision, making restrictions harder to document and protest.</p>
+                    <div class="summary-icon gold">👁️</div>
+                    <h3>Monitoring Matters</h3>
+                    <p>Organizations like RIPE, OONI, and IODA provide visibility into network health. This documentation helps hold authorities accountable.</p>
                 </div>
             </div>
         </div>
@@ -1853,7 +1885,7 @@
 
     <footer>
         <p>Data sources: <a href="https://stat.ripe.net" target="_blank">RIPEstat</a>, <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA (Georgia Tech)</a>, <a href="https://ooni.org" target="_blank">OONI</a></p>
-        <p style="margin-top: 12px; opacity: 0.7;">Last updated January 2026</p>
+        <p style="margin-top: 12px; opacity: 0.7;">Last updated January 13, 2026</p>
     </footer>
 
     <script>
