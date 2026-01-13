@@ -870,7 +870,7 @@
             <div class="status-box reveal">
                 <div class="status-label">Current Status</div>
                 <h2 class="status-headline">Iran is nearly offline right now</h2>
-                <p class="status-text">Since January 8, 2026, internet traffic from Iran has dropped to near-zero. This is a <strong>"stealth outage"</strong>—IPv4 routes appear UP on monitoring tools, but traffic is blocked at the firewall level. IPv6 was fully withdrawn. Only whitelisted services pass through.</p>
+                <p class="status-text">Since January 8, 2026, internet traffic from Iran has dropped to near-zero. This is a <strong>"stealth outage"</strong>—IPv4 routes appear UP on monitoring tools, but traffic is blocked at the DPI (Deep Packet Inspection) level. IPv6 was fully withdrawn. Only whitelisted services pass through.</p>
                 <div class="status-stats">
                     <div class="status-stat">
                         <div class="status-stat-value">-98.5%</div>
@@ -885,7 +885,7 @@
                         <div class="status-stat-label">People affected</div>
                     </div>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--text-caption); margin-top: 12px;">*IPv4 BGP routes are announced but traffic is blocked at firewall/DPI level (whitelisting)</p>
+                <p style="font-size: 0.8rem; color: var(--text-caption); margin-top: 12px;">*IPv4 BGP routes are announced but traffic is blocked at DPI level (whitelisting)</p>
             </div>
         </div>
     </section>
@@ -1053,7 +1053,7 @@
 
             <div class="highlight-box reveal">
                 <div class="highlight-label">The key insight: A dual-method shutdown</div>
-                <p class="highlight-text">IPv6 was <strong>erased</strong> (routes withdrawn—98.5% gone). But IPv4 was <strong>silenced</strong>—routes remain announced, but traffic is blocked at the firewall level. This "stealth outage" means monitoring tools see IPv4 as "UP" while actual connectivity is near-zero. Only whitelisted government and business traffic passes through.</p>
+                <p class="highlight-text">IPv6 was <strong>erased</strong> (routes withdrawn—98.5% gone). But IPv4 was <strong>silenced</strong>—routes remain announced, but traffic is blocked at the DPI (Deep Packet Inspection) level. This "stealth outage" means monitoring tools see IPv4 as "UP" while actual connectivity is near-zero. Only whitelisted government and business traffic passes through.</p>
             </div>
 
             <p class="section-text reveal">This dual approach is harder to detect and document. Traditional BGP monitoring shows IPv4 as "working"—you need traffic analysis to see the block. It's a more sophisticated form of control.</p>
@@ -1182,7 +1182,7 @@
 
             <div class="highlight-box reveal" style="border-left-color: var(--accent-forest);">
                 <div class="highlight-label" style="color: var(--accent-forest);">Key point</div>
-                <p class="highlight-text">This shutdown uses two methods: IPv6 routes are <em>withdrawn</em> (traditional deletion from the map). IPv4 routes remain <em>announced</em> but traffic is blocked at the firewall level (whitelisting). Only approved government and business traffic passes through. VPNs and DNS tunnels can sometimes exploit these whitelisted paths.</p>
+                <p class="highlight-text">This shutdown uses two methods: IPv6 routes are <em>withdrawn</em> (traditional deletion from the map). IPv4 routes remain <em>announced</em> but traffic is blocked at the DPI (Deep Packet Inspection) level (whitelisting). Only approved government and business traffic passes through. VPNs and DNS tunnels can sometimes exploit these whitelisted paths.</p>
             </div>
         </div>
     </section>
@@ -1656,7 +1656,7 @@
                 <div class="summary-card reveal">
                     <div class="summary-icon">🗺️</div>
                     <h3>Stealth outage</h3>
-                    <p>IPv6 routes were withdrawn. But IPv4 routes appear "UP"—traffic is blocked at the firewall level with whitelisting. A sophisticated method that's harder to detect and document.</p>
+                    <p>IPv6 routes were withdrawn. But IPv4 routes appear "UP"—traffic is blocked at the DPI (Deep Packet Inspection) level with whitelisting. A sophisticated method that's harder to detect and document.</p>
                 </div>
 
                 <div class="summary-card reveal">
