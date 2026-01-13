@@ -1066,14 +1066,14 @@
             <div class="section-number reveal">Part 3</div>
             <h2 class="section-title reveal">Why was this so easy to do?</h2>
 
-            <p class="section-text reveal">Most countries have many connections to the global internet. If one fails, traffic finds another path. Iran is different: <strong>all international traffic passes through a single gateway</strong>.</p>
+            <p class="section-text reveal">Most countries have many connections to the global internet. If one fails, traffic finds another path. Iran is different: <strong>all international traffic passes through just two gateways</strong>—TIC and IPM—both under state control.</p>
         </div>
 
         <div class="container-wide">
             <div class="network-diagram reveal">
                 <div class="network-header">
                     <div class="network-title">Iran's Network Architecture</div>
-                    <div class="network-subtitle">All traffic funnels through one chokepoint</div>
+                    <div class="network-subtitle">All traffic funnels through two state-controlled gateways</div>
                 </div>
 
                 <div class="network-layout">
@@ -1097,10 +1097,17 @@
 
                     <div class="network-arrow">→</div>
 
-                    <div class="network-chokepoint">
-                        <div class="chokepoint-icon">🚫</div>
-                        <div class="chokepoint-label">Gateway blocked</div>
-                        <div class="node-asn" style="color: rgba(255,255,255,0.4);">AS49666 · TIC</div>
+                    <div class="network-column" style="gap: 16px;">
+                        <div class="network-chokepoint">
+                            <div class="chokepoint-icon">🚫</div>
+                            <div class="chokepoint-label">TIC</div>
+                            <div class="node-asn" style="color: rgba(255,255,255,0.4);">AS49666 · AS12880 · AS48159</div>
+                        </div>
+                        <div class="network-chokepoint">
+                            <div class="chokepoint-icon">🚫</div>
+                            <div class="chokepoint-label">IPM</div>
+                            <div class="node-asn" style="color: rgba(255,255,255,0.4);">AS6736</div>
+                        </div>
                     </div>
 
                     <div class="network-arrow">→</div>
@@ -1127,7 +1134,7 @@
         </div>
 
         <div class="container">
-            <p class="section-text reveal">This gateway (AS49666) is operated by the state-controlled Telecommunication Infrastructure Company. When it withdraws its routes, every Iranian ISP—mobile carriers, home internet providers, businesses—loses their connection to the outside world.</p>
+            <p class="section-text reveal">TIC (AS49666, AS12880, AS48159) is operated by the state-controlled Telecommunication Infrastructure Company. IPM (AS6736) is the other gateway. When these two coordinate to block traffic, every Iranian ISP—mobile carriers, home internet providers, businesses—loses their connection to the outside world.</p>
         </div>
     </section>
 
@@ -1270,30 +1277,24 @@
             <div class="section-number reveal">Part 6</div>
             <h2 class="section-title reveal">This has happened before</h2>
 
-            <p class="section-text reveal">Iran's network infrastructure wasn't always this centralized. Over the past decade, international gateways were reduced from five to one—creating the single point of control that makes shutdowns trivial.</p>
+            <p class="section-text reveal">Iran has historically had only two international gateways: <strong>TIC</strong> (AS12880, AS49666, AS48159) and <strong>IPM</strong> (AS6736). Going back further, it was just IPM. This limited architecture—combined with increasing state control—makes coordinated shutdowns straightforward.</p>
 
             <div class="evolution-row reveal">
                 <div class="evolution-item">
                     <div class="evolution-bars">
                         <div class="evolution-bar"></div>
-                        <div class="evolution-bar"></div>
-                        <div class="evolution-bar"></div>
-                        <div class="evolution-bar"></div>
-                        <div class="evolution-bar"></div>
                     </div>
-                    <div class="evolution-year">2014</div>
-                    <div class="evolution-note">5 gateways</div>
+                    <div class="evolution-year">Early</div>
+                    <div class="evolution-note">IPM only</div>
                 </div>
 
                 <div class="evolution-item">
                     <div class="evolution-bars">
                         <div class="evolution-bar"></div>
                         <div class="evolution-bar"></div>
-                        <div class="evolution-bar"></div>
-                        <div class="evolution-bar"></div>
                     </div>
-                    <div class="evolution-year">2016</div>
-                    <div class="evolution-note">4 gateways</div>
+                    <div class="evolution-year">2000s</div>
+                    <div class="evolution-note">TIC + IPM</div>
                 </div>
 
                 <div class="evolution-item warning">
@@ -1308,6 +1309,7 @@
                 <div class="evolution-item danger">
                     <div class="evolution-bars">
                         <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
                     </div>
                     <div class="evolution-year">2019</div>
                     <div class="evolution-note">First blackout</div>
@@ -1315,6 +1317,7 @@
 
                 <div class="evolution-item danger">
                     <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
                         <div class="evolution-bar"></div>
                     </div>
                     <div class="evolution-year">2022</div>
@@ -1324,9 +1327,10 @@
                 <div class="evolution-item danger">
                     <div class="evolution-bars">
                         <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
                     </div>
                     <div class="evolution-year">2026</div>
-                    <div class="evolution-note">Now offline</div>
+                    <div class="evolution-note">Stealth outage</div>
                 </div>
             </div>
 

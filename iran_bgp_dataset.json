@@ -198,12 +198,12 @@
   },
 
   "evolution": [
-    {"year": 2014, "state": "distributed", "international_gateways": 5, "shutdown_difficulty": "hard"},
-    {"year": 2016, "state": "consolidating", "international_gateways": 4, "shutdown_difficulty": "moderate"},
-    {"year": 2017, "state": "centralizing", "international_gateways": 2, "shutdown_difficulty": "easy", "event": "NIN launched"},
-    {"year": 2019, "state": "centralized", "international_gateways": 1, "shutdown_difficulty": "trivial", "event": "Nov shutdown proved capability"},
-    {"year": 2022, "state": "optimized", "international_gateways": 1, "shutdown_difficulty": "trivial", "event": "Stealth curfew method"},
-    {"year": 2024, "state": "mature", "international_gateways": 1, "shutdown_difficulty": "trivial", "event": "Single gateway confirmed"}
+    {"year": "early", "state": "initial", "international_gateways": 1, "gateways": ["IPM (AS6736)"], "shutdown_difficulty": "moderate"},
+    {"year": "2000s", "state": "dual-gateway", "international_gateways": 2, "gateways": ["TIC (AS49666, AS12880, AS48159)", "IPM (AS6736)"], "shutdown_difficulty": "moderate"},
+    {"year": 2017, "state": "controlled", "international_gateways": 2, "gateways": ["TIC", "IPM"], "shutdown_difficulty": "easy", "event": "NIN launched"},
+    {"year": 2019, "state": "proven", "international_gateways": 2, "gateways": ["TIC", "IPM"], "shutdown_difficulty": "trivial", "event": "Nov shutdown proved capability"},
+    {"year": 2022, "state": "optimized", "international_gateways": 2, "gateways": ["TIC", "IPM"], "shutdown_difficulty": "trivial", "event": "Stealth curfew method"},
+    {"year": 2026, "state": "stealth", "international_gateways": 2, "gateways": ["TIC", "IPM"], "shutdown_difficulty": "trivial", "event": "Stealth outage - routes UP, traffic blocked"}
   ],
 
   "ripe_atlas": {
