@@ -1402,18 +1402,7 @@
                     <div class="bypass-warning"><strong>How it works:</strong> Tools like iodine, dnscat2, or dns2tcp encode data in DNS queries to a server you control. The traffic looks like normal DNS lookups, bypassing Deep Packet Inspection. Slow but effective when DPI is blocking VPNs.</div>
                 </div>
 
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🌊</div>
-                        <div>
-                            <div class="bypass-name">Domain Fronting</div>
-                            <div class="bypass-status limited">Partially effective</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Hides the true destination by routing traffic through allowed CDN domains (like major cloud providers). The censor sees traffic to "allowed.com" but it actually reaches "blocked.com".</p>
-                    <div class="bypass-warning"><strong>Limitation:</strong> Many CDN providers have disabled this. Requires some connectivity to work. Ineffective during total BGP withdrawal.</div>
                 </div>
-            </div>
 
             <div class="highlight-box reveal" style="margin-top: 32px; border-left-color: var(--accent-ochre);">
                 <div class="highlight-label" style="color: var(--accent-ochre);">Important distinction</div>
