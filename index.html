@@ -860,7 +860,7 @@
             <div class="hero-kicker">January 2026 Crisis</div>
             <h1 class="hero-headline">Understanding Iran's Internet Blackout</h1>
             <p class="hero-deck">A clear explanation of what's happening, how it works, and why 87 million people are cut off from the world—written so anyone can understand.</p>
-            <p class="hero-meta">Last updated <time datetime="2026-01-13">January 13, 2026</time></p>
+            <p class="hero-meta">Last updated <time datetime="2026-01-13">January 14, 2026</time></p>
         </div>
     </section>
 
@@ -870,21 +870,22 @@
             <div class="status-box reveal">
                 <div class="status-label">Current Status</div>
                 <h2 class="status-headline">Iran is nearly offline right now</h2>
-                <p class="status-text">Since January 8, 2026, internet traffic from Iran has dropped to near-zero. This is not a technical failure—it is a deliberate disconnection. A small percentage of routes remain, exploited by those with VPNs, DNS tunnels, or access to government/business lines.</p>
+                <p class="status-text">Since January 8, 2026, internet traffic from Iran has dropped to near-zero. This is a <strong>"stealth outage"</strong>—IPv4 routes appear UP on monitoring tools, but traffic is blocked at the firewall level. IPv6 was fully withdrawn. Only whitelisted services pass through.</p>
                 <div class="status-stats">
                     <div class="status-stat">
                         <div class="status-stat-value">-98.5%</div>
-                        <div class="status-stat-label">IPv6 routes</div>
+                        <div class="status-stat-label">IPv6 routes withdrawn</div>
                     </div>
                     <div class="status-stat">
-                        <div class="status-stat-value">-82%</div>
-                        <div class="status-stat-label">IPv4 visibility</div>
+                        <div class="status-stat-value">UP*</div>
+                        <div class="status-stat-label">IPv4 routes (traffic blocked)</div>
                     </div>
                     <div class="status-stat">
                         <div class="status-stat-value">87M</div>
                         <div class="status-stat-label">People affected</div>
                     </div>
                 </div>
+                <p style="font-size: 0.8rem; color: var(--text-caption); margin-top: 12px;">*IPv4 BGP routes are announced but traffic is blocked at firewall/DPI level (whitelisting)</p>
             </div>
         </div>
     </section>
@@ -955,13 +956,13 @@
 
             <!-- BGP Charts -->
             <h3 class="section-title reveal" style="font-size: 1.4rem; margin-top: 48px;">The BGP Evidence</h3>
-            <p class="section-text reveal">BGP (Border Gateway Protocol) is how networks announce their existence to the world. When routes are "withdrawn," the network disappears from the internet. Here's what the BGP data shows:</p>
+            <p class="section-text reveal">BGP (Border Gateway Protocol) is how networks announce their existence to the world. The January 2026 shutdown reveals a more sophisticated approach: <strong>IPv6 routes were withdrawn</strong>, but <strong>IPv4 routes remain UP while traffic is blocked</strong>—a "stealth outage."</p>
 
             <!-- Combined BGP Chart -->
             <div class="chart-box reveal">
                 <div class="chart-header">
-                    <h3 class="chart-title">BGP Route Visibility</h3>
-                    <p class="chart-subtitle">Normalized to 100% baseline — January 7–10, 2026</p>
+                    <h3 class="chart-title">BGP Route Visibility — "Stealth Outage"</h3>
+                    <p class="chart-subtitle">IPv6 withdrawn, IPv4 UP but traffic blocked — January 7–10, 2026</p>
                 </div>
                 <div class="chart-area">
                     <svg class="svg-chart" viewBox="0 0 650 230" preserveAspectRatio="xMidYMid meet">
@@ -1021,21 +1022,21 @@
                         <text style="fill: #c45a3b; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;" x="520" y="188">IPv6: -98.5%</text>
 
                         <!-- IPv4 label -->
-                        <text style="fill: #c49a3b; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;" x="520" y="128">IPv4: -82%</text>
+                        <text style="fill: #c49a3b; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;" x="520" y="128">IPv4: UP* (blocked)</text>
 
                         <!-- Legend -->
                         <rect x="70" y="8" width="12" height="12" rx="2" fill="#c45a3b"/>
-                        <text class="chart-axis" x="86" y="18">IPv6 routes (48M → 737K prefixes)</text>
+                        <text class="chart-axis" x="86" y="18">IPv6 routes withdrawn (98.5%)</text>
 
                         <rect x="280" y="8" width="12" height="12" rx="2" fill="#c49a3b"/>
-                        <text class="chart-axis" x="296" y="18">IPv4 peers (313 → 56 peers)</text>
+                        <text class="chart-axis" x="296" y="18">IPv4: routes UP, traffic blocked</text>
                     </svg>
                 </div>
             </div>
 
             <div class="highlight-box reveal">
-                <div class="highlight-label">What this means</div>
-                <p class="highlight-text">IPv6 was nearly severed—a 98.5% drop. IPv4 experienced severe degradation with peer visibility dropping from 313 to just 56 peers. This indicates a targeted, protocol-aware shutdown.</p>
+                <div class="highlight-label">What this means — A "Stealth Outage"</div>
+                <p class="highlight-text">IPv6 routes were withdrawn (98.5% gone). But IPv4 routes remain <em>announced</em>—they appear "UP" on IODA and other monitoring tools. Yet traffic doesn't flow. This is firewall-level blocking with whitelisting: routes exist, but only approved traffic passes. A more sophisticated form of shutdown that's harder to detect and document.</p>
             </div>
         </div>
     </section>
@@ -1048,14 +1049,14 @@
 
             <p class="section-text reveal">The internet works by networks announcing where they are. Think of it like an address system—networks tell routers around the world: "To reach us, send traffic here."</p>
 
-            <p class="section-text reveal">This system is called <strong>BGP</strong> (Border Gateway Protocol). When a network stops announcing its routes, the rest of the world's routers forget how to reach it. Traffic doesn't get blocked—it simply has nowhere to go.</p>
+            <p class="section-text reveal">This system is called <strong>BGP</strong> (Border Gateway Protocol). In past shutdowns, Iran withdrew its routes—making the country invisible to global routers. The January 2026 shutdown is different and more sophisticated.</p>
 
             <div class="highlight-box reveal">
-                <div class="highlight-label">The key insight</div>
-                <p class="highlight-text">Iran didn't block the internet. It erased itself from the internet's map. Global routers now literally don't know how to send data there—or how to receive any traffic trying to get out.</p>
+                <div class="highlight-label">The key insight: A dual-method shutdown</div>
+                <p class="highlight-text">IPv6 was <strong>erased</strong> (routes withdrawn—98.5% gone). But IPv4 was <strong>silenced</strong>—routes remain announced, but traffic is blocked at the firewall level. This "stealth outage" means monitoring tools see IPv4 as "UP" while actual connectivity is near-zero. Only whitelisted government and business traffic passes through.</p>
             </div>
 
-            <p class="section-text reveal">On January 8, Iran's networks withdrew 98.5% of their IPv6 routes and 82% of IPv4 peer visibility dropped. Within hours, the country was nearly unreachable—though small leaks remain.</p>
+            <p class="section-text reveal">This dual approach is harder to detect and document. Traditional BGP monitoring shows IPv4 as "working"—you need traffic analysis to see the block. It's a more sophisticated form of control.</p>
         </div>
     </section>
 
@@ -1181,7 +1182,7 @@
 
             <div class="highlight-box reveal" style="border-left-color: var(--accent-forest);">
                 <div class="highlight-label" style="color: var(--accent-forest);">Key point</div>
-                <p class="highlight-text">This isn't censorship in the traditional sense—it's disconnection. Most routes are deleted from the internet's map. However, no shutdown is 100% sealed. Some connections leak through government and business lines, and tools like VPNs and DNS tunnels can exploit these gaps for those with technical knowledge.</p>
+                <p class="highlight-text">This shutdown uses two methods: IPv6 routes are <em>withdrawn</em> (traditional deletion from the map). IPv4 routes remain <em>announced</em> but traffic is blocked at the firewall level (whitelisting). Only approved government and business traffic passes through. VPNs and DNS tunnels can sometimes exploit these whitelisted paths.</p>
             </div>
         </div>
     </section>
@@ -1359,7 +1360,7 @@
 
             <p class="section-text reveal">Censorship means traffic is being inspected and selectively blocked. Disconnection means the routes don't exist at all. Most tools are designed for the first scenario.</p>
 
-            <p class="section-text reveal"><strong>However, no shutdown is 100% sealed.</strong> The current data shows ~82% of IPv4 routes withdrawn—not 100%. Some paths leak through: government and business lines that stay up, ISPs with partial connectivity, and protocols like DNS that can't be fully blocked without breaking internal services. People inside Iran are exploiting these leaks.</p>
+            <p class="section-text reveal"><strong>However, this shutdown uses whitelisting, not total erasure.</strong> IPv4 routes remain announced—meaning paths technically exist. Only approved traffic (government, business, whitelisted services) passes through the firewall. Some VPNs and DNS tunnels can sometimes slip through these whitelisted channels. People inside Iran are exploiting these gaps.</p>
         </div>
 
         <div class="container-wide">
@@ -1410,8 +1411,8 @@
             </div>
 
             <div class="highlight-box reveal" style="margin-top: 32px; border-left-color: var(--accent-ochre);">
-                <div class="highlight-label" style="color: var(--accent-ochre);">The reality</div>
-                <p class="highlight-text">No shutdown is hermetically sealed. While ~82-98% of routes are withdrawn, small leaks remain. VPNs and DNS tunnels exploit these gaps. The connection is severely degraded—slow, unreliable, and risky—but not impossible for those with technical knowledge and the right tools.</p>
+                <div class="highlight-label" style="color: var(--accent-ochre);">The reality: Stealth outage with whitelisting</div>
+                <p class="highlight-text">IPv4 routes are UP but traffic is blocked—a "stealth outage" that's harder to detect. Only whitelisted traffic passes through. VPNs and DNS tunnels can sometimes exploit these approved channels. Connection is extremely slow and unreliable, but not impossible for those with the right tools and technical knowledge.</p>
             </div>
         </div>
     </section>
@@ -1654,8 +1655,8 @@
 
                 <div class="summary-card reveal">
                     <div class="summary-icon">🗺️</div>
-                    <h3>Erasure, not blocking</h3>
-                    <p>Iran withdrew its routes from global routing tables. The world's routers don't know how to reach it. The country was erased from the internet's map.</p>
+                    <h3>Stealth outage</h3>
+                    <p>IPv6 routes were withdrawn. But IPv4 routes appear "UP"—traffic is blocked at the firewall level with whitelisting. A sophisticated method that's harder to detect and document.</p>
                 </div>
 
                 <div class="summary-card reveal">
@@ -1670,7 +1671,7 @@
     <!-- Footer -->
     <footer>
         <p>Data sources: <a href="https://blog.cloudflare.com/iran-protests-internet-shutdown/" target="_blank">Cloudflare</a> · <a href="https://netblocks.org" target="_blank">NetBlocks</a> · <a href="https://stat.ripe.net" target="_blank">RIPE</a> · <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA</a> · <a href="https://ooni.org" target="_blank">OONI</a></p>
-        <p class="footer-update">Last updated January 13, 2026</p>
+        <p class="footer-update">Last updated January 14, 2026</p>
     </footer>
 
     <script>
