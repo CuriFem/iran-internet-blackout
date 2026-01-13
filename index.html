@@ -1020,7 +1020,7 @@
 
             <div class="highlight-box reveal">
                 <div class="highlight-label">What this means</div>
-                <p class="highlight-text">IPv6 was completely severed—a 98.5% drop. IPv4 experienced severe degradation with peer visibility dropping from 313 to just 56 peers. This indicates a targeted, protocol-aware shutdown.</p>
+                <p class="highlight-text">IPv6 was nearly severed—a 98.5% drop. IPv4 experienced severe degradation with peer visibility dropping from 313 to just 56 peers. This indicates a targeted, protocol-aware shutdown.</p>
             </div>
         </div>
     </section>
@@ -1037,7 +1037,7 @@
 
             <div class="highlight-box reveal">
                 <div class="highlight-label">The key insight</div>
-                <p class="highlight-text">Iran didn't block the internet. It erased itself from the internet's map. Global routers now literally don't know how to send data there.</p>
+                <p class="highlight-text">Iran didn't block the internet. It erased itself from the internet's map. Global routers now literally don't know how to send data there—or how to receive any traffic trying to get out.</p>
             </div>
 
             <p class="section-text reveal">On January 8, Iran's networks withdrew 98.5% of their IPv6 routes. Within hours, the country was unreachable from outside.</p>
@@ -1157,6 +1157,9 @@
 
             <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">Can Iranians access outside websites?</h3>
             <p class="section-text reveal"><strong>No.</strong> Even if DNS resolution worked (which it often doesn't), the return path doesn't exist. Data can't flow in either direction when routes are withdrawn.</p>
+
+            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">What about .ir websites hosted outside Iran?</h3>
+            <p class="section-text reveal"><strong>Also unreachable.</strong> The nameservers for the .ir top-level domain—where all .ir domain records are stored—are located inside Iran. When Iran's routes are withdrawn, these nameservers become unreachable. So even if an Iranian website is hosted on a server in Europe or the US, and you're trying to access it from outside Iran, the DNS lookup for the .ir domain fails. The world can't resolve .ir addresses anymore.</p>
 
             <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">What about the "National Internet"?</h3>
             <p class="section-text reveal">Iran has built a "National Information Network" (NIN/SHOMA) for domestic traffic. During shutdowns, some internal services may remain accessible—government websites, domestic banks, approved apps. But anything requiring international connectivity is blocked.</p>
@@ -1405,54 +1408,7 @@
         </div>
 
         <div class="container-wide">
-            <h3 class="reveal" style="font-family: 'Source Serif 4', serif; font-size: 1.2rem; margin: 32px 0 16px; color: var(--text-ink);">Academic Research Groups</h3>
-            <div class="bypass-grid reveal">
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🎓</div>
-                        <div>
-                            <div class="bypass-name">Citizen Lab</div>
-                            <div class="bypass-status works">University of Toronto</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Interdisciplinary research on digital threats, surveillance, and censorship. Led by Ron Deibert. Pioneering work on targeted attacks and information controls.</p>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🎓</div>
-                        <div>
-                            <div class="bypass-name">Censored Planet</div>
-                            <div class="bypass-status works">University of Michigan</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Automated global censorship measurement platform. Led by Roya Ensafi. Continuous monitoring of internet censorship across 200+ countries.</p>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🎓</div>
-                        <div>
-                            <div class="bypass-name">IODA</div>
-                            <div class="bypass-status works">Georgia Tech</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Internet Outage Detection and Analysis. Led by Alberto Dainotti. Real-time detection of macroscopic internet outages using BGP, traceroute, and darknet data.</p>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🎓</div>
-                        <div>
-                            <div class="bypass-name">ICLab</div>
-                            <div class="bypass-status works">UMass Amherst</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Internet Censorship Lab. Global measurement of internet censorship and content manipulation using distributed measurement infrastructure.</p>
-                </div>
-            </div>
-
-            <h3 class="reveal" style="font-family: 'Source Serif 4', serif; font-size: 1.2rem; margin: 40px 0 16px; color: var(--text-ink);">Measurement Organizations</h3>
+            <h3 class="reveal" style="font-family: 'Source Serif 4', serif; font-size: 1.2rem; margin: 32px 0 16px; color: var(--text-ink);">Measurement Organizations</h3>
             <div class="bypass-grid reveal">
                 <div class="bypass-card">
                     <div class="bypass-header">
@@ -1496,6 +1452,78 @@
                         </div>
                     </div>
                     <p class="bypass-desc">Center for Applied Internet Data Analysis. Internet topology mapping, traffic analysis, and routing security research.</p>
+                </div>
+            </div>
+
+            <h3 class="reveal" style="font-family: 'Source Serif 4', serif; font-size: 1.2rem; margin: 40px 0 16px; color: var(--text-ink);">Iran-Focused Research</h3>
+            <div class="bypass-grid reveal">
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🔬</div>
+                        <div>
+                            <div class="bypass-name">Miaan Group</div>
+                            <div class="bypass-status works">Human Rights & Technology</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Documenting digital rights violations in Iran. Research by Amir Rashidi and team on surveillance, censorship, and digital security.</p>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🔬</div>
+                        <div>
+                            <div class="bypass-name">Filterwatch</div>
+                            <div class="bypass-status works">ASL19</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Monitors internet censorship in Iran. Tracks blocked websites, apps, and services. Part of ASL19's digital security work.</p>
+                </div>
+            </div>
+
+            <h3 class="reveal" style="font-family: 'Source Serif 4', serif; font-size: 1.2rem; margin: 40px 0 16px; color: var(--text-ink);">Academic Research Groups</h3>
+            <div class="bypass-grid reveal">
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🎓</div>
+                        <div>
+                            <div class="bypass-name">Citizen Lab</div>
+                            <div class="bypass-status works">University of Toronto</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Interdisciplinary research on digital threats, surveillance, and censorship. Led by Ron Deibert. Pioneering work on targeted attacks and information controls.</p>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🎓</div>
+                        <div>
+                            <div class="bypass-name">Censored Planet</div>
+                            <div class="bypass-status works">University of Michigan</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Automated global censorship measurement platform. Led by Roya Ensafi. Continuous monitoring of internet censorship across 200+ countries.</p>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🎓</div>
+                        <div>
+                            <div class="bypass-name">IODA</div>
+                            <div class="bypass-status works">Georgia Tech</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Internet Outage Detection and Analysis. Led by Alberto Dainotti. Real-time detection of macroscopic internet outages using BGP, traceroute, and darknet data.</p>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🎓</div>
+                        <div>
+                            <div class="bypass-name">ICLab</div>
+                            <div class="bypass-status works">UMass Amherst</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Internet Censorship Lab. Global measurement of internet censorship and content manipulation using distributed measurement infrastructure.</p>
                 </div>
             </div>
 
@@ -1543,31 +1571,6 @@
                         </div>
                     </div>
                     <p class="bypass-desc">International human rights organization focused on freedom of expression and information. Research on internet shutdowns and censorship.</p>
-                </div>
-            </div>
-
-            <h3 class="reveal" style="font-family: 'Source Serif 4', serif; font-size: 1.2rem; margin: 40px 0 16px; color: var(--text-ink);">Iran-Focused Research</h3>
-            <div class="bypass-grid reveal">
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🔬</div>
-                        <div>
-                            <div class="bypass-name">Miaan Group</div>
-                            <div class="bypass-status works">Human Rights & Technology</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Documenting digital rights violations in Iran. Research by Amir Rashidi and team on surveillance, censorship, and digital security.</p>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🔬</div>
-                        <div>
-                            <div class="bypass-name">Filterwatch</div>
-                            <div class="bypass-status works">ASL19</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Monitors internet censorship in Iran. Tracks blocked websites, apps, and services. Part of ASL19's digital security work.</p>
                 </div>
             </div>
         </div>
