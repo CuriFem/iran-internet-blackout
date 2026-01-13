@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iran Internet Blackout — January 2026</title>
+    <title>Understanding Iran's Internet Blackout — A Public Report</title>
+    <meta name="description" content="An accessible explanation of Iran's January 2026 internet shutdown. What happened, how it works, and why it matters. Data-driven reporting for everyone.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-void: #050507;
-            --bg-deep: #0a0a0c;
-            --bg-surface: #111114;
-            --bg-elevated: #18181c;
-            --text-primary: #f0f0f2;
-            --text-secondary: #a0a0a8;
-            --text-muted: #606068;
-            --danger: #ef4444;
-            --danger-glow: rgba(239, 68, 68, 0.4);
-            --warning: #f97316;
-            --hope: #14b8a6;
-            --hope-muted: rgba(20, 184, 166, 0.15);
+            --bg-cream: #fdfbf7;
+            --bg-warm: #f7f3ec;
+            --bg-paper: #f0ebe1;
+            --bg-dark: #2c2a26;
+            --bg-darker: #1f1e1a;
+            --text-ink: #1a1916;
+            --text-body: #3d3a33;
+            --text-caption: #6b665a;
+            --text-muted: #9a9488;
+            --accent-rust: #c45a3b;
+            --accent-rust-light: #d97356;
+            --accent-ochre: #c49a3b;
+            --accent-forest: #4a7c59;
+            --accent-slate: #5a6a7a;
+            --border-light: rgba(0,0,0,0.08);
+            --border-medium: rgba(0,0,0,0.12);
         }
 
         * {
@@ -34,315 +39,748 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg-void);
-            color: var(--text-primary);
-            line-height: 1.7;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-body);
+            line-height: 1.75;
             font-size: 17px;
-            overflow-x: hidden;
-        }
-
-        /* Noise overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 1000;
         }
 
         .serif {
-            font-family: 'Crimson Pro', Georgia, serif;
+            font-family: 'Source Serif 4', Georgia, serif;
         }
 
         .mono {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        h1, h2, h3 {
-            font-family: 'Crimson Pro', Georgia, serif;
+        h1, h2, h3, h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            color: var(--text-ink);
             font-weight: 600;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
+            line-height: 1.25;
         }
 
-        /* Alert bar */
-        .alert-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: linear-gradient(90deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.95) 100%);
-            padding: 10px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            backdrop-filter: blur(8px);
+        a {
+            color: var(--accent-rust);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+            transition: color 0.2s ease;
         }
 
-        .alert-pulse {
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            animation: alert-blink 1s ease-in-out infinite;
+        a:hover {
+            color: var(--accent-rust-light);
         }
 
-        @keyframes alert-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .alert-text {
-            font-size: 0.8rem;
+        /* Alert banner */
+        .alert-banner {
+            background: var(--accent-rust);
+            color: white;
+            text-align: center;
+            padding: 12px 24px;
+            font-size: 0.85rem;
             font-weight: 500;
+        }
+
+        .alert-banner strong {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* Header */
+        .site-header {
+            background: var(--bg-cream);
+            border-bottom: 1px solid var(--border-light);
+            padding: 20px 24px;
+            text-align: center;
+        }
+
+        .site-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-caption);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.15em;
+        }
+
+        /* Container */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .container-wide {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 120px 24px 80px;
-            position: relative;
-            background: radial-gradient(ellipse at 50% 0%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
-                        var(--bg-void);
+            padding: 80px 24px 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
         }
 
-        .hero-label {
-            font-family: 'IBM Plex Mono', monospace;
+        .hero-kicker {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
+            color: var(--accent-rust);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--danger);
-            margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .hero-label::before,
-        .hero-label::after {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--danger));
-        }
-
-        .hero-label::after {
-            background: linear-gradient(90deg, var(--danger), transparent);
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
         }
 
         .hero-headline {
-            font-size: clamp(3rem, 10vw, 7rem);
-            text-align: center;
-            max-width: 900px;
-            margin-bottom: 24px;
-            font-weight: 700;
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
+            max-width: 800px;
+            margin: 0 auto 20px;
+            letter-spacing: -0.02em;
         }
 
-        .hero-headline .strike {
-            position: relative;
-            color: var(--danger);
-        }
-
-        .hero-headline .strike::after {
-            content: '';
-            position: absolute;
-            left: -4%;
-            right: -4%;
-            top: 50%;
-            height: 4px;
-            background: var(--danger);
-            transform: rotate(-2deg);
-        }
-
-        .hero-sub {
-            font-size: 1.35rem;
-            color: var(--text-secondary);
-            text-align: center;
+        .hero-deck {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.3rem;
+            color: var(--text-caption);
             max-width: 600px;
-            margin-bottom: 64px;
+            margin: 0 auto 32px;
+            font-style: italic;
         }
 
-        /* Gauge section */
-        .gauge-section {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            flex-wrap: wrap;
-            margin-bottom: 48px;
+        .hero-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        .gauge-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-        }
-
-        .gauge-svg {
-            transform: rotate(-90deg);
-        }
-
-        .gauge-bg {
-            fill: none;
-            stroke: var(--bg-elevated);
-            stroke-width: 12;
-        }
-
-        .gauge-fill {
-            fill: none;
-            stroke: var(--danger);
-            stroke-width: 12;
-            stroke-linecap: round;
-            stroke-dasharray: 502;
-            stroke-dashoffset: 502;
-            filter: drop-shadow(0 0 12px var(--danger-glow));
-            animation: gauge-flatline 2s ease-out forwards;
-        }
-
-        @keyframes gauge-flatline {
-            0% { stroke-dashoffset: 0; }
-            100% { stroke-dashoffset: 500; }
-        }
-
-        .gauge-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .gauge-value {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 2.5rem;
+        .hero-meta time {
             font-weight: 500;
-            color: var(--danger);
-            line-height: 1;
         }
 
-        .gauge-label {
+        /* Status box */
+        .status-box {
+            background: var(--bg-warm);
+            border: 1px solid var(--border-medium);
+            border-left: 4px solid var(--accent-rust);
+            padding: 28px 32px;
+            margin: 48px auto;
+            max-width: 600px;
+        }
+
+        .status-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-rust);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .status-headline {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .status-text {
+            color: var(--text-body);
+            margin-bottom: 16px;
+        }
+
+        .status-stats {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .status-stat {
+            text-align: left;
+        }
+
+        .status-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent-rust);
+        }
+
+        .status-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-caption);
+        }
+
+        /* Article sections */
+        .article-section {
+            padding: 64px 24px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .article-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-top: 8px;
+            margin-bottom: 12px;
         }
 
-        .gauge-status {
-            position: absolute;
-            bottom: -36px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--danger);
+        .section-title {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            margin-bottom: 24px;
+            max-width: 600px;
+        }
+
+        .section-text {
+            margin-bottom: 24px;
+            max-width: 640px;
+        }
+
+        .section-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: var(--bg-paper);
+            border-radius: 8px;
+            padding: 24px 28px;
+            margin: 32px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .highlight-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-forest);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .highlight-text {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.15rem;
+            color: var(--text-ink);
+            font-style: italic;
+        }
+
+        /* Chart container */
+        .chart-box {
+            background: white;
+            border: 1px solid var(--border-medium);
+            border-radius: 8px;
+            padding: 28px;
+            margin: 40px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .chart-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .chart-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-caption);
+        }
+
+        .chart-area {
+            height: 260px;
+            position: relative;
+        }
+
+        .svg-chart {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-grid { stroke: var(--border-light); stroke-width: 1; }
+        .chart-axis { fill: var(--text-caption); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+        .chart-line { fill: none; stroke: var(--accent-rust); stroke-width: 2.5; stroke-linecap: round; }
+        .chart-area-fill { fill: url(#rust-gradient); }
+        .chart-point { fill: white; stroke: var(--accent-rust); stroke-width: 2; }
+        .chart-annotation { fill: var(--text-caption); font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+
+        /* Network diagram */
+        .network-diagram {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 40px 32px;
+            margin: 40px 0;
+            color: white;
+        }
+
+        .network-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .network-title {
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            white-space: nowrap;
-            animation: status-blink 1.5s ease-in-out infinite;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
         }
 
-        @keyframes status-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        .network-subtitle {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.3rem;
+            color: white;
         }
 
-        /* Scroll prompt */
-        .scroll-prompt {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+        .network-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .network-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .network-node {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 14px 18px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .network-node.faded {
+            opacity: 0.4;
+        }
+
+        .network-node.offline {
+            opacity: 0.5;
+            border-color: var(--accent-rust);
+        }
+
+        .node-flag {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .node-name {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .node-asn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+
+        .node-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent-rust);
+            margin-top: 6px;
+        }
+
+        .network-chokepoint {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            color: var(--text-muted);
-            font-size: 0.75rem;
+        }
+
+        .chokepoint-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(196, 90, 59, 0.2);
+            border: 2px solid var(--accent-rust);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .chokepoint-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent-rust);
+            text-transform: uppercase;
             letter-spacing: 0.1em;
         }
 
-        .scroll-line {
-            width: 1px;
-            height: 48px;
-            background: linear-gradient(to bottom, var(--text-muted), transparent);
-            animation: scroll-pulse 2s ease-in-out infinite;
+        .network-arrow {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.2);
         }
 
-        @keyframes scroll-pulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(1); }
-            50% { opacity: 1; transform: scaleY(1.2); }
+        /* Timeline */
+        .timeline {
+            margin: 40px 0;
         }
 
-        /* Section styling */
-        .section {
-            padding: 140px 24px;
-            position: relative;
+        .timeline-event {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-light);
         }
 
-        .section-dark {
-            background: var(--bg-deep);
+        .timeline-event:last-child {
+            border-bottom: none;
         }
 
-        .section-darker {
-            background: var(--bg-void);
+        .timeline-date {
+            flex-shrink: 0;
+            width: 90px;
         }
 
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
+        .timeline-date-main {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-ink);
         }
 
-        .container-wide {
-            max-width: 1100px;
-            margin: 0 auto;
+        .timeline-date-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-caption);
         }
 
-        .section-label {
-            font-family: 'IBM Plex Mono', monospace;
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-ink);
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-body);
+        }
+
+        .timeline-stat {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-rust);
+            background: rgba(196, 90, 59, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Evolution visual */
+        .evolution-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 16px;
+            margin: 40px 0;
+            padding: 32px;
+            background: var(--bg-warm);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .evolution-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 70px;
+        }
+
+        .evolution-bars {
+            display: flex;
+            gap: 4px;
+            align-items: flex-end;
+            height: 80px;
+        }
+
+        .evolution-bar {
+            width: 12px;
+            background: var(--accent-forest);
+            border-radius: 3px 3px 0 0;
+            height: 60px;
+        }
+
+        .evolution-item.warning .evolution-bar {
+            background: var(--accent-ochre);
+        }
+
+        .evolution-item.danger .evolution-bar {
+            background: var(--accent-rust);
+        }
+
+        .evolution-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-ink);
+        }
+
+        .evolution-note {
+            font-size: 0.65rem;
+            color: var(--text-caption);
+            text-align: center;
+        }
+
+        /* Data cards */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .data-card {
+            background: white;
+            border: 1px solid var(--border-medium);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .data-card-label {
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--warning);
-            margin-bottom: 20px;
-            display: block;
+            letter-spacing: 0.05em;
+            color: var(--text-caption);
+            margin-bottom: 8px;
         }
 
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            margin-bottom: 32px;
-            max-width: 700px;
+        .data-card-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--text-ink);
         }
 
-        .section-text {
-            color: var(--text-secondary);
-            margin-bottom: 28px;
+        .data-card.alert .data-card-value {
+            color: var(--accent-rust);
+        }
+
+        .data-card-note {
+            font-size: 0.8rem;
+            color: var(--text-caption);
+            margin-top: 8px;
+        }
+
+        /* Bypass cards */
+        .bypass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .bypass-card {
+            background: white;
+            border: 1px solid var(--border-medium);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .bypass-header {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .bypass-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-warm);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .bypass-name {
+            font-family: 'Source Serif 4', Georgia, serif;
             font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-ink);
         }
 
-        .section-text strong {
-            color: var(--text-primary);
+        .bypass-status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .bypass-status.works { color: var(--accent-forest); }
+        .bypass-status.limited { color: var(--accent-ochre); }
+        .bypass-status.blocked { color: var(--accent-rust); }
+
+        .bypass-desc {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            margin-bottom: 16px;
+        }
+
+        .bypass-warning {
+            background: var(--bg-warm);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 0.85rem;
+            color: var(--text-caption);
+        }
+
+        .bypass-warning strong {
+            color: var(--text-body);
+        }
+
+        /* Live sources section */
+        .sources-section {
+            background: var(--bg-dark);
+            color: white;
+            padding: 64px 24px;
+        }
+
+        .sources-title {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .sources-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .source-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .source-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .source-name {
             font-weight: 600;
+            color: white;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        .source-desc {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+        }
+
+        .source-type {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent-ochre);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 12px;
+        }
+
+        /* Summary */
+        .summary-section {
+            background: var(--bg-paper);
+            padding: 64px 24px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 8px;
+            padding: 28px;
+            border: 1px solid var(--border-light);
+        }
+
+        .summary-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .summary-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .summary-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            color: rgba(255,255,255,0.6);
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-update {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 16px;
         }
 
         /* Reveal animations */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(24px);
+            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .reveal.visible {
@@ -350,1187 +788,564 @@
             transform: translateY(0);
         }
 
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-
-        /* Network topology visualization */
-        .topology-wrapper {
-            background: var(--bg-surface);
-            border-radius: 24px;
-            padding: 48px 32px;
-            margin: 60px 0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            overflow: hidden;
-        }
-
-        .topology-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .topology-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .topology-subtitle {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .topology-diagram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            padding: 20px 0;
-            position: relative;
-        }
-
-        .topology-column {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .topology-node {
-            background: var(--bg-elevated);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 16px 20px;
-            text-align: center;
-            min-width: 110px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .topology-node.international {
-            opacity: 0.4;
-            filter: blur(1px);
-        }
-
-        .topology-node.isp {
-            opacity: 0.5;
-        }
-
-        .topology-node.isp.offline::after {
-            content: 'OFFLINE';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.55rem;
-            color: var(--danger);
-            letter-spacing: 0.1em;
-            background: var(--bg-void);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .topology-node.gateway {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.4);
-            box-shadow: 0 0 40px rgba(239, 68, 68, 0.2);
-        }
-
-        .node-icon {
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-        }
-
-        .node-name {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .node-asn {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .topology-connection {
-            width: 100px;
-            height: 200px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .connection-lines {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .connection-line {
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 1;
-            fill: none;
-        }
-
-        .connection-line.active {
-            stroke: var(--danger);
-            stroke-width: 2;
-            opacity: 0.3;
-        }
-
-        .chokepoint-indicator {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-void);
-            border: 2px solid var(--danger);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 0 30px var(--danger-glow);
-            animation: choke-pulse 2s ease-in-out infinite;
-            z-index: 2;
-        }
-
-        @keyframes choke-pulse {
-            0%, 100% { box-shadow: 0 0 20px var(--danger-glow); }
-            50% { box-shadow: 0 0 50px var(--danger-glow); }
-        }
-
-        .topology-legend {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .legend-dot.danger { background: var(--danger); }
-        .legend-dot.muted { background: var(--text-muted); opacity: 0.5; }
-
-        /* Quote/callout */
-        .callout {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(249, 115, 22, 0.05) 100%);
-            border-left: 3px solid var(--warning);
-            border-radius: 0 16px 16px 0;
-            padding: 32px;
-            margin: 48px 0;
-        }
-
-        .callout-label {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--warning);
-            margin-bottom: 12px;
-        }
-
-        .callout-text {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.3rem;
-            font-style: italic;
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        /* Timeline */
-        .timeline-wrapper {
-            position: relative;
-            padding: 40px 0;
-        }
-
-        .timeline-track {
-            position: absolute;
-            left: 32px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--danger), var(--warning), var(--danger));
-        }
-
-        .timeline-event {
-            display: flex;
-            gap: 32px;
-            margin-bottom: 48px;
-            position: relative;
-        }
-
-        .timeline-event:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-marker {
-            width: 64px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .timeline-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--bg-void);
-            border: 3px solid var(--danger);
-            z-index: 1;
-        }
-
-        .timeline-dot.warning {
-            border-color: var(--warning);
-        }
-
-        .timeline-dot.current {
-            background: var(--danger);
-            box-shadow: 0 0 20px var(--danger-glow);
-            animation: dot-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes dot-pulse {
-            0%, 100% { box-shadow: 0 0 10px var(--danger-glow); }
-            50% { box-shadow: 0 0 30px var(--danger-glow); }
-        }
-
-        .timeline-time {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 12px;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        .timeline-content {
-            flex: 1;
-            padding-top: 0;
-        }
-
-        .timeline-title {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .timeline-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .timeline-stat {
-            display: inline-block;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--danger);
-            background: rgba(239, 68, 68, 0.1);
-            padding: 2px 10px;
-            border-radius: 4px;
-            margin-left: 4px;
-        }
-
-        /* Data cards */
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin: 48px 0;
-        }
-
-        .data-card {
-            background: var(--bg-surface);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s ease;
-        }
-
-        .data-card:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-4px);
-        }
-
-        .data-card.danger {
-            border-color: rgba(239, 68, 68, 0.3);
-            background: rgba(239, 68, 68, 0.05);
-        }
-
-        .data-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .data-value {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            line-height: 1;
-        }
-
-        .data-card.danger .data-value {
-            color: var(--danger);
-        }
-
-        .data-note {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 12px;
-        }
-
-        /* Evolution visualization */
-        .evolution-visual {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 16px;
-            padding: 48px 0;
-            margin: 48px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            overflow-x: auto;
-        }
-
-        .evolution-year {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            min-width: 80px;
-        }
-
-        .evolution-gates {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            align-items: center;
-        }
-
-        .evolution-gate {
-            width: 24px;
-            height: 32px;
-            background: var(--hope);
-            border-radius: 6px 6px 0 0;
-            transition: all 0.3s ease;
-        }
-
-        .evolution-year.danger .evolution-gate {
-            background: var(--danger);
-        }
-
-        .evolution-year.current .evolution-gate {
-            background: var(--danger);
-            box-shadow: 0 0 20px var(--danger-glow);
-        }
-
-        .evolution-label {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .evolution-year.current .evolution-label {
-            color: var(--danger);
-            font-weight: 500;
-        }
-
-        .evolution-event {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-align: center;
-            max-width: 80px;
-        }
-
-        /* Bypass section */
-        .bypass-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin: 48px 0;
-        }
-
-        .bypass-card {
-            background: var(--bg-surface);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 20px;
-            padding: 32px;
-            transition: all 0.3s ease;
-        }
-
-        .bypass-card:hover {
-            border-color: rgba(20, 184, 166, 0.3);
-        }
-
-        .bypass-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .bypass-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--hope-muted);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .bypass-title {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .bypass-status {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .bypass-status.works { color: var(--hope); }
-        .bypass-status.limited { color: var(--warning); }
-        .bypass-status.blocked { color: var(--danger); }
-
-        .bypass-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .bypass-warning {
-            background: rgba(239, 68, 68, 0.08);
-            border-radius: 10px;
-            padding: 14px;
-        }
-
-        .bypass-warning-label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--danger);
-            margin-bottom: 6px;
-        }
-
-        .bypass-warning-text {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Charts */
-        .chart-container {
-            background: var(--bg-surface);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 20px;
-            padding: 32px;
-            margin: 32px 0;
-        }
-
-        .chart-header {
-            margin-bottom: 24px;
-        }
-
-        .chart-title {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.25rem;
-            margin-bottom: 4px;
-        }
-
-        .chart-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .chart-area {
-            height: 280px;
-            position: relative;
-        }
-
-        /* SVG Chart */
-        .svg-chart {
-            width: 100%;
-            height: 100%;
-        }
-
-        .chart-grid-line {
-            stroke: rgba(255, 255, 255, 0.05);
-            stroke-width: 1;
-        }
-
-        .chart-axis-label {
-            fill: var(--text-muted);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-        }
-
-        .chart-line {
-            fill: none;
-            stroke: var(--danger);
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .chart-area-fill {
-            fill: url(#danger-gradient);
-        }
-
-        .chart-point {
-            fill: var(--bg-void);
-            stroke: var(--danger);
-            stroke-width: 2;
-        }
-
-        .chart-point.highlight {
-            fill: var(--danger);
-            r: 6;
-        }
-
-        .chart-annotation {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 9px;
-            fill: var(--text-muted);
-        }
-
-        .chart-annotation-line {
-            stroke: var(--text-muted);
-            stroke-width: 1;
-            stroke-dasharray: 3,3;
-        }
-
-        /* Summary cards */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-top: 64px;
-        }
-
-        .summary-card {
-            background: var(--bg-surface);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 20px;
-            padding: 36px;
-        }
-
-        .summary-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 24px;
-        }
-
-        .summary-icon.danger { background: rgba(239, 68, 68, 0.15); }
-        .summary-icon.warning { background: rgba(249, 115, 22, 0.15); }
-        .summary-icon.hope { background: var(--hope-muted); }
-
-        .summary-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-        }
-
-        .summary-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-void);
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 60px 24px;
-            text-align: center;
-        }
-
-        .footer-sources {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .footer-sources a {
-            color: var(--hope);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-sources a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-update {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
             .hero {
-                padding: 100px 20px 60px;
+                padding: 60px 20px 48px;
             }
 
-            .gauge-section {
-                gap: 48px;
+            .article-section {
+                padding: 48px 20px;
             }
 
-            .section {
-                padding: 100px 20px;
-            }
-
-            .topology-diagram {
-                flex-direction: column;
+            .status-stats {
                 gap: 24px;
             }
 
-            .topology-connection {
-                width: 200px;
-                height: 60px;
-                transform: rotate(90deg);
+            .network-layout {
+                flex-direction: column;
             }
 
-            .topology-column {
+            .network-column {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
             }
 
-            .timeline-track {
-                left: 24px;
-            }
-
-            .timeline-marker {
-                width: 48px;
-            }
-
             .timeline-event {
-                gap: 20px;
+                flex-direction: column;
+                gap: 8px;
             }
 
-            .evolution-visual {
-                justify-content: flex-start;
-                padding-bottom: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .alert-text {
-                font-size: 0.7rem;
+            .timeline-date {
+                width: auto;
             }
 
-            .gauge-container {
-                width: 160px;
-                height: 160px;
-            }
-
-            .gauge-value {
-                font-size: 2rem;
-            }
-
-            .topology-node {
-                min-width: 90px;
-                padding: 12px 14px;
-            }
-
-            .bypass-grid {
-                grid-template-columns: 1fr;
+            .evolution-row {
+                padding: 24px 16px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Alert Bar -->
-    <div class="alert-bar">
-        <div class="alert-pulse"></div>
-        <span class="alert-text">Active internet blackout in Iran — January 2026</span>
+    <!-- Alert Banner -->
+    <div class="alert-banner">
+        <strong>Ongoing Event</strong> Iran's internet has been offline since January 8, 2026
     </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="site-title">A Public Report</div>
+    </header>
 
     <!-- Hero -->
     <section class="hero">
-        <span class="hero-label">Ongoing Crisis</span>
-        <h1 class="hero-headline">
-            87 Million People<br><span class="strike">Offline</span>
-        </h1>
-        <p class="hero-sub">
-            Since January 8, 2026, Iran has been disconnected from the global internet.
-            This is how it happened—and why it was inevitable.
-        </p>
-
-        <div class="gauge-section">
-            <div class="gauge-container">
-                <svg class="gauge-svg" width="200" height="200" viewBox="0 0 200 200">
-                    <circle class="gauge-bg" cx="100" cy="100" r="80"/>
-                    <circle class="gauge-fill" cx="100" cy="100" r="80"/>
-                </svg>
-                <div class="gauge-center">
-                    <div class="gauge-value">~0%</div>
-                    <div class="gauge-label">Traffic</div>
-                </div>
-                <div class="gauge-status">Signal lost</div>
-            </div>
-
-            <div class="gauge-container">
-                <svg class="gauge-svg" width="200" height="200" viewBox="0 0 200 200">
-                    <circle class="gauge-bg" cx="100" cy="100" r="80"/>
-                    <circle class="gauge-fill" cx="100" cy="100" r="80" style="stroke: var(--warning);"/>
-                </svg>
-                <div class="gauge-center">
-                    <div class="gauge-value" style="color: var(--warning);">98.5%</div>
-                    <div class="gauge-label">Routes Gone</div>
-                </div>
-                <div class="gauge-status" style="color: var(--warning);">IPv6 withdrawn</div>
-            </div>
-        </div>
-
-        <div class="scroll-prompt">
-            <span>Scroll to understand</span>
-            <div class="scroll-line"></div>
+        <div class="container">
+            <div class="hero-kicker">January 2026 Crisis</div>
+            <h1 class="hero-headline">Understanding Iran's Internet Blackout</h1>
+            <p class="hero-deck">A clear explanation of what's happening, how it works, and why 87 million people are cut off from the world—written so anyone can understand.</p>
+            <p class="hero-meta">Last updated <time datetime="2026-01-13">January 13, 2026</time></p>
         </div>
     </section>
 
-    <!-- What's Happening Now -->
-    <section class="section section-dark">
-        <div class="container-wide">
-            <span class="section-label reveal">Live Data</span>
-            <h2 class="section-title reveal reveal-delay-1">The January 2026 Blackout</h2>
+    <!-- Current Status -->
+    <section class="article-section">
+        <div class="container">
+            <div class="status-box reveal">
+                <div class="status-label">Current Status</div>
+                <h2 class="status-headline">Iran is offline right now</h2>
+                <p class="status-text">Since January 8, 2026, internet traffic from Iran has dropped to nearly zero. This is not a technical failure—it is a deliberate disconnection affecting the entire country.</p>
+                <div class="status-stats">
+                    <div class="status-stat">
+                        <div class="status-stat-value">~0%</div>
+                        <div class="status-stat-label">Current traffic</div>
+                    </div>
+                    <div class="status-stat">
+                        <div class="status-stat-value">98.5%</div>
+                        <div class="status-stat-label">Routes withdrawn</div>
+                    </div>
+                    <div class="status-stat">
+                        <div class="status-stat-value">87M</div>
+                        <div class="status-stat-label">People affected</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Traffic Chart -->
-            <div class="chart-container reveal reveal-delay-2">
+    <!-- Section 1: What happened -->
+    <section class="article-section">
+        <div class="container">
+            <div class="section-number reveal">Part 1</div>
+            <h2 class="section-title reveal">What happened on January 8?</h2>
+
+            <p class="section-text reveal">On January 8, 2026, Iran's internet traffic dropped sharply over a period of hours. By evening, it had fallen to effectively zero—the country had been disconnected from the global internet.</p>
+
+            <div class="chart-box reveal">
                 <div class="chart-header">
-                    <h3 class="chart-title">Iran Internet Traffic Volume</h3>
-                    <p class="chart-subtitle">Normalized to 100% baseline, January 1–13, 2026</p>
+                    <h3 class="chart-title">Iran Internet Traffic</h3>
+                    <p class="chart-subtitle">January 1–13, 2026 (100% = normal levels)</p>
                 </div>
                 <div class="chart-area">
-                    <svg class="svg-chart" viewBox="0 0 700 250" preserveAspectRatio="none">
+                    <svg class="svg-chart" viewBox="0 0 650 230" preserveAspectRatio="xMidYMid meet">
                         <defs>
-                            <linearGradient id="danger-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color: var(--danger); stop-opacity: 0.3"/>
-                                <stop offset="100%" style="stop-color: var(--danger); stop-opacity: 0"/>
+                            <linearGradient id="rust-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color: #c45a3b; stop-opacity: 0.25"/>
+                                <stop offset="100%" style="stop-color: #c45a3b; stop-opacity: 0"/>
                             </linearGradient>
                         </defs>
 
                         <!-- Grid -->
-                        <line class="chart-grid-line" x1="50" y1="40" x2="680" y2="40"/>
-                        <line class="chart-grid-line" x1="50" y1="90" x2="680" y2="90"/>
-                        <line class="chart-grid-line" x1="50" y1="140" x2="680" y2="140"/>
-                        <line class="chart-grid-line" x1="50" y1="190" x2="680" y2="190"/>
+                        <line class="chart-grid" x1="50" y1="40" x2="620" y2="40"/>
+                        <line class="chart-grid" x1="50" y1="80" x2="620" y2="80"/>
+                        <line class="chart-grid" x1="50" y1="120" x2="620" y2="120"/>
+                        <line class="chart-grid" x1="50" y1="160" x2="620" y2="160"/>
 
-                        <!-- Y-axis labels -->
-                        <text class="chart-axis-label" x="40" y="44" text-anchor="end">100%</text>
-                        <text class="chart-axis-label" x="40" y="94" text-anchor="end">75%</text>
-                        <text class="chart-axis-label" x="40" y="144" text-anchor="end">50%</text>
-                        <text class="chart-axis-label" x="40" y="194" text-anchor="end">25%</text>
-                        <text class="chart-axis-label" x="40" y="230" text-anchor="end">0%</text>
+                        <!-- Y-axis -->
+                        <text class="chart-axis" x="44" y="44" text-anchor="end">100%</text>
+                        <text class="chart-axis" x="44" y="84" text-anchor="end">75%</text>
+                        <text class="chart-axis" x="44" y="124" text-anchor="end">50%</text>
+                        <text class="chart-axis" x="44" y="164" text-anchor="end">25%</text>
+                        <text class="chart-axis" x="44" y="200" text-anchor="end">0%</text>
 
-                        <!-- X-axis labels -->
-                        <text class="chart-axis-label" x="70" y="245">Jan 1</text>
-                        <text class="chart-axis-label" x="165" y="245">3</text>
-                        <text class="chart-axis-label" x="260" y="245">5</text>
-                        <text class="chart-axis-label" x="355" y="245">7</text>
-                        <text class="chart-axis-label" x="450" y="245">9</text>
-                        <text class="chart-axis-label" x="545" y="245">11</text>
-                        <text class="chart-axis-label" x="640" y="245">13</text>
+                        <!-- X-axis -->
+                        <text class="chart-axis" x="70" y="218">Jan 1</text>
+                        <text class="chart-axis" x="158" y="218">3</text>
+                        <text class="chart-axis" x="246" y="218">5</text>
+                        <text class="chart-axis" x="334" y="218">7</text>
+                        <text class="chart-axis" x="422" y="218">9</text>
+                        <text class="chart-axis" x="510" y="218">11</text>
+                        <text class="chart-axis" x="598" y="218">13</text>
 
-                        <!-- Area fill -->
-                        <path class="chart-area-fill" d="M70,45 L118,50 L166,55 L214,52 L262,38 L310,30 L358,35 L406,185 L454,225 L502,228 L550,228 L598,230 L646,230 L646,230 L70,230 Z"/>
+                        <!-- Area -->
+                        <path class="chart-area-fill" d="M70,45 L114,48 L158,52 L202,50 L246,38 L290,32 L334,36 L378,155 L422,195 L466,198 L510,198 L554,200 L598,200 L598,200 L70,200 Z"/>
 
                         <!-- Line -->
-                        <path class="chart-line" d="M70,45 L118,50 L166,55 L214,52 L262,38 L310,30 L358,35 L406,185 L454,225 L502,228 L550,228 L598,230 L646,230"/>
+                        <path class="chart-line" d="M70,45 L114,48 L158,52 L202,50 L246,38 L290,32 L334,36 L378,155 L422,195 L466,198 L510,198 L554,200 L598,200"/>
 
                         <!-- Points -->
-                        <circle class="chart-point" cx="70" cy="45" r="4"/>
-                        <circle class="chart-point" cx="166" cy="55" r="4"/>
-                        <circle class="chart-point" cx="310" cy="30" r="4"/>
-                        <circle class="chart-point highlight" cx="406" cy="185" r="5"/>
-                        <circle class="chart-point highlight" cx="454" cy="225" r="5"/>
-                        <circle class="chart-point" cx="646" cy="230" r="4"/>
+                        <circle class="chart-point" cx="290" cy="32" r="4"/>
+                        <circle class="chart-point" cx="378" cy="155" r="5" style="fill: #c45a3b;"/>
+                        <circle class="chart-point" cx="422" cy="195" r="5" style="fill: #c45a3b;"/>
 
                         <!-- Annotation -->
-                        <line class="chart-annotation-line" x1="406" y1="185" x2="406" y2="120"/>
-                        <text class="chart-annotation" x="410" y="115">Jan 8: Blackout begins</text>
-                        <text class="chart-annotation" x="410" y="128">Traffic drops 90%</text>
+                        <line stroke="#9a9488" stroke-width="1" stroke-dasharray="3,3" x1="378" y1="155" x2="378" y2="100"/>
+                        <text class="chart-annotation" x="382" y="95">Jan 8: Traffic crashes</text>
                     </svg>
                 </div>
             </div>
 
-            <!-- Stats Grid -->
-            <div class="data-grid reveal">
-                <div class="data-card danger">
-                    <div class="data-label">Current Traffic</div>
-                    <div class="data-value">~0%</div>
-                    <div class="data-note">Effectively offline</div>
+            <p class="section-text reveal">The data shows traffic was normal—even slightly elevated—in the days before. Then on January 8, it collapsed. This pattern is consistent with a coordinated shutdown, not a technical failure.</p>
+
+            <!-- BGP Charts -->
+            <h3 class="section-title reveal" style="font-size: 1.4rem; margin-top: 48px;">The BGP Evidence</h3>
+            <p class="section-text reveal">BGP (Border Gateway Protocol) is how networks announce their existence to the world. When routes are "withdrawn," the network disappears from the internet. Here's what the BGP data shows:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 32px 0;">
+                <!-- IPv6 Chart -->
+                <div class="chart-box reveal">
+                    <div class="chart-header">
+                        <h3 class="chart-title">IPv6 Route Announcements</h3>
+                        <p class="chart-subtitle">Millions of /48 prefixes visible globally</p>
+                    </div>
+                    <div class="chart-area" style="height: 200px;">
+                        <svg class="svg-chart" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <linearGradient id="ipv6-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color: #c45a3b; stop-opacity: 0.3"/>
+                                    <stop offset="100%" style="stop-color: #c45a3b; stop-opacity: 0"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Grid -->
+                            <line class="chart-grid" x1="45" y1="30" x2="300" y2="30"/>
+                            <line class="chart-grid" x1="45" y1="70" x2="300" y2="70"/>
+                            <line class="chart-grid" x1="45" y1="110" x2="300" y2="110"/>
+                            <!-- Y-axis -->
+                            <text class="chart-axis" x="40" y="34" text-anchor="end">48M</text>
+                            <text class="chart-axis" x="40" y="74" text-anchor="end">32M</text>
+                            <text class="chart-axis" x="40" y="114" text-anchor="end">16M</text>
+                            <text class="chart-axis" x="40" y="150" text-anchor="end">0</text>
+                            <!-- X-axis -->
+                            <text class="chart-axis" x="60" y="168">Jan 7</text>
+                            <text class="chart-axis" x="140" y="168">Jan 8</text>
+                            <text class="chart-axis" x="220" y="168">Jan 9</text>
+                            <text class="chart-axis" x="280" y="168">10</text>
+                            <!-- Area -->
+                            <path fill="url(#ipv6-gradient)" d="M60,35 L100,35 L140,35 L160,140 L200,145 L240,145 L280,145 L280,150 L60,150 Z"/>
+                            <!-- Line -->
+                            <path class="chart-line" d="M60,35 L100,35 L140,35 L160,140 L200,145 L240,145 L280,145"/>
+                            <!-- Crash point -->
+                            <circle cx="160" cy="140" r="5" fill="#c45a3b"/>
+                            <!-- Annotation -->
+                            <text class="chart-annotation" x="165" y="125">-98.5%</text>
+                            <text class="chart-annotation" x="165" y="137">in minutes</text>
+                        </svg>
+                    </div>
                 </div>
-                <div class="data-card danger">
-                    <div class="data-label">IPv6 Routes</div>
-                    <div class="data-value">-98.5%</div>
-                    <div class="data-note">48M → 737K prefixes</div>
+
+                <!-- IPv4 Chart -->
+                <div class="chart-box reveal">
+                    <div class="chart-header">
+                        <h3 class="chart-title">IPv4 Peer Visibility</h3>
+                        <p class="chart-subtitle">Number of global peers seeing Iran's routes</p>
+                    </div>
+                    <div class="chart-area" style="height: 200px;">
+                        <svg class="svg-chart" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <linearGradient id="ipv4-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color: #c49a3b; stop-opacity: 0.3"/>
+                                    <stop offset="100%" style="stop-color: #c49a3b; stop-opacity: 0"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Grid -->
+                            <line class="chart-grid" x1="45" y1="30" x2="300" y2="30"/>
+                            <line class="chart-grid" x1="45" y1="70" x2="300" y2="70"/>
+                            <line class="chart-grid" x1="45" y1="110" x2="300" y2="110"/>
+                            <!-- Y-axis -->
+                            <text class="chart-axis" x="40" y="34" text-anchor="end">313</text>
+                            <text class="chart-axis" x="40" y="74" text-anchor="end">200</text>
+                            <text class="chart-axis" x="40" y="114" text-anchor="end">100</text>
+                            <text class="chart-axis" x="40" y="150" text-anchor="end">0</text>
+                            <!-- X-axis -->
+                            <text class="chart-axis" x="60" y="168">Jan 7</text>
+                            <text class="chart-axis" x="140" y="168">Jan 8</text>
+                            <text class="chart-axis" x="220" y="168">Jan 9</text>
+                            <text class="chart-axis" x="280" y="168">10</text>
+                            <!-- Area -->
+                            <path fill="url(#ipv4-gradient)" d="M60,35 L100,35 L140,38 L160,115 L200,120 L240,118 L280,120 L280,150 L60,150 Z"/>
+                            <!-- Line -->
+                            <path style="fill: none; stroke: #c49a3b; stroke-width: 2.5; stroke-linecap: round;" d="M60,35 L100,35 L140,38 L160,115 L200,120 L240,118 L280,120"/>
+                            <!-- Crash point -->
+                            <circle cx="160" cy="115" r="5" fill="#c49a3b"/>
+                            <!-- Annotation -->
+                            <text class="chart-annotation" x="165" y="100">-82%</text>
+                            <text class="chart-annotation" x="165" y="112">313→56 peers</text>
+                        </svg>
+                    </div>
                 </div>
-                <div class="data-card">
-                    <div class="data-label">Duration</div>
-                    <div class="data-value">5+ days</div>
-                    <div class="data-note">Since Jan 8, 2026</div>
-                </div>
-                <div class="data-card">
-                    <div class="data-label">People Affected</div>
-                    <div class="data-value">87M</div>
-                    <div class="data-note">Entire population</div>
-                </div>
+            </div>
+
+            <div class="highlight-box reveal">
+                <div class="highlight-label">What this means</div>
+                <p class="highlight-text">IPv6 was completely severed—a 98.5% drop. IPv4 experienced severe degradation with peer visibility dropping from 313 to just 56 peers. This indicates a targeted, protocol-aware shutdown.</p>
             </div>
         </div>
     </section>
 
-    <!-- Timeline -->
-    <section class="section section-darker">
+    <!-- Section 2: How it works -->
+    <section class="article-section">
         <div class="container">
-            <span class="section-label reveal">Hour by Hour</span>
-            <h2 class="section-title reveal reveal-delay-1">How the Blackout Unfolded</h2>
+            <div class="section-number reveal">Part 2</div>
+            <h2 class="section-title reveal">How does a country go offline?</h2>
 
-            <div class="timeline-wrapper reveal reveal-delay-2">
-                <div class="timeline-track"></div>
+            <p class="section-text reveal">The internet works by networks announcing where they are. Think of it like an address system—networks tell routers around the world: "To reach us, send traffic here."</p>
 
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot warning"></div>
-                        <div class="timeline-time">Dec 31<br>2025</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">HTTP/3 Blocking Begins</h4>
-                        <p class="timeline-desc">IranCell's HTTP/3 traffic drops from 40% to 5%. Modern encrypted protocols are being blocked in preparation.</p>
-                    </div>
-                </div>
+            <p class="section-text reveal">This system is called <strong>BGP</strong> (Border Gateway Protocol). When a network stops announcing its routes, the rest of the world's routers forget how to reach it. Traffic doesn't get blocked—it simply has nowhere to go.</p>
 
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot warning"></div>
-                        <div class="timeline-time">Jan 3</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">Protocol Restrictions Expand</h4>
-                        <p class="timeline-desc">TCI (AS58224) HTTP/3 falls below 5%. QUIC protocol blocked across major networks.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">Jan 5–7</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">Traffic Spike</h4>
-                        <p class="timeline-desc">Traffic exceeds normal levels as users anticipate restrictions. Last chance to download circumvention tools.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot current"></div>
-                        <div class="timeline-time">Jan 8<br>11:50 UTC</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">IPv6 Routes Withdrawn</h4>
-                        <p class="timeline-desc">IPv6 address space drops<span class="timeline-stat">98.5%</span>—from 48 million to 737,000 /48 prefixes in minutes.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot current"></div>
-                        <div class="timeline-time">Jan 8<br>18:45 UTC</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">Total Blackout</h4>
-                        <p class="timeline-desc">Traffic drops to<span class="timeline-stat">effectively zero</span>. Iran disappears from the global internet.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">Jan 9<br>11:30 UTC</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">Universities Briefly Connected</h4>
-                        <p class="timeline-desc">University of Tehran, Sharif, Tehran Medical briefly restored. Access cut again within hours.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot current"></div>
-                        <div class="timeline-time">Jan 10+<br>Ongoing</div>
-                    </div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">Blackout Continues</h4>
-                        <p class="timeline-desc">Traffic remains at<span class="timeline-stat">&lt;0.01%</span>of normal. No sign of restoration.</p>
-                    </div>
-                </div>
+            <div class="highlight-box reveal">
+                <div class="highlight-label">The key insight</div>
+                <p class="highlight-text">Iran didn't block the internet. It erased itself from the internet's map. Global routers now literally don't know how to send data there.</p>
             </div>
+
+            <p class="section-text reveal">On January 8, Iran's networks withdrew 98.5% of their IPv6 routes. Within hours, the country was unreachable from outside.</p>
         </div>
     </section>
 
-    <!-- The Chokepoint -->
-    <section class="section section-dark">
+    <!-- Section 3: The architecture -->
+    <section class="article-section">
         <div class="container">
-            <span class="section-label reveal">The Architecture</span>
-            <h2 class="section-title reveal reveal-delay-1">One Gateway. 87 Million People.</h2>
+            <div class="section-number reveal">Part 3</div>
+            <h2 class="section-title reveal">Why was this so easy to do?</h2>
 
-            <p class="section-text reveal reveal-delay-2">
-                All of Iran's international internet traffic passes through a <strong>single gateway</strong>:
-                AS49666, operated by the state-controlled Telecommunication Infrastructure Company.
-            </p>
-
-            <p class="section-text reveal">
-                This isn't an accident. Over a decade, international connections were systematically
-                reduced from five independent gateways to one. The infrastructure was designed for control.
-            </p>
+            <p class="section-text reveal">Most countries have many connections to the global internet. If one fails, traffic finds another path. Iran is different: <strong>all international traffic passes through a single gateway</strong>.</p>
         </div>
 
         <div class="container-wide">
-            <div class="topology-wrapper reveal">
-                <div class="topology-header">
-                    <div class="topology-title">Iran Network Architecture — Currently Severed</div>
-                    <div class="topology-subtitle">All traffic must pass through the single chokepoint</div>
+            <div class="network-diagram reveal">
+                <div class="network-header">
+                    <div class="network-title">Iran's Network Architecture</div>
+                    <div class="network-subtitle">All traffic funnels through one chokepoint</div>
                 </div>
 
-                <div class="topology-diagram">
-                    <!-- International providers -->
-                    <div class="topology-column">
-                        <div class="topology-node international">
-                            <div class="node-icon">🇮🇹</div>
+                <div class="network-layout">
+                    <div class="network-column">
+                        <div class="network-node faded">
+                            <div class="node-flag">🇮🇹</div>
                             <div class="node-name">Telecom Italia</div>
                             <div class="node-asn">AS6762</div>
                         </div>
-                        <div class="topology-node international">
-                            <div class="node-icon">🇺🇸</div>
+                        <div class="network-node faded">
+                            <div class="node-flag">🇺🇸</div>
                             <div class="node-name">GTT</div>
                             <div class="node-asn">AS3257</div>
                         </div>
-                        <div class="topology-node international">
-                            <div class="node-icon">🇫🇷</div>
+                        <div class="network-node faded">
+                            <div class="node-flag">🇫🇷</div>
                             <div class="node-name">Orange</div>
                             <div class="node-asn">AS5511</div>
                         </div>
-                        <div class="topology-node international">
-                            <div class="node-icon">🇮🇳</div>
-                            <div class="node-name">TATA</div>
-                            <div class="node-asn">AS6453</div>
-                        </div>
                     </div>
 
-                    <!-- Connection / Chokepoint -->
-                    <div class="topology-connection">
-                        <svg class="connection-lines" viewBox="0 0 100 200">
-                            <path class="connection-line" d="M0,25 Q50,25 50,100"/>
-                            <path class="connection-line" d="M0,75 Q50,75 50,100"/>
-                            <path class="connection-line" d="M0,125 Q50,125 50,100"/>
-                            <path class="connection-line" d="M0,175 Q50,175 50,100"/>
-                            <path class="connection-line active" d="M50,100 Q50,25 100,25"/>
-                            <path class="connection-line active" d="M50,100 Q50,75 100,75"/>
-                            <path class="connection-line active" d="M50,100 Q50,125 100,125"/>
-                            <path class="connection-line active" d="M50,100 Q50,175 100,175"/>
-                        </svg>
-                        <div class="chokepoint-indicator">🚫</div>
+                    <div class="network-arrow">→</div>
+
+                    <div class="network-chokepoint">
+                        <div class="chokepoint-icon">🚫</div>
+                        <div class="chokepoint-label">Gateway blocked</div>
+                        <div class="node-asn" style="color: rgba(255,255,255,0.4);">AS49666 · TIC</div>
                     </div>
 
-                    <!-- Iranian ISPs -->
-                    <div class="topology-column">
-                        <div class="topology-node isp offline">
-                            <div class="node-icon">📱</div>
+                    <div class="network-arrow">→</div>
+
+                    <div class="network-column">
+                        <div class="network-node offline">
+                            <div class="node-flag">📱</div>
                             <div class="node-name">MCI Mobile</div>
-                            <div class="node-asn">AS197207</div>
+                            <div class="node-status">Offline</div>
                         </div>
-                        <div class="topology-node isp offline">
-                            <div class="node-icon">📱</div>
+                        <div class="network-node offline">
+                            <div class="node-flag">📱</div>
                             <div class="node-name">IranCell</div>
-                            <div class="node-asn">AS44244</div>
+                            <div class="node-status">Offline</div>
                         </div>
-                        <div class="topology-node isp offline">
-                            <div class="node-icon">🏢</div>
-                            <div class="node-name">TCI</div>
-                            <div class="node-asn">AS58224</div>
-                        </div>
-                        <div class="topology-node isp offline">
-                            <div class="node-icon">🌐</div>
+                        <div class="network-node offline">
+                            <div class="node-flag">🌐</div>
                             <div class="node-name">Shatel</div>
-                            <div class="node-asn">AS31549</div>
+                            <div class="node-status">Offline</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="topology-legend">
-                    <div class="legend-item">
-                        <div class="legend-dot danger"></div>
-                        <span>Connection severed</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot muted"></div>
-                        <span>Networks offline</span>
-                    </div>
-                </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="callout reveal">
-                <div class="callout-label">What This Means</div>
-                <p class="callout-text">
-                    When the gateway withdraws its BGP routes, the world's routers literally forget
-                    how to reach Iran. Traffic doesn't get blocked—it has nowhere to go.
-                    The country is erased from the internet.
-                </p>
+            <p class="section-text reveal">This gateway (AS49666) is operated by the state-controlled Telecommunication Infrastructure Company. When it withdraws its routes, every Iranian ISP—mobile carriers, home internet providers, businesses—loses their connection to the outside world.</p>
+        </div>
+    </section>
+
+    <!-- Section 4: DNS and Website Access -->
+    <section class="article-section">
+        <div class="container">
+            <div class="section-number reveal">Part 4</div>
+            <h2 class="section-title reveal">What about DNS and websites?</h2>
+
+            <p class="section-text reveal">People often ask: "Can't you just use a different DNS server?" or "What if I already know the IP address?" Here's why that doesn't help during a total shutdown.</p>
+
+            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">How websites normally work</h3>
+            <p class="section-text reveal">When you type "google.com" in your browser, your device asks a DNS server: "What's the IP address for google.com?" Once it gets the answer, it connects to that IP address. This is like looking up a phone number in a directory, then calling it.</p>
+
+            <div class="highlight-box reveal">
+                <div class="highlight-label">During a total BGP withdrawal</div>
+                <p class="highlight-text">Even if you know the exact IP address, your data has nowhere to go. It's not that the phone is busy—there's no phone line at all. The routes that tell the internet how to reach Iran simply don't exist anymore.</p>
+            </div>
+
+            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 40px;">The DNS timeline</h3>
+            <p class="section-text reveal">DNS manipulation was one of the first steps before the full shutdown:</p>
+
+            <div class="data-grid reveal" style="margin-top: 24px;">
+                <div class="data-card">
+                    <div class="data-card-label">Dec 31, 2025</div>
+                    <div class="data-card-value" style="font-size: 1.2rem;">DoH blocked</div>
+                    <div class="data-card-note">Encrypted DNS (DNS-over-HTTPS) stopped working, forcing users back to unencrypted DNS.</div>
+                </div>
+                <div class="data-card">
+                    <div class="data-card-label">Jan 3, 2026</div>
+                    <div class="data-card-value" style="font-size: 1.2rem;">DoT blocked</div>
+                    <div class="data-card-note">DNS-over-TLS also blocked. All DNS queries now visible to censorship systems.</div>
+                </div>
+                <div class="data-card alert">
+                    <div class="data-card-label">Jan 8, 2026</div>
+                    <div class="data-card-value" style="font-size: 1.2rem;">Routes gone</div>
+                    <div class="data-card-note">DNS becomes irrelevant—even with IP addresses, traffic can't reach Iran.</div>
+                </div>
+            </div>
+
+            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 40px;">Can you access Iranian websites from outside?</h3>
+            <p class="section-text reveal"><strong>No.</strong> Websites hosted in Iran are completely unreachable. The routes to Iranian IP addresses have been withdrawn from global routing tables. Your browser doesn't know how to get there.</p>
+
+            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">Can Iranians access outside websites?</h3>
+            <p class="section-text reveal"><strong>No.</strong> Even if DNS resolution worked (which it often doesn't), the return path doesn't exist. Data can't flow in either direction when routes are withdrawn.</p>
+
+            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">What about the "National Internet"?</h3>
+            <p class="section-text reveal">Iran has built a "National Information Network" (NIN/SHOMA) for domestic traffic. During shutdowns, some internal services may remain accessible—government websites, domestic banks, approved apps. But anything requiring international connectivity is blocked.</p>
+
+            <div class="highlight-box reveal" style="border-left-color: var(--accent-forest);">
+                <div class="highlight-label" style="color: var(--accent-forest);">Key point</div>
+                <p class="highlight-text">This isn't censorship in the traditional sense. You can't "get around" a BGP withdrawal with a VPN or DNS trick. The routes simply don't exist. It's like trying to drive somewhere when the roads have been deleted from every map and GPS.</p>
             </div>
         </div>
     </section>
 
-    <!-- Evolution -->
-    <section class="section section-darker">
+    <!-- Section 5: Timeline -->
+    <section class="article-section">
         <div class="container">
-            <span class="section-label reveal">How We Got Here</span>
-            <h2 class="section-title reveal reveal-delay-1">The Systematic Elimination of Redundancy</h2>
+            <div class="section-number reveal">Part 5</div>
+            <h2 class="section-title reveal">Timeline of the shutdown</h2>
 
-            <p class="section-text reveal reveal-delay-2">
-                Iran didn't always have this vulnerability. The infrastructure was deliberately
-                consolidated over a decade, reducing international gateways from five to one.
-            </p>
+            <p class="section-text reveal">The blackout didn't happen instantly. There were warning signs in the days before, followed by a rapid collapse on January 8.</p>
 
-            <div class="evolution-visual reveal">
-                <div class="evolution-year">
-                    <div class="evolution-gates">
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
+            <div class="timeline reveal">
+                <div class="timeline-event">
+                    <div class="timeline-date">
+                        <div class="timeline-date-main">Dec 31</div>
+                        <div class="timeline-date-sub">2025</div>
                     </div>
-                    <div class="evolution-label">2014</div>
-                    <div class="evolution-event">5 gateways</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Protocol blocking begins</div>
+                        <p class="timeline-desc">HTTP/3 traffic on IranCell drops from 40% to 5%. Modern encrypted protocols are being restricted.</p>
+                    </div>
                 </div>
 
-                <div class="evolution-year">
-                    <div class="evolution-gates">
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
+                <div class="timeline-event">
+                    <div class="timeline-date">
+                        <div class="timeline-date-main">Jan 5–7</div>
                     </div>
-                    <div class="evolution-label">2016</div>
-                    <div class="evolution-event">4 gateways</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Traffic spikes</div>
+                        <p class="timeline-desc">Traffic rises above normal levels as users anticipate restrictions and download circumvention tools.</p>
+                    </div>
                 </div>
 
-                <div class="evolution-year danger">
-                    <div class="evolution-gates">
-                        <div class="evolution-gate"></div>
-                        <div class="evolution-gate"></div>
+                <div class="timeline-event">
+                    <div class="timeline-date">
+                        <div class="timeline-date-main">Jan 8</div>
+                        <div class="timeline-date-sub">11:50 UTC</div>
                     </div>
-                    <div class="evolution-label">2017</div>
-                    <div class="evolution-event">NIN launched</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">IPv6 routes withdrawn</div>
+                        <p class="timeline-desc">IPv6 address space drops <span class="timeline-stat">98.5%</span> in minutes—from 48 million to 737,000 prefixes.</p>
+                    </div>
                 </div>
 
-                <div class="evolution-year danger">
-                    <div class="evolution-gates">
-                        <div class="evolution-gate"></div>
+                <div class="timeline-event">
+                    <div class="timeline-date">
+                        <div class="timeline-date-main">Jan 8</div>
+                        <div class="timeline-date-sub">18:45 UTC</div>
                     </div>
-                    <div class="evolution-label">2019</div>
-                    <div class="evolution-event">First blackout</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Total blackout</div>
+                        <p class="timeline-desc">Traffic drops to <span class="timeline-stat">effectively zero</span>. Iran is disconnected from the global internet.</p>
+                    </div>
                 </div>
 
-                <div class="evolution-year danger">
-                    <div class="evolution-gates">
-                        <div class="evolution-gate"></div>
+                <div class="timeline-event">
+                    <div class="timeline-date">
+                        <div class="timeline-date-main">Jan 9</div>
+                        <div class="timeline-date-sub">11:30 UTC</div>
                     </div>
-                    <div class="evolution-label">2022</div>
-                    <div class="evolution-event">Digital curfew</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Universities briefly online</div>
+                        <p class="timeline-desc">University of Tehran, Sharif University, and others are briefly reconnected. Access is cut again within hours.</p>
+                    </div>
                 </div>
 
-                <div class="evolution-year current">
-                    <div class="evolution-gates">
-                        <div class="evolution-gate"></div>
+                <div class="timeline-event">
+                    <div class="timeline-date">
+                        <div class="timeline-date-main">Jan 10+</div>
+                        <div class="timeline-date-sub">Ongoing</div>
                     </div>
-                    <div class="evolution-label">2026</div>
-                    <div class="evolution-event">Now offline</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Blackout continues</div>
+                        <p class="timeline-desc">Traffic remains at <span class="timeline-stat">&lt;0.01%</span> of normal levels. No restoration in sight.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Historical Context -->
-    <section class="section section-dark">
+    <!-- Section 5: Historical context -->
+    <section class="article-section">
         <div class="container">
-            <span class="section-label reveal">Pattern of Control</span>
-            <h2 class="section-title reveal reveal-delay-1">This Has Happened Before</h2>
+            <div class="section-number reveal">Part 6</div>
+            <h2 class="section-title reveal">This has happened before</h2>
 
-            <p class="section-text reveal reveal-delay-2">
-                The January 2026 blackout follows a documented pattern. This infrastructure
-                has been used repeatedly during periods of civil unrest.
-            </p>
+            <p class="section-text reveal">Iran's network infrastructure wasn't always this centralized. Over the past decade, international gateways were reduced from five to one—creating the single point of control that makes shutdowns trivial.</p>
+
+            <div class="evolution-row reveal">
+                <div class="evolution-item">
+                    <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                    </div>
+                    <div class="evolution-year">2014</div>
+                    <div class="evolution-note">5 gateways</div>
+                </div>
+
+                <div class="evolution-item">
+                    <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                    </div>
+                    <div class="evolution-year">2016</div>
+                    <div class="evolution-note">4 gateways</div>
+                </div>
+
+                <div class="evolution-item warning">
+                    <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
+                        <div class="evolution-bar"></div>
+                    </div>
+                    <div class="evolution-year">2017</div>
+                    <div class="evolution-note">NIN launched</div>
+                </div>
+
+                <div class="evolution-item danger">
+                    <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
+                    </div>
+                    <div class="evolution-year">2019</div>
+                    <div class="evolution-note">First blackout</div>
+                </div>
+
+                <div class="evolution-item danger">
+                    <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
+                    </div>
+                    <div class="evolution-year">2022</div>
+                    <div class="evolution-note">Digital curfew</div>
+                </div>
+
+                <div class="evolution-item danger">
+                    <div class="evolution-bars">
+                        <div class="evolution-bar"></div>
+                    </div>
+                    <div class="evolution-year">2026</div>
+                    <div class="evolution-note">Now offline</div>
+                </div>
+            </div>
 
             <div class="data-grid reveal">
                 <div class="data-card">
-                    <div class="data-label">November 2019</div>
-                    <div class="data-value">7 days</div>
-                    <div class="data-note">Fuel protests. First total blackout. Visibility dropped to 5%.</div>
+                    <div class="data-card-label">November 2019</div>
+                    <div class="data-card-value">7 days</div>
+                    <div class="data-card-note">Fuel price protests. First total shutdown.</div>
                 </div>
                 <div class="data-card">
-                    <div class="data-label">September 2022</div>
-                    <div class="data-value">100+ hrs</div>
-                    <div class="data-note">Mahsa Amini protests. Daily "curfews" 4PM–midnight on mobile.</div>
+                    <div class="data-card-label">September 2022</div>
+                    <div class="data-card-value">100+ hrs</div>
+                    <div class="data-card-note">Mahsa Amini protests. Daily mobile curfews.</div>
                 </div>
-                <div class="data-card danger">
-                    <div class="data-label">January 2026</div>
-                    <div class="data-value">Ongoing</div>
-                    <div class="data-note">Most severe. Traffic at ~0%. No restoration in sight.</div>
+                <div class="data-card alert">
+                    <div class="data-card-label">January 2026</div>
+                    <div class="data-card-value">Ongoing</div>
+                    <div class="data-card-note">Most severe shutdown on record.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Bypass Methods -->
-    <section class="section section-darker">
+    <!-- Section 6: Bypass methods -->
+    <section class="article-section">
         <div class="container">
-            <span class="section-label reveal">Circumvention</span>
-            <h2 class="section-title reveal reveal-delay-1">How People Try to Stay Connected</h2>
+            <div class="section-number reveal">Part 7</div>
+            <h2 class="section-title reveal">Can people get around it?</h2>
 
-            <p class="section-text reveal reveal-delay-2">
-                During a total BGP withdrawal, most circumvention tools are useless.
-                They require some connectivity to work. Here's what's actually possible.
-            </p>
+            <p class="section-text reveal">During a total shutdown, most circumvention tools don't work. VPNs, Tor, and similar tools require some internet connection to function. When routes are withdrawn, there's nothing to circumvent—traffic has nowhere to go.</p>
         </div>
 
         <div class="container-wide">
@@ -1539,99 +1354,150 @@
                     <div class="bypass-header">
                         <div class="bypass-icon">📡</div>
                         <div>
-                            <div class="bypass-title">Satellite (Starlink)</div>
+                            <div class="bypass-name">Satellite Internet</div>
                             <div class="bypass-status works">Only option during total blackout</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">
-                        Satellite connections bypass terrestrial infrastructure entirely.
-                        The only method that works when BGP routes are withdrawn.
-                    </p>
-                    <div class="bypass-warning">
-                        <div class="bypass-warning-label">Risk</div>
-                        <div class="bypass-warning-text">Equipment must be smuggled. Dishes detectable. Possession illegal. Active jamming reported.</div>
-                    </div>
+                    <p class="bypass-desc">Starlink and other satellite services bypass terrestrial infrastructure entirely. The only method that works when BGP routes are withdrawn.</p>
+                    <div class="bypass-warning"><strong>Risk:</strong> Equipment must be smuggled. Dishes are detectable. Possession is illegal. Active jamming has been reported.</div>
                 </div>
 
                 <div class="bypass-card">
                     <div class="bypass-header">
                         <div class="bypass-icon">🔗</div>
                         <div>
-                            <div class="bypass-title">Mesh Networks</div>
+                            <div class="bypass-name">Mesh Networks</div>
                             <div class="bypass-status limited">Local communication only</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">
-                        Apps like Briar and Bridgefy enable phone-to-phone communication
-                        via Bluetooth or WiFi. Works without any internet.
-                    </p>
-                    <div class="bypass-warning">
-                        <div class="bypass-warning-label">Limitation</div>
-                        <div class="bypass-warning-text">Can only reach nearby users. No access to global internet or outside information.</div>
-                    </div>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🧅</div>
-                        <div>
-                            <div class="bypass-title">Tor / VPNs</div>
-                            <div class="bypass-status blocked">Ineffective during total blackout</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">
-                        Normally useful for evading censorship, but these tools require
-                        some connectivity to function. Useless when routes are withdrawn.
-                    </p>
-                    <div class="bypass-warning">
-                        <div class="bypass-warning-label">Current status</div>
-                        <div class="bypass-warning-text">Cannot connect. Traffic has nowhere to go. Download in advance for partial blocks.</div>
-                    </div>
+                    <p class="bypass-desc">Apps like Briar and Bridgefy allow phone-to-phone communication via Bluetooth or WiFi, without any internet connection.</p>
+                    <div class="bypass-warning"><strong>Limitation:</strong> Can only reach nearby users. No access to global internet or outside information.</div>
                 </div>
 
                 <div class="bypass-card">
                     <div class="bypass-header">
                         <div class="bypass-icon">🛡️</div>
                         <div>
-                            <div class="bypass-title">Psiphon / Lantern</div>
+                            <div class="bypass-name">VPNs and Tor</div>
+                            <div class="bypass-status blocked">Ineffective during total blackout</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Normally useful for bypassing censorship, but these tools require some connectivity to function.</p>
+                    <div class="bypass-warning"><strong>Current status:</strong> Cannot connect. Must be downloaded before blackouts for use during partial restrictions.</div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">📻</div>
+                        <div>
+                            <div class="bypass-name">Psiphon / Lantern</div>
                             <div class="bypass-status blocked">Requires connectivity</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">
-                        Purpose-built circumvention tools effective during partial blocks
-                        or protocol restrictions, but not during total shutdown.
-                    </p>
-                    <div class="bypass-warning">
-                        <div class="bypass-warning-label">When useful</div>
-                        <div class="bypass-warning-text">During partial restrictions only. Must be downloaded before blackout occurs.</div>
-                    </div>
+                    <p class="bypass-desc">Purpose-built circumvention tools that are effective during partial blocks and protocol restrictions.</p>
+                    <div class="bypass-warning"><strong>When useful:</strong> During partial restrictions only. Download in advance.</div>
                 </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🔀</div>
+                        <div>
+                            <div class="bypass-name">DNS Tunneling</div>
+                            <div class="bypass-status limited">Works during partial blocks only</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Encodes internet traffic inside DNS queries. Since DNS is essential for basic network functions, it's often allowed even when other traffic is blocked or inspected by DPI.</p>
+                    <div class="bypass-warning"><strong>How it works:</strong> Tools like iodine, dnscat2, or dns2tcp encode data in DNS queries to a server you control. The traffic looks like normal DNS lookups, bypassing Deep Packet Inspection. Slow but effective when DPI is blocking VPNs.</div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🌊</div>
+                        <div>
+                            <div class="bypass-name">Domain Fronting</div>
+                            <div class="bypass-status limited">Partially effective</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Hides the true destination by routing traffic through allowed CDN domains (like major cloud providers). The censor sees traffic to "allowed.com" but it actually reaches "blocked.com".</p>
+                    <div class="bypass-warning"><strong>Limitation:</strong> Many CDN providers have disabled this. Requires some connectivity to work. Ineffective during total BGP withdrawal.</div>
+                </div>
+            </div>
+
+            <div class="highlight-box reveal" style="margin-top: 32px; border-left-color: var(--accent-ochre);">
+                <div class="highlight-label" style="color: var(--accent-ochre);">Important distinction</div>
+                <p class="highlight-text">DNS tunneling and domain fronting work when there's <strong>some connectivity</strong> but traffic is being filtered by DPI. During a <strong>total BGP withdrawal</strong> (like now), no circumvention tool that requires internet connectivity will work—the routes simply don't exist.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Data Sources -->
+    <section class="sources-section">
+        <div class="container-wide">
+            <h2 class="sources-title reveal">Follow the Data</h2>
+            <p class="sources-subtitle reveal">These organizations monitor internet connectivity in real-time. Check them for ongoing updates.</p>
+
+            <div class="sources-grid reveal">
+                <a href="https://blog.cloudflare.com/iran-protests-internet-shutdown/" target="_blank" class="source-card">
+                    <div class="source-name">Cloudflare</div>
+                    <div class="source-desc">Detailed analysis of traffic patterns, protocol blocking, and BGP withdrawals.</div>
+                    <div class="source-type">Traffic Analysis</div>
+                </a>
+
+                <a href="https://netblocks.org/reports" target="_blank" class="source-card">
+                    <div class="source-name">NetBlocks</div>
+                    <div class="source-desc">Real-time network monitoring and outage verification.</div>
+                    <div class="source-type">Live Monitoring</div>
+                </a>
+
+                <a href="https://ioda.inetintel.cc.gatech.edu/country/IR" target="_blank" class="source-card">
+                    <div class="source-name">IODA</div>
+                    <div class="source-desc">Georgia Tech's Internet Outage Detection and Analysis project.</div>
+                    <div class="source-type">Academic Research</div>
+                </a>
+
+                <a href="https://ooni.org/country/ir" target="_blank" class="source-card">
+                    <div class="source-name">OONI</div>
+                    <div class="source-desc">Open Observatory of Network Interference. Censorship measurement data.</div>
+                    <div class="source-type">Censorship Data</div>
+                </a>
+
+                <a href="https://stat.ripe.net/widget/country-routing-stats#w.resource=IR" target="_blank" class="source-card">
+                    <div class="source-name">RIPE RIS</div>
+                    <div class="source-desc">BGP routing information service. Shows route announcements and withdrawals.</div>
+                    <div class="source-type">BGP Data</div>
+                </a>
+
+                <a href="https://radar.cloudflare.com/ir" target="_blank" class="source-card">
+                    <div class="source-name">Cloudflare Radar</div>
+                    <div class="source-desc">Live internet traffic and trends dashboard for Iran.</div>
+                    <div class="source-type">Live Dashboard</div>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Summary -->
-    <section class="section section-dark">
+    <section class="summary-section">
         <div class="container-wide">
-            <h2 class="section-title reveal" style="text-align: center; max-width: none;">What You Need to Know</h2>
+            <h2 class="section-title reveal" style="text-align: center; max-width: none; margin-bottom: 40px;">Key Takeaways</h2>
 
             <div class="summary-grid">
-                <div class="summary-card reveal reveal-delay-1">
-                    <div class="summary-icon danger">🚨</div>
-                    <h3>This Is Happening Now</h3>
-                    <p>Since January 8, 2026, Iran's internet traffic has been near zero. 87 million people are cut off from the world, from information, from each other.</p>
+                <div class="summary-card reveal">
+                    <div class="summary-icon">📍</div>
+                    <h3>This is happening now</h3>
+                    <p>Since January 8, 2026, Iran's internet has been at near-zero. 87 million people are cut off from information, from communication, from each other.</p>
                 </div>
 
-                <div class="summary-card reveal reveal-delay-2">
-                    <div class="summary-icon warning">🗺️</div>
-                    <h3>Erasure, Not Blocking</h3>
-                    <p>Iran hasn't blocked traffic—it has withdrawn its routes from global tables. The world's routers literally don't know how to reach it. The country has been erased.</p>
+                <div class="summary-card reveal">
+                    <div class="summary-icon">🗺️</div>
+                    <h3>Erasure, not blocking</h3>
+                    <p>Iran withdrew its routes from global routing tables. The world's routers don't know how to reach it. The country was erased from the internet's map.</p>
                 </div>
 
-                <div class="summary-card reveal reveal-delay-3">
-                    <div class="summary-icon hope">👁️</div>
-                    <h3>Visibility Matters</h3>
-                    <p>Organizations like Cloudflare, RIPE, OONI, and IODA document these events in real-time. This record is crucial for accountability and understanding.</p>
+                <div class="summary-card reveal">
+                    <div class="summary-icon">👁️</div>
+                    <h3>Documentation matters</h3>
+                    <p>Organizations like Cloudflare, OONI, IODA, and NetBlocks are recording this in real-time. This data is crucial for understanding and accountability.</p>
                 </div>
             </div>
         </div>
@@ -1639,55 +1505,21 @@
 
     <!-- Footer -->
     <footer>
-        <p class="footer-sources">
-            Data:
-            <a href="https://blog.cloudflare.com/iran-protests-internet-shutdown/" target="_blank">Cloudflare</a> ·
-            <a href="https://stat.ripe.net" target="_blank">RIPEstat</a> ·
-            <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA</a> ·
-            <a href="https://ooni.org" target="_blank">OONI</a>
-        </p>
+        <p>Data sources: <a href="https://blog.cloudflare.com/iran-protests-internet-shutdown/" target="_blank">Cloudflare</a> · <a href="https://netblocks.org" target="_blank">NetBlocks</a> · <a href="https://stat.ripe.net" target="_blank">RIPE</a> · <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA</a> · <a href="https://ooni.org" target="_blank">OONI</a></p>
         <p class="footer-update">Last updated January 13, 2026</p>
     </footer>
 
     <script>
-        // Intersection Observer for reveal animations
+        // Reveal on scroll
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            revealObserver.observe(el);
-        });
-
-        // Animate gauge on load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Counter animation for gauge
-            const gaugeValues = document.querySelectorAll('.gauge-value');
-            gaugeValues.forEach(el => {
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.style.transition = 'opacity 0.5s ease';
-                    el.style.opacity = '1';
-                }, 500);
-            });
-        });
-
-        // Parallax effect on hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero && scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-                hero.style.opacity = 1 - (scrolled / window.innerHeight);
-            }
-        });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
 
 </body>
