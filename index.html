@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Iran Built a Kill Switch for 87 Million People</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf8f5;
+            --bg-warm: #f5f0e8;
+            --bg-dark: #1a1a1f;
+            --bg-darker: #0f0f12;
+            --text-dark: #1a1a1f;
+            --text-medium: #4a4a55;
+            --text-light: #7a7a88;
+            --accent-coral: #e85d4c;
+            --accent-coral-dark: #c44a3a;
+            --accent-blue: #3d5a80;
+            --accent-teal: #2a9d8f;
+            --accent-gold: #e9c46a;
+            --accent-orange: #f4a261;
+            --accent-green: #4ade80;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .wide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(232,93,76,0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+            opacity: 0.5;
+        }
+
+        .hero-warning {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(232, 93, 76, 0.2);
+            border: 1px solid rgba(232, 93, 76, 0.3);
+            color: var(--accent-coral);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-question {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            max-width: 900px;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .hero-question .highlight {
+            color: var(--accent-coral);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--accent-coral);
+            font-weight: 500;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        .scroll-hint svg {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Story sections */
+        .story-section {
+            padding: 120px 24px;
+        }
+
+        .story-section:nth-child(even) {
+            background: var(--bg-warm);
+        }
+
+        .story-section.dark {
+            background: var(--bg-dark);
+            color: white;
+        }
+
+        .story-section.dark .story-text {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .story-section.dark .story-title {
+            color: white;
+        }
+
+        .story-section.danger {
+            background: linear-gradient(180deg, #2a1a1a 0%, var(--bg-dark) 100%);
+            color: white;
+        }
+
+        .section-number {
+            font-family: 'Fraunces', serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent-coral);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 24px;
+        }
+
+        .story-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        .story-text {
+            color: var(--text-medium);
+            margin-bottom: 24px;
+        }
+
+        .story-text:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .story-text strong {
+            color: var(--text-dark);
+        }
+
+        .story-section.dark .story-text strong {
+            color: white;
+        }
+
+        /* Critical callout */
+        .critical-box {
+            background: linear-gradient(135deg, var(--accent-coral) 0%, var(--accent-coral-dark) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            color: white;
+        }
+
+        .critical-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .critical-text {
+            font-size: 1.125rem;
+            line-height: 1.6;
+        }
+
+        /* Analogy Box */
+        .analogy-box {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border-left: 4px solid var(--accent-teal);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .story-section.dark .analogy-box {
+            background: rgba(255,255,255,0.05);
+            border-left-color: var(--accent-coral);
+        }
+
+        .analogy-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+
+        .story-section.dark .analogy-label {
+            color: var(--accent-coral);
+        }
+
+        .analogy-text {
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        .story-section.dark .analogy-text {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Visual: Chokepoint Diagram */
+        .chokepoint-visual {
+            background: var(--bg-darker);
+            border-radius: 24px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chokepoint-title {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 48px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .chokepoint-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* ISP Row */
+        .isp-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .isp-node {
+            width: 100px;
+            background: linear-gradient(180deg, var(--accent-blue) 0%, #2d4a70 100%);
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .isp-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .isp-name {
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        .isp-type {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+        }
+
+        .isp-users {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent-gold);
+            margin-top: 8px;
+        }
+
+        /* Connection lines */
+        .connections-down {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+            position: relative;
+        }
+
+        .conn-line {
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-blue) 0%, var(--accent-coral) 100%);
+        }
+
+        .conn-funnel {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 30px solid rgba(232, 93, 76, 0.2);
+        }
+
+        /* Chokepoint Gate */
+        .chokepoint-gate {
+            background: linear-gradient(180deg, var(--accent-coral) 0%, var(--accent-coral-dark) 100%);
+            border-radius: 16px;
+            padding: 24px 48px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 60px rgba(232, 93, 76, 0.4);
+            margin: 20px 0;
+        }
+
+        .gate-warning {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: var(--accent-coral);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .gate-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .gate-name {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .gate-asn {
+            font-family: 'JetBrains Mono', monospace;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .gate-owner {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 8px;
+        }
+
+        /* International side */
+        .intl-connection {
+            width: 2px;
+            height: 40px;
+            background: var(--accent-teal);
+            margin: 0 auto;
+        }
+
+        .intl-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .intl-node {
+            background: rgba(42, 157, 143, 0.2);
+            border: 1px solid rgba(42, 157, 143, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .intl-name {
+            font-size: 0.75rem;
+            color: var(--accent-teal);
+            font-weight: 500;
+        }
+
+        .intl-flag {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .world-label {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* BGP Explanation Visual */
+        .bgp-visual {
+            background: var(--bg-darker);
+            border-radius: 24px;
+            padding: 48px;
+            margin: 60px 0;
+        }
+
+        .bgp-title {
+            color: white;
+            font-size: 1.125rem;
+            margin-bottom: 8px;
+        }
+
+        .bgp-subtitle {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.875rem;
+            margin-bottom: 40px;
+        }
+
+        .bgp-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 700px) {
+            .bgp-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bgp-state {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .bgp-state.normal {
+            border-color: rgba(42, 157, 143, 0.3);
+        }
+
+        .bgp-state.shutdown {
+            border-color: rgba(232, 93, 76, 0.3);
+            background: rgba(232, 93, 76, 0.05);
+        }
+
+        .bgp-state-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .bgp-state-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .bgp-state.normal .bgp-state-icon {
+            background: rgba(42, 157, 143, 0.2);
+        }
+
+        .bgp-state.shutdown .bgp-state-icon {
+            background: rgba(232, 93, 76, 0.2);
+        }
+
+        .bgp-state-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .bgp-state.normal .bgp-state-title {
+            color: var(--accent-teal);
+        }
+
+        .bgp-state.shutdown .bgp-state-title {
+            color: var(--accent-coral);
+        }
+
+        .bgp-message {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            overflow-x: auto;
+        }
+
+        .bgp-message .keyword {
+            color: var(--accent-gold);
+        }
+
+        .bgp-message .value {
+            color: var(--accent-teal);
+        }
+
+        .bgp-message .withdrawn {
+            color: var(--accent-coral);
+            text-decoration: line-through;
+        }
+
+        .bgp-result {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        .bgp-result strong {
+            color: white;
+        }
+
+        /* Timeline Visual */
+        .timeline-visual {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            margin: 60px 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+
+        .story-section.dark .timeline-visual {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .story-section.dark .timeline-subtitle {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-track {
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent-teal) 0%, var(--accent-coral) 20%, var(--accent-coral) 80%, var(--accent-teal) 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-event {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .timeline-event:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            width: 60px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-teal);
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .story-section.dark .dot {
+            border-color: var(--bg-dark);
+        }
+
+        .dot.danger {
+            background: var(--accent-coral);
+        }
+
+        .dot.warning {
+            background: var(--accent-orange);
+        }
+
+        .timeline-time {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 8px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .story-section.dark .timeline-time {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-top: 2px;
+        }
+
+        .timeline-event-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .story-section.dark .timeline-event-title {
+            color: white;
+        }
+
+        .timeline-event-desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        .story-section.dark .timeline-event-desc {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .timeline-percent {
+            display: inline-block;
+            background: rgba(232, 93, 76, 0.1);
+            color: var(--accent-coral);
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Curfew Visual */
+        .curfew-visual {
+            background: var(--bg-darker);
+            border-radius: 24px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .curfew-title {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .clock-ring {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .clock-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                var(--accent-teal) 0deg,
+                var(--accent-teal) 240deg,
+                var(--accent-coral) 240deg,
+                var(--accent-coral) 360deg
+            );
+            opacity: 0.8;
+        }
+
+        .clock-inner {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: var(--bg-darker);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clock-time {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            color: var(--accent-coral);
+        }
+
+        .clock-label-text {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+        }
+
+        .clock-markers {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .clock-marker {
+            position: absolute;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .clock-marker.top { top: 4px; left: 50%; transform: translateX(-50%); }
+        .clock-marker.right { right: 0; top: 50%; transform: translateY(-50%); }
+        .clock-marker.bottom { bottom: 4px; left: 50%; transform: translateX(-50%); }
+        .clock-marker.left { left: 4px; top: 50%; transform: translateY(-50%); }
+
+        .curfew-legend {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            color: white;
+            margin-bottom: 32px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-color.online { background: var(--accent-teal); }
+        .legend-color.offline { background: var(--accent-coral); }
+
+        .curfew-stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .curfew-stat strong {
+            color: var(--accent-coral);
+            font-size: 1.25rem;
+        }
+
+        /* Evolution Visual */
+        .evolution-visual {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            margin: 60px 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+
+        .evolution-title {
+            font-size: 1.125rem;
+            margin-bottom: 8px;
+        }
+
+        .evolution-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .evolution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .evolution-item {
+            text-align: center;
+            padding: 24px 16px;
+            border-radius: 16px;
+            background: var(--bg-cream);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .evolution-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .evolution-item.danger {
+            background: rgba(232, 93, 76, 0.08);
+        }
+
+        .evolution-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+        }
+
+        .evolution-item.danger .evolution-year {
+            color: var(--accent-coral);
+        }
+
+        .evolution-doors {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 12px;
+            min-height: 36px;
+            align-items: flex-end;
+        }
+
+        .door-icon {
+            width: 18px;
+            height: 28px;
+            background: var(--accent-blue);
+            border-radius: 9px 9px 0 0;
+        }
+
+        .evolution-item.danger .door-icon {
+            background: var(--accent-coral);
+        }
+
+        .evolution-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .evolution-event {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Bypass Section */
+        .bypass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+
+        .bypass-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .bypass-card:hover {
+            border-color: rgba(42, 157, 143, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .bypass-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .bypass-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: rgba(42, 157, 143, 0.15);
+        }
+
+        .bypass-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .bypass-difficulty {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        .bypass-difficulty.easy { color: var(--accent-green); }
+        .bypass-difficulty.medium { color: var(--accent-gold); }
+        .bypass-difficulty.hard { color: var(--accent-coral); }
+
+        .bypass-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .bypass-how {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .bypass-how-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-teal);
+            margin-bottom: 8px;
+        }
+
+        .bypass-how-text {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        .bypass-limitation {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .bypass-limitation-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-coral);
+            margin-bottom: 6px;
+        }
+
+        .bypass-limitation-text {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* DPI Visual */
+        .dpi-visual {
+            background: var(--bg-darker);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 48px 0;
+        }
+
+        .dpi-title {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .dpi-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .dpi-step {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .dpi-step-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .dpi-step-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .dpi-arrow {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .dpi-step.blocked {
+            background: rgba(232, 93, 76, 0.15);
+            border: 1px solid rgba(232, 93, 76, 0.3);
+        }
+
+        .dpi-step.blocked .dpi-step-label {
+            color: var(--accent-coral);
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: var(--bg-dark);
+            padding: 100px 24px;
+            color: white;
+        }
+
+        .summary-title {
+            text-align: center;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 60px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .summary-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .summary-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .summary-icon.coral { background: rgba(232, 93, 76, 0.2); }
+        .summary-icon.teal { background: rgba(42, 157, 143, 0.2); }
+        .summary-icon.gold { background: rgba(233, 196, 106, 0.2); }
+
+        .summary-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+        }
+
+        .summary-card p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            padding: 40px 24px;
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            section {
+                padding: 80px 0;
+            }
+
+            .story-section {
+                padding: 80px 24px;
+            }
+
+            .chokepoint-visual,
+            .bgp-visual,
+            .curfew-visual,
+            .timeline-visual,
+            .evolution-visual,
+            .analogy-box,
+            .critical-box,
+            .dpi-visual {
+                border-radius: 16px;
+                margin: 40px -12px;
+                padding: 32px 20px;
+            }
+
+            .isp-node {
+                width: 80px;
+                padding: 12px 8px;
+            }
+
+            .clock-ring {
+                width: 220px;
+                height: 220px;
+            }
+
+            .bypass-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-warning">
+            <span>Human Rights Issue</span>
+        </div>
+        <h1 class="hero-question">How Iran Built a <span class="highlight">Kill Switch</span> for 87 Million People</h1>
+        <p class="hero-subtitle">A technical breakdown of how a government engineered the ability to silence an entire nation&mdash;and what people can do about it.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-value">1</div>
+                <div class="hero-stat-label">Chokepoint</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">7</div>
+                <div class="hero-stat-label">Days blacked out (2019)</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">100+</div>
+                <div class="hero-stat-label">Hours offline (2022)</div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll to understand</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Part 1: The Basics -->
+    <section class="story-section">
+        <div class="container">
+            <span class="section-number fade-in">Part 1</span>
+            <h2 class="story-title fade-in">First, understand what "the internet" actually is</h2>
+
+            <p class="story-text fade-in">The internet isn't one thing. It's thousands of separate networks all agreeing to pass traffic to each other. Your home WiFi is a network. Your mobile carrier is a network. Google runs networks. So does every country.</p>
+
+            <p class="story-text fade-in">When you visit a website hosted in another country, your request hops through multiple networks to get there. Each network knows which neighbors it can reach, and they pass your data along like a chain of messengers.</p>
+
+            <div class="analogy-box fade-in">
+                <div class="analogy-label">Think of it this way</div>
+                <p class="analogy-text">The internet is like a city of buildings connected by roads. Each building (network) has its own rooms and people. The roads let traffic flow between buildings. Normally, if one road closes, you can take another route.</p>
+            </div>
+
+            <p class="story-text fade-in">Most countries have <strong>multiple connections</strong> to the global internet through different providers in different locations. This redundancy makes the internet resilient. If one path fails, traffic finds another way.</p>
+
+            <p class="story-text fade-in"><strong>Iran deliberately destroyed this redundancy.</strong></p>
+        </div>
+    </section>
+
+    <!-- Part 2: The Chokepoint -->
+    <section class="story-section dark">
+        <div class="container">
+            <span class="section-number fade-in">Part 2</span>
+            <h2 class="story-title fade-in">Iran funneled everything through one door</h2>
+
+            <p class="story-text fade-in">Over the past decade, Iran systematically restructured its internet infrastructure. Instead of allowing networks to connect to the outside world independently, the government forced <strong>all international traffic</strong> through a single gateway: <strong>AS49666</strong>, operated by the state-controlled Telecommunication Infrastructure Company (TIC).</p>
+
+            <div class="chokepoint-visual fade-in">
+                <div class="chokepoint-title">Iran's Engineered Chokepoint Architecture</div>
+                <div class="chokepoint-diagram">
+                    <div class="isp-row">
+                        <div class="isp-node">
+                            <div class="isp-icon">📱</div>
+                            <div class="isp-name">MCI</div>
+                            <div class="isp-type">Mobile</div>
+                            <div class="isp-users">~50M users</div>
+                        </div>
+                        <div class="isp-node">
+                            <div class="isp-icon">📱</div>
+                            <div class="isp-name">Irancell</div>
+                            <div class="isp-type">Mobile</div>
+                            <div class="isp-users">~45M users</div>
+                        </div>
+                        <div class="isp-node">
+                            <div class="isp-icon">🏠</div>
+                            <div class="isp-name">Shatel</div>
+                            <div class="isp-type">Fixed ISP</div>
+                            <div class="isp-users">~2M users</div>
+                        </div>
+                        <div class="isp-node">
+                            <div class="isp-icon">📱</div>
+                            <div class="isp-name">Rightel</div>
+                            <div class="isp-type">Mobile</div>
+                            <div class="isp-users">~8M users</div>
+                        </div>
+                    </div>
+
+                    <div class="connections-down">
+                        <div class="conn-line"></div>
+                        <div class="conn-line"></div>
+                        <div class="conn-line"></div>
+                        <div class="conn-line"></div>
+                        <div class="conn-funnel"></div>
+                    </div>
+
+                    <div class="chokepoint-gate">
+                        <div class="gate-warning">Government Controlled Chokepoint</div>
+                        <div class="gate-icon">🚨</div>
+                        <div class="gate-name">TIC Gateway</div>
+                        <div class="gate-asn">AS49666</div>
+                        <div class="gate-owner">Telecommunication Infrastructure Company</div>
+                    </div>
+
+                    <div class="intl-connection"></div>
+
+                    <div class="intl-row">
+                        <div class="intl-node">
+                            <div class="intl-flag">🇮🇹</div>
+                            <div class="intl-name">Telecom Italia</div>
+                        </div>
+                        <div class="intl-node">
+                            <div class="intl-flag">🇺🇸</div>
+                            <div class="intl-name">GTT</div>
+                        </div>
+                        <div class="intl-node">
+                            <div class="intl-flag">🇮🇳</div>
+                            <div class="intl-name">TATA</div>
+                        </div>
+                        <div class="intl-node">
+                            <div class="intl-flag">🇫🇷</div>
+                            <div class="intl-name">Orange</div>
+                        </div>
+                    </div>
+
+                    <div class="world-label">Global Internet</div>
+                </div>
+            </div>
+
+            <div class="critical-box fade-in">
+                <div class="critical-label">Why this is dangerous</div>
+                <p class="critical-text">By forcing all traffic through one point, the government doesn't need to negotiate with dozens of companies or physically cut cables in multiple locations. They control one gateway, they control everything. This was not an accident&mdash;it was deliberate engineering to enable censorship and shutdowns.</p>
+            </div>
+
+            <p class="story-text fade-in">This single point of control is called a <strong>chokepoint</strong>. It transforms the internet from a resilient, distributed network into something that can be switched off with a single command.</p>
+        </div>
+    </section>
+
+    <!-- Part 3: How BGP Works -->
+    <section class="story-section">
+        <div class="container">
+            <span class="section-number fade-in">Part 3</span>
+            <h2 class="story-title fade-in">How they actually "turn off" the internet</h2>
+
+            <p class="story-text fade-in">The internet uses a protocol called <strong>BGP</strong> (Border Gateway Protocol) to know how to route traffic. Think of BGP as a global address book that every network constantly updates. When a network wants to be reachable, it "announces" its addresses to its neighbors, who pass the information along.</p>
+
+            <p class="story-text fade-in">When Iran wants to disappear from the internet, they don't "block" anything. They simply <strong>stop announcing their addresses</strong>. The rest of the world's routers gradually forget Iran exists. It's not that they refuse to connect&mdash;they literally don't know how to reach Iran anymore.</p>
+
+            <div class="bgp-visual fade-in">
+                <h3 class="bgp-title">What happens to BGP during a shutdown</h3>
+                <p class="bgp-subtitle">Simplified view of route announcements</p>
+
+                <div class="bgp-comparison">
+                    <div class="bgp-state normal">
+                        <div class="bgp-state-header">
+                            <div class="bgp-state-icon">✓</div>
+                            <div class="bgp-state-title">Normal Operation</div>
+                        </div>
+                        <div class="bgp-message">
+                            <span class="keyword">ANNOUNCE</span> prefix <span class="value">185.143.232.0/22</span><br>
+                            <span class="keyword">PATH:</span> AS49666 → AS6762 → ...<br>
+                            <span class="keyword">NEXT_HOP:</span> <span class="value">185.143.232.1</span>
+                        </div>
+                        <p class="bgp-result"><strong>Result:</strong> Global routers know "to reach 185.143.232.x, send traffic toward AS49666 (Iran's gateway)"</p>
+                    </div>
+
+                    <div class="bgp-state shutdown">
+                        <div class="bgp-state-header">
+                            <div class="bgp-state-icon">✕</div>
+                            <div class="bgp-state-title">During Shutdown</div>
+                        </div>
+                        <div class="bgp-message">
+                            <span class="keyword">WITHDRAW</span> prefix <span class="withdrawn">185.143.232.0/22</span><br>
+                            <span class="keyword">PATH:</span> <span class="withdrawn">[removed]</span><br>
+                            <span class="keyword">NEXT_HOP:</span> <span class="withdrawn">[none]</span>
+                        </div>
+                        <p class="bgp-result"><strong>Result:</strong> Global routers delete Iran from their routing tables. Traffic to Iranian IPs gets dropped&mdash;there's nowhere to send it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analogy-box fade-in">
+                <div class="analogy-label">Think of it this way</div>
+                <p class="analogy-text">Imagine if a country could erase itself from every GPS system and map in the world simultaneously. Delivery drivers wouldn't refuse to go there&mdash;they simply couldn't find it. That's what BGP withdrawal does to internet traffic.</p>
+            </div>
+
+            <p class="story-text fade-in">During the November 2019 shutdown, Iran withdrew approximately <strong>15,000 network prefixes</strong> from global routing tables. Within hours, international visibility of Iranian networks dropped from 100% to just 5%.</p>
+
+            <p class="story-text fade-in">The domestic "National Information Network" (NIN) continued working because it doesn't rely on international BGP announcements. This allowed government services and approved domestic apps to function while the outside world was completely cut off.</p>
+        </div>
+    </section>
+
+    <!-- Part 4: November 2019 -->
+    <section class="story-section dark">
+        <div class="container">
+            <span class="section-number fade-in">Part 4</span>
+            <h2 class="story-title fade-in">November 2019: Seven days of silence</h2>
+
+            <p class="story-text fade-in">On November 16, 2019, following protests over fuel price increases, Iran executed a near-total internet shutdown. It wasn't a technical failure&mdash;it was a <strong>coordinated, deliberate silencing</strong> of 87 million people.</p>
+
+            <p class="story-text fade-in">The shutdown followed a calculated sequence: <strong>mobile networks first</strong> (harder to circumvent, used by protesters on the streets), then fixed-line ISPs. Within 6 hours, international connectivity dropped from 100% to 5%.</p>
+
+            <div class="timeline-visual fade-in">
+                <h3 class="timeline-title">The coordinated shutdown sequence</h3>
+                <p class="timeline-subtitle">November 16-23, 2019 (times in local Iran time)</p>
+
+                <div class="timeline">
+                    <div class="timeline-track"></div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot"></div>
+                            <div class="timeline-time">14:00</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">Irancell goes dark</div>
+                            <div class="timeline-event-desc">First mobile network disconnected. <span class="timeline-percent">-33%</span> visibility</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot warning"></div>
+                            <div class="timeline-time">14:30</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">MCI disconnected</div>
+                            <div class="timeline-event-desc">Largest mobile carrier (~50M users) goes offline. <span class="timeline-percent">67%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot warning"></div>
+                            <div class="timeline-time">15:00</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">Rightel drops</div>
+                            <div class="timeline-event-desc">All three mobile operators now offline. <span class="timeline-percent">55%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot danger"></div>
+                            <div class="timeline-time">16:30</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">TIC backbone withdraws routes</div>
+                            <div class="timeline-event-desc">Main infrastructure provider disconnects. <span class="timeline-percent">40%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot danger"></div>
+                            <div class="timeline-time">17:00</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">Shatel, ParsOnline disconnected</div>
+                            <div class="timeline-event-desc">Major fixed-line ISPs go dark. <span class="timeline-percent">25%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot danger"></div>
+                            <div class="timeline-time">20:00</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">Near-total blackout</div>
+                            <div class="timeline-event-desc">Only government/military networks remain. <span class="timeline-percent">5%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot danger"></div>
+                            <div class="timeline-time">Nov 17-20</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">Total information blackout</div>
+                            <div class="timeline-event-desc">5 days with no outside visibility. News can't get out. <span class="timeline-percent">5%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-dot">
+                            <div class="dot"></div>
+                            <div class="timeline-time">Nov 23</div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-event-title">Gradual restoration</div>
+                            <div class="timeline-event-desc">Services slowly return. Damage already done. <span class="timeline-percent">90%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="critical-box fade-in">
+                <div class="critical-label">The human cost</div>
+                <p class="critical-text">During the blackout, the outside world had almost no visibility into what was happening inside Iran. Families couldn't reach relatives abroad. Journalists couldn't report. Evidence of violence was trapped inside. The shutdown was designed to enable a crackdown in darkness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 5: September 2022 -->
+    <section class="story-section">
+        <div class="container">
+            <span class="section-number fade-in">Part 5</span>
+            <h2 class="story-title fade-in">September 2022: The "digital curfew"</h2>
+
+            <p class="story-text fade-in">Following the death of Mahsa Amini and subsequent protests, Iran deployed a more insidious approach. Instead of a total blackout (which drew international criticism in 2019), they implemented <strong>scheduled daily shutdowns</strong>.</p>
+
+            <p class="story-text fade-in">Every day from <strong>4 PM to midnight</strong>&mdash;exactly when protests typically occurred&mdash;mobile internet would go dark. This "digital curfew" was designed to suppress coordination among protesters while maintaining plausible deniability that a shutdown was occurring.</p>
+
+            <div class="curfew-visual fade-in">
+                <div class="curfew-title">Daily Mobile Shutdown Pattern (Sept 21 - Oct 3, 2022)</div>
+
+                <div class="clock-ring">
+                    <div class="clock-bg"></div>
+                    <div class="clock-inner">
+                        <div class="clock-time">4PM-12AM</div>
+                        <div class="clock-label-text">Daily blackout</div>
+                    </div>
+                    <div class="clock-markers">
+                        <span class="clock-marker top">00:00</span>
+                        <span class="clock-marker right">06:00</span>
+                        <span class="clock-marker bottom">12:00</span>
+                        <span class="clock-marker left">18:00</span>
+                    </div>
+                </div>
+
+                <div class="curfew-legend">
+                    <div class="legend-item">
+                        <div class="legend-color online"></div>
+                        <span>Online</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color offline"></div>
+                        <span>Forced offline</span>
+                    </div>
+                </div>
+
+                <div class="curfew-stat">
+                    <strong>100+</strong> hours of mobile blackout over 13 days
+                </div>
+            </div>
+
+            <p class="story-text fade-in">The regime also layered additional restrictions: blocking WhatsApp, Instagram, encrypted DNS, app stores, and even browser extension repositories (to prevent VPN installation). They blocked <strong>HTTP/3 and QUIC protocols</strong> entirely&mdash;cutting off modern encrypted connections.</p>
+
+            <p class="story-text fade-in">Notably, <strong>fixed-line internet stayed connected</strong>. This was strategic: protesters on the streets (using mobile) couldn't coordinate, but businesses could continue operating. The regime learned to be surgical in their suppression.</p>
+        </div>
+    </section>
+
+    <!-- Part 6: Evolution -->
+    <section class="story-section dark">
+        <div class="container">
+            <span class="section-number fade-in">Part 6</span>
+            <h2 class="story-title fade-in">How they built this trap over a decade</h2>
+
+            <p class="story-text fade-in">This capability didn't appear overnight. Iran spent years systematically <strong>eliminating redundancy</strong> and <strong>centralizing control</strong>. What once required coordinating with multiple independent providers now requires controlling just one.</p>
+
+            <div class="evolution-visual fade-in" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+                <h3 class="evolution-title" style="color: white;">The deliberate narrowing of Iran's internet</h3>
+                <p class="evolution-subtitle" style="color: rgba(255,255,255,0.4);">International gateway count over time</p>
+
+                <div class="evolution-grid">
+                    <div class="evolution-item" style="background: rgba(61, 90, 128, 0.2);">
+                        <div class="evolution-year">2014</div>
+                        <div class="evolution-doors">
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                        </div>
+                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">5 gateways</div>
+                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Distributed</div>
+                    </div>
+
+                    <div class="evolution-item" style="background: rgba(61, 90, 128, 0.15);">
+                        <div class="evolution-year">2016</div>
+                        <div class="evolution-doors">
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                        </div>
+                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">4 gateways</div>
+                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Consolidating</div>
+                    </div>
+
+                    <div class="evolution-item danger" style="background: rgba(232, 93, 76, 0.15);">
+                        <div class="evolution-year">2017</div>
+                        <div class="evolution-doors">
+                            <div class="door-icon"></div>
+                            <div class="door-icon"></div>
+                        </div>
+                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">2 gateways</div>
+                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">NIN launched</div>
+                    </div>
+
+                    <div class="evolution-item danger" style="background: rgba(232, 93, 76, 0.2);">
+                        <div class="evolution-year">2019</div>
+                        <div class="evolution-doors">
+                            <div class="door-icon"></div>
+                        </div>
+                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">1 gateway</div>
+                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Total blackout</div>
+                    </div>
+
+                    <div class="evolution-item danger" style="background: rgba(232, 93, 76, 0.25);">
+                        <div class="evolution-year">Today</div>
+                        <div class="evolution-doors">
+                            <div class="door-icon"></div>
+                        </div>
+                        <div class="evolution-label" style="color: rgba(255,255,255,0.5);">1 gateway</div>
+                        <div class="evolution-event" style="color: rgba(255,255,255,0.4);">Full control</div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="story-text fade-in">In 2017, Iran launched its "National Information Network" (NIN), which separates domestic traffic from international traffic. This means during a shutdown:</p>
+
+            <ul class="story-text fade-in" style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> Government websites stay accessible</li>
+                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> Approved domestic apps continue working</li>
+                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> Banking and essential services remain online</li>
+                <li style="padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-coral);">→</span> <strong>But the outside world is completely cut off</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Part 7: Bypass Methods -->
+    <section class="story-section danger">
+        <div class="container">
+            <span class="section-number fade-in">Part 7</span>
+            <h2 class="story-title fade-in" style="color: white;">How people try to bypass the blockade</h2>
+
+            <p class="story-text fade-in">Despite the chokepoint architecture, people continue to find ways around restrictions. However, each method has significant limitations&mdash;and Iran actively works to block them.</p>
+
+            <div class="dpi-visual fade-in">
+                <div class="dpi-title">Deep Packet Inspection (DPI): The Other Layer of Control</div>
+                <div class="dpi-flow">
+                    <div class="dpi-step">
+                        <div class="dpi-step-icon">📱</div>
+                        <div class="dpi-step-label">Your device</div>
+                    </div>
+                    <div class="dpi-arrow">→</div>
+                    <div class="dpi-step blocked">
+                        <div class="dpi-step-icon">🔍</div>
+                        <div class="dpi-step-label">DPI Inspection</div>
+                    </div>
+                    <div class="dpi-arrow">→</div>
+                    <div class="dpi-step">
+                        <div class="dpi-step-icon">🚪</div>
+                        <div class="dpi-step-label">Gateway</div>
+                    </div>
+                    <div class="dpi-arrow">→</div>
+                    <div class="dpi-step">
+                        <div class="dpi-step-icon">🌍</div>
+                        <div class="dpi-step-label">Internet</div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="story-text fade-in">Even when the gateway is "open," Iran uses <strong>Deep Packet Inspection (DPI)</strong> to analyze traffic patterns. DPI can identify VPN protocols, Tor connections, and other circumvention tools&mdash;even when encrypted&mdash;by looking at packet sizes, timing, and other fingerprints.</p>
+
+            <div class="bypass-grid fade-in">
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🌀</div>
+                        <div>
+                            <div class="bypass-title">DNS Tunneling</div>
+                            <div class="bypass-difficulty hard">Technical / Slow</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Encodes data inside DNS queries, which are often allowed through firewalls. DNS is essential for basic internet function, so it's hard to block completely.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">Your data is encoded into fake DNS lookups (like "d2f3a7.tunnel.example.com"). A server outside Iran decodes these requests and fetches the real content, sending it back via DNS responses. Tools: iodine, dnscat2.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Extremely slow (often &lt;50 kbps). Only useful for text. Iran has begun monitoring anomalous DNS patterns.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🧅</div>
+                        <div>
+                            <div class="bypass-title">Tor with Pluggable Transports</div>
+                            <div class="bypass-difficulty medium">Moderate difficulty</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Tor's "pluggable transports" (obfs4, meek, Snowflake) disguise Tor traffic to look like normal HTTPS or video calls, evading DPI detection.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">Instead of connecting directly to Tor, you connect to "bridges" that obfuscate the traffic. Snowflake uses WebRTC (video call protocol) to tunnel through. Meek disguises traffic as connections to allowed services like Azure.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Iran actively blocks known bridge IPs. Meek domains get blocked. Connection can be slow and unreliable. Requires technical setup.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">📡</div>
+                        <div>
+                            <div class="bypass-title">Satellite Internet (Starlink)</div>
+                            <div class="bypass-difficulty hard">High risk / Expensive</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Satellite connections bypass terrestrial infrastructure entirely. Starlink has activated service over Iran despite no official presence.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">Satellite dishes communicate directly with orbiting satellites, skipping all ground-based chokepoints. Data goes to ground stations outside Iran.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Equipment must be smuggled in. Dishes are detectable. Possession is illegal. Iran uses jamming. Expensive ($600+ equipment, $120/month). Risky to use.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🔗</div>
+                        <div>
+                            <div class="bypass-title">Mesh Networks (Briar, Bridgefy)</div>
+                            <div class="bypass-difficulty easy">Requires nearby users</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Phone-to-phone communication via Bluetooth or WiFi, without internet. Messages hop between devices to reach recipients.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">Apps like Briar create encrypted local networks. Your message passes through nearby phones until it reaches someone who can relay it further. Works during total shutdowns.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Only works for local communication. Requires many users in physical proximity. Range limited to ~100m per hop. Can't access global internet.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🎭</div>
+                        <div>
+                            <div class="bypass-title">Domain Fronting</div>
+                            <div class="bypass-difficulty hard">Mostly blocked</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Makes censored traffic appear to go to allowed services (like Google or Amazon) by exploiting how CDNs route HTTPS requests.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">The outer TLS connection shows "google.com" (allowed), but the encrypted HTTP header inside requests "blocked-site.com". The CDN sees the real destination and routes accordingly.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Google and Amazon disabled this in 2018. Most major CDNs have followed. Few viable fronting domains remain. Requires specialized setup.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🛡️</div>
+                        <div>
+                            <div class="bypass-title">Psiphon / Lantern</div>
+                            <div class="bypass-difficulty easy">User friendly</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Purpose-built circumvention tools that automatically try multiple bypass techniques and rotate through servers.</p>
+                    <div class="bypass-how">
+                        <div class="bypass-how-label">How it works</div>
+                        <div class="bypass-how-text">These tools combine VPN, SSH tunneling, and obfuscation. They maintain networks of thousands of servers and automatically switch when one is blocked. Designed for hostile environments.</div>
+                    </div>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Iran specifically targets these tools. Download is blocked (must get APK through unofficial channels). Connection speed varies. Some users report intermittent blocking.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="critical-box fade-in" style="background: rgba(42, 157, 143, 0.15); border: 1px solid rgba(42, 157, 143, 0.3);">
+                <div class="critical-label" style="color: var(--accent-teal);">Important</div>
+                <p class="critical-text" style="color: rgba(255,255,255,0.8);">No single bypass method is reliable in Iran. The most resilient approach is to have <strong>multiple tools ready</strong> before a shutdown occurs. Download Tor, Psiphon, and mesh apps in advance. Share tools via Bluetooth or SD card when app stores are blocked.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="summary-section">
+        <div class="wide-container">
+            <h2 class="summary-title fade-in">What you need to understand</h2>
+
+            <div class="summary-grid">
+                <div class="summary-card fade-in">
+                    <div class="summary-icon coral">🚨</div>
+                    <h3>This was engineered</h3>
+                    <p>Iran's single chokepoint isn't an accident. It took a decade of deliberate infrastructure consolidation to build a kill switch for 87 million people. This is censorship infrastructure.</p>
+                </div>
+
+                <div class="summary-card fade-in">
+                    <div class="summary-icon teal">🗺️</div>
+                    <h3>Erasure, not blocking</h3>
+                    <p>During shutdowns, Iran doesn't "block" the internet&mdash;it erases itself from global routing tables. The world's routers literally forget Iran exists. This makes shutdowns nearly impossible to circumvent.</p>
+                </div>
+
+                <div class="summary-card fade-in">
+                    <div class="summary-icon gold">🎯</div>
+                    <h3>Increasingly surgical</h3>
+                    <p>Methods have evolved from total blackouts (2019) to targeted daily curfews (2022). The regime is learning to suppress with precision, making restrictions harder to document and protest.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Data sources: <a href="https://stat.ripe.net" target="_blank">RIPEstat</a>, <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA (Georgia Tech)</a>, <a href="https://ooni.org" target="_blank">OONI</a></p>
+        <p style="margin-top: 12px; opacity: 0.7;">Last updated January 2026</p>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const revealOnScroll = () => {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                if (rect.top < windowHeight - 80) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+</html>

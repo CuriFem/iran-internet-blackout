@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-01-13T14:31:23.505400",
+  "asns": {
+    "49666": {
+      "name": "TIC-GW",
+      "prefixes": 29,
+      "upstreams": 12,
+      "downstreams": 16
+    },
+    "58224": {
+      "name": "TIC",
+      "prefixes": 1236,
+      "upstreams": 3,
+      "downstreams": 91
+    },
+    "12880": {
+      "name": "DCI",
+      "prefixes": 75,
+      "upstreams": 1,
+      "downstreams": 21
+    },
+    "197207": {
+      "name": "MCI",
+      "prefixes": 905,
+      "upstreams": 1,
+      "downstreams": 3
+    },
+    "44244": {
+      "name": "Irancell",
+      "prefixes": 461,
+      "upstreams": 1,
+      "downstreams": 1
+    },
+    "31549": {
+      "name": "Shatel",
+      "prefixes": 184,
+      "upstreams": 2,
+      "downstreams": 28
+    },
+    "42337": {
+      "name": "Respina",
+      "prefixes": 723,
+      "upstreams": 2,
+      "downstreams": 147
+    },
+    "57218": {
+      "name": "Rightel",
+      "prefixes": 90,
+      "upstreams": 1,
+      "downstreams": 2
+    }
+  }
+}
