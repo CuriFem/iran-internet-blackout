@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iran Internet Blackout: 87 Million People at Risk</title>
+    <title>Iran Internet Blackout: January 2026 Crisis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --bg-cream: #faf8f5;
@@ -23,6 +24,7 @@
             --accent-gold: #e9c46a;
             --accent-orange: #f4a261;
             --accent-green: #4ade80;
+            --accent-red: #ef4444;
         }
 
         * {
@@ -69,6 +71,33 @@
             padding: 100px 0;
         }
 
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(90deg, #7f1d1d 0%, #991b1b 50%, #7f1d1d 100%);
+            color: white;
+            padding: 16px 24px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: emergency-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes emergency-pulse {
+            0%, 100% { background-color: #7f1d1d; }
+            50% { background-color: #991b1b; }
+        }
+
+        .emergency-banner strong {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .emergency-banner span {
+            opacity: 0.9;
+            margin-left: 12px;
+        }
+
         /* Hero */
         .hero {
             min-height: 100vh;
@@ -90,7 +119,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: radial-gradient(circle at 2px 2px, rgba(232,93,76,0.15) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(239,68,68,0.2) 1px, transparent 0);
             background-size: 40px 40px;
             opacity: 0.5;
         }
@@ -99,9 +128,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(232, 93, 76, 0.2);
-            border: 1px solid rgba(232, 93, 76, 0.3);
-            color: var(--accent-coral);
+            background: rgba(239, 68, 68, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
             padding: 8px 16px;
             border-radius: 100px;
             font-size: 0.75rem;
@@ -111,12 +140,12 @@
             margin-bottom: 32px;
             position: relative;
             z-index: 1;
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 1s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
         }
 
         .hero-question {
@@ -129,7 +158,7 @@
         }
 
         .hero-question .highlight {
-            color: var(--accent-coral);
+            color: var(--accent-red);
         }
 
         .hero-subtitle {
@@ -157,7 +186,7 @@
         .hero-stat-value {
             font-family: 'JetBrains Mono', monospace;
             font-size: 2.5rem;
-            color: var(--accent-coral);
+            color: var(--accent-red);
             font-weight: 500;
         }
 
@@ -190,75 +219,169 @@
             50% { transform: translateY(8px); }
         }
 
-        /* Current Status Banner */
-        .current-status {
-            background: linear-gradient(135deg, #1a2a1a 0%, #0f0f12 100%);
+        /* Current Crisis Section */
+        .crisis-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #0f0f12 100%);
             padding: 80px 24px;
-            border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+            border-bottom: 2px solid rgba(239, 68, 68, 0.3);
         }
 
-        .status-header {
+        .crisis-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 32px;
         }
 
-        .status-dot {
+        .crisis-dot {
             width: 12px;
             height: 12px;
-            background: var(--accent-green);
+            background: var(--accent-red);
             border-radius: 50%;
-            animation: blink 2s ease-in-out infinite;
-        }
-
-        .status-dot.warning {
-            background: var(--accent-orange);
+            animation: blink 1s ease-in-out infinite;
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px var(--accent-red); }
+            50% { opacity: 0.5; box-shadow: 0 0 5px var(--accent-red); }
         }
 
-        .status-label {
+        .crisis-label {
             font-size: 0.85rem;
-            color: var(--accent-green);
+            color: var(--accent-red);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
 
-        .status-label.warning {
-            color: var(--accent-orange);
-        }
-
-        .status-title {
+        .crisis-title {
             color: white;
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
             margin-bottom: 16px;
         }
 
-        .status-date {
+        .crisis-date {
             color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
             margin-bottom: 40px;
         }
 
-        .status-grid {
+        /* Graph Container */
+        .graph-container {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .graph-title {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .graph-subtitle {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            margin-bottom: 24px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        /* Crisis Timeline */
+        .crisis-timeline {
+            margin-top: 48px;
+        }
+
+        .crisis-timeline-title {
+            color: white;
+            font-size: 1.125rem;
+            margin-bottom: 24px;
+        }
+
+        .crisis-event {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .crisis-event.warning {
+            border-left-color: var(--accent-orange);
+        }
+
+        .crisis-event.info {
+            border-left-color: var(--accent-blue);
+        }
+
+        .crisis-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .crisis-event.warning .crisis-time {
+            color: var(--accent-orange);
+        }
+
+        .crisis-event.info .crisis-time {
+            color: var(--accent-blue);
+        }
+
+        .crisis-details h4 {
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .crisis-details p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        .crisis-stat {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 24px;
+            margin-top: 40px;
         }
 
-        .status-card {
+        .stat-card {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
             padding: 24px;
         }
 
-        .status-card-label {
+        .stat-card.danger {
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .stat-card-label {
             font-size: 0.75rem;
             color: rgba(255,255,255,0.4);
             text-transform: uppercase;
@@ -266,21 +389,17 @@
             margin-bottom: 8px;
         }
 
-        .status-card-value {
+        .stat-card-value {
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.75rem;
             color: white;
         }
 
-        .status-card-value.highlight {
-            color: var(--accent-green);
+        .stat-card.danger .stat-card-value {
+            color: var(--accent-red);
         }
 
-        .status-card-value.warning {
-            color: var(--accent-orange);
-        }
-
-        .status-card-note {
+        .stat-card-note {
             font-size: 0.8rem;
             color: rgba(255,255,255,0.4);
             margin-top: 8px;
@@ -433,7 +552,6 @@
             gap: 0;
         }
 
-        /* ISP Row */
         .isp-row {
             display: flex;
             gap: 20px;
@@ -449,6 +567,11 @@
             padding: 16px 12px;
             text-align: center;
             position: relative;
+        }
+
+        .isp-node.offline {
+            background: linear-gradient(180deg, #4a4a55 0%, #3a3a44 100%);
+            opacity: 0.6;
         }
 
         .isp-icon {
@@ -468,14 +591,18 @@
             margin-top: 4px;
         }
 
-        .isp-users {
+        .isp-status {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--accent-gold);
+            font-size: 0.6rem;
+            color: var(--accent-red);
             margin-top: 8px;
+            text-transform: uppercase;
         }
 
-        /* Connection lines */
+        .isp-node.offline .isp-status {
+            color: var(--accent-red);
+        }
+
         .connections-down {
             display: flex;
             justify-content: center;
@@ -490,6 +617,11 @@
             background: linear-gradient(180deg, var(--accent-blue) 0%, var(--accent-coral) 100%);
         }
 
+        .conn-line.severed {
+            background: linear-gradient(180deg, #4a4a55 0%, var(--accent-red) 100%);
+            opacity: 0.5;
+        }
+
         .conn-funnel {
             position: absolute;
             bottom: 0;
@@ -499,17 +631,16 @@
             height: 0;
             border-left: 150px solid transparent;
             border-right: 150px solid transparent;
-            border-top: 30px solid rgba(232, 93, 76, 0.2);
+            border-top: 30px solid rgba(239, 68, 68, 0.2);
         }
 
-        /* Chokepoint Gate */
         .chokepoint-gate {
-            background: linear-gradient(180deg, var(--accent-coral) 0%, var(--accent-coral-dark) 100%);
+            background: linear-gradient(180deg, var(--accent-red) 0%, #b91c1c 100%);
             border-radius: 16px;
             padding: 24px 48px;
             text-align: center;
             position: relative;
-            box-shadow: 0 0 60px rgba(232, 93, 76, 0.4);
+            box-shadow: 0 0 60px rgba(239, 68, 68, 0.4);
             margin: 20px 0;
         }
 
@@ -519,7 +650,7 @@
             left: 50%;
             transform: translateX(-50%);
             background: white;
-            color: var(--accent-coral);
+            color: var(--accent-red);
             font-size: 0.6rem;
             font-weight: 700;
             padding: 6px 12px;
@@ -553,12 +684,12 @@
             margin-top: 8px;
         }
 
-        /* International side */
         .intl-connection {
             width: 2px;
             height: 40px;
-            background: var(--accent-teal);
+            background: var(--accent-red);
             margin: 0 auto;
+            opacity: 0.3;
         }
 
         .intl-row {
@@ -567,6 +698,7 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 20px;
+            opacity: 0.4;
         }
 
         .intl-node {
@@ -589,7 +721,7 @@
         }
 
         .world-label {
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.3);
             font-size: 0.8rem;
             text-align: center;
             margin-top: 24px;
@@ -597,7 +729,7 @@
             letter-spacing: 0.1em;
         }
 
-        /* BGP Explanation Visual */
+        /* BGP Visual */
         .bgp-visual {
             background: var(--bg-darker);
             border-radius: 24px;
@@ -641,8 +773,8 @@
         }
 
         .bgp-state.shutdown {
-            border-color: rgba(232, 93, 76, 0.3);
-            background: rgba(232, 93, 76, 0.05);
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
         }
 
         .bgp-state-header {
@@ -667,7 +799,7 @@
         }
 
         .bgp-state.shutdown .bgp-state-icon {
-            background: rgba(232, 93, 76, 0.2);
+            background: rgba(239, 68, 68, 0.2);
         }
 
         .bgp-state-title {
@@ -681,7 +813,7 @@
         }
 
         .bgp-state.shutdown .bgp-state-title {
-            color: var(--accent-coral);
+            color: var(--accent-red);
         }
 
         .bgp-message {
@@ -704,7 +836,7 @@
         }
 
         .bgp-message .withdrawn {
-            color: var(--accent-coral);
+            color: var(--accent-red);
             text-decoration: line-through;
         }
 
@@ -757,7 +889,7 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, var(--accent-teal) 0%, var(--accent-coral) 20%, var(--accent-coral) 80%, var(--accent-teal) 100%);
+            background: linear-gradient(180deg, var(--accent-coral) 0%, var(--accent-red) 100%);
             border-radius: 2px;
         }
 
@@ -795,7 +927,13 @@
         }
 
         .dot.danger {
-            background: var(--accent-coral);
+            background: var(--accent-red);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
         }
 
         .dot.warning {
@@ -840,132 +978,13 @@
 
         .timeline-percent {
             display: inline-block;
-            background: rgba(232, 93, 76, 0.1);
-            color: var(--accent-coral);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
             font-weight: 600;
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 0.8rem;
             font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Curfew Visual */
-        .curfew-visual {
-            background: var(--bg-darker);
-            border-radius: 24px;
-            padding: 60px 40px;
-            margin: 60px 0;
-            text-align: center;
-        }
-
-        .curfew-title {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .clock-ring {
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 40px;
-            position: relative;
-        }
-
-        .clock-bg {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                var(--accent-teal) 0deg,
-                var(--accent-teal) 240deg,
-                var(--accent-coral) 240deg,
-                var(--accent-coral) 360deg
-            );
-            opacity: 0.8;
-        }
-
-        .clock-inner {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            background: var(--bg-darker);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .clock-time {
-            font-family: 'Fraunces', serif;
-            font-size: 2rem;
-            color: var(--accent-coral);
-        }
-
-        .clock-label-text {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 4px;
-        }
-
-        .clock-markers {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .clock-marker {
-            position: absolute;
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.4);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .clock-marker.top { top: 4px; left: 50%; transform: translateX(-50%); }
-        .clock-marker.right { right: 0; top: 50%; transform: translateY(-50%); }
-        .clock-marker.bottom { bottom: 4px; left: 50%; transform: translateX(-50%); }
-        .clock-marker.left { left: 4px; top: 50%; transform: translateY(-50%); }
-
-        .curfew-legend {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            color: white;
-            margin-bottom: 32px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .legend-color {
-            width: 16px;
-            height: 16px;
-            border-radius: 4px;
-        }
-
-        .legend-color.online { background: var(--accent-teal); }
-        .legend-color.offline { background: var(--accent-coral); }
-
-        .curfew-stat {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .curfew-stat strong {
-            color: var(--accent-coral);
-            font-size: 1.25rem;
         }
 
         /* Evolution Visual */
@@ -990,13 +1009,13 @@
 
         .evolution-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
         }
 
         .evolution-item {
             text-align: center;
-            padding: 24px 16px;
+            padding: 20px 12px;
             border-radius: 16px;
             background: var(--bg-cream);
             transition: transform 0.3s ease;
@@ -1008,18 +1027,24 @@
         }
 
         .evolution-item.danger {
-            background: rgba(232, 93, 76, 0.08);
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .evolution-item.current {
+            background: rgba(239, 68, 68, 0.15);
+            border: 2px solid var(--accent-red);
         }
 
         .evolution-year {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.25rem;
+            font-size: 1rem;
             color: var(--accent-blue);
             margin-bottom: 12px;
         }
 
-        .evolution-item.danger .evolution-year {
-            color: var(--accent-coral);
+        .evolution-item.danger .evolution-year,
+        .evolution-item.current .evolution-year {
+            color: var(--accent-red);
         }
 
         .evolution-doors {
@@ -1032,27 +1057,28 @@
         }
 
         .door-icon {
-            width: 18px;
-            height: 28px;
+            width: 16px;
+            height: 24px;
             background: var(--accent-blue);
-            border-radius: 9px 9px 0 0;
+            border-radius: 8px 8px 0 0;
         }
 
-        .evolution-item.danger .door-icon {
-            background: var(--accent-coral);
+        .evolution-item.danger .door-icon,
+        .evolution-item.current .door-icon {
+            background: var(--accent-red);
         }
 
         .evolution-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .evolution-event {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-medium);
-            margin-top: 8px;
+            margin-top: 6px;
             font-style: italic;
         }
 
@@ -1110,7 +1136,7 @@
 
         .bypass-difficulty.easy { color: var(--accent-green); }
         .bypass-difficulty.medium { color: var(--accent-gold); }
-        .bypass-difficulty.hard { color: var(--accent-coral); }
+        .bypass-difficulty.hard { color: var(--accent-red); }
 
         .bypass-desc {
             font-size: 0.9rem;
@@ -1149,7 +1175,7 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--accent-coral);
+            color: var(--accent-red);
             margin-bottom: 6px;
         }
 
@@ -1205,12 +1231,12 @@
         }
 
         .dpi-step.blocked {
-            background: rgba(232, 93, 76, 0.15);
-            border: 1px solid rgba(232, 93, 76, 0.3);
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         .dpi-step.blocked .dpi-step-label {
-            color: var(--accent-coral);
+            color: var(--accent-red);
         }
 
         /* Summary Section */
@@ -1252,7 +1278,7 @@
             margin-bottom: 20px;
         }
 
-        .summary-icon.coral { background: rgba(232, 93, 76, 0.2); }
+        .summary-icon.red { background: rgba(239, 68, 68, 0.2); }
         .summary-icon.teal { background: rgba(42, 157, 143, 0.2); }
         .summary-icon.gold { background: rgba(233, 196, 106, 0.2); }
 
@@ -1305,12 +1331,12 @@
 
             .chokepoint-visual,
             .bgp-visual,
-            .curfew-visual,
             .timeline-visual,
             .evolution-visual,
             .analogy-box,
             .critical-box,
-            .dpi-visual {
+            .dpi-visual,
+            .graph-container {
                 border-radius: 16px;
                 margin: 40px -12px;
                 padding: 32px 20px;
@@ -1321,38 +1347,48 @@
                 padding: 12px 8px;
             }
 
-            .clock-ring {
-                width: 220px;
-                height: 220px;
-            }
-
             .bypass-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .crisis-event {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .crisis-time {
+                min-width: auto;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <strong>Active Blackout</strong>
+        <span>Iran internet traffic has dropped to near-zero since January 8, 2026</span>
+    </div>
+
     <!-- Hero -->
     <section class="hero">
         <div class="hero-warning">
-            <span>Human Rights Crisis</span>
+            <span>Ongoing Crisis - January 2026</span>
         </div>
         <h1 class="hero-question">Iran's Internet <span class="highlight">Blackout</span></h1>
-        <p class="hero-subtitle">Understanding how 87 million people can be disconnected from the world&mdash;and the ongoing threat they face.</p>
+        <p class="hero-subtitle">Right now, 87 million people are cut off from the world. Here's what's happening and why.</p>
         <div class="hero-stats">
             <div class="hero-stat">
-                <div class="hero-stat-value">87M</div>
-                <div class="hero-stat-label">People affected</div>
+                <div class="hero-stat-value">~0%</div>
+                <div class="hero-stat-label">Current traffic</div>
             </div>
             <div class="hero-stat">
-                <div class="hero-stat-value">1</div>
-                <div class="hero-stat-label">Single point of failure</div>
+                <div class="hero-stat-value">98.5%</div>
+                <div class="hero-stat-label">IPv6 routes withdrawn</div>
             </div>
             <div class="hero-stat">
-                <div class="hero-stat-value">4,026</div>
-                <div class="hero-stat-label">Network routes at risk</div>
+                <div class="hero-stat-value">5+ days</div>
+                <div class="hero-stat-label">Duration so far</div>
             </div>
         </div>
         <div class="scroll-hint">
@@ -1363,43 +1399,142 @@
         </div>
     </section>
 
-    <!-- Current Status - January 2026 -->
-    <section class="current-status">
+    <!-- Current Crisis Section -->
+    <section class="crisis-section">
         <div class="wide-container">
-            <div class="status-header">
-                <div class="status-dot"></div>
-                <span class="status-label">Live Status - January 2026</span>
+            <div class="crisis-header">
+                <div class="crisis-dot"></div>
+                <span class="crisis-label">Active Shutdown</span>
             </div>
 
-            <h2 class="status-title fade-in">Current State of Iran's Internet</h2>
-            <p class="status-date fade-in">Data collected January 13, 2026 via RIPE RIS</p>
+            <h2 class="crisis-title fade-in">January 2026: What's Happening Now</h2>
+            <p class="crisis-date fade-in">Live data from Cloudflare, RIPE RIS, and IODA</p>
 
-            <div class="status-grid fade-in">
-                <div class="status-card">
-                    <div class="status-card-label">Global Visibility</div>
-                    <div class="status-card-value highlight">99.7%</div>
-                    <div class="status-card-note">320 of 321 peers seeing routes</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-card-label">IPv4 Prefixes</div>
-                    <div class="status-card-value">4,026</div>
-                    <div class="status-card-note">Active route announcements</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-card-label">Gateway Status</div>
-                    <div class="status-card-value warning">AS49666</div>
-                    <div class="status-card-note">Single chokepoint active</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-card-label">International Upstreams</div>
-                    <div class="status-card-value">12</div>
-                    <div class="status-card-note">All through TIC gateway</div>
+            <!-- Traffic Graph -->
+            <div class="graph-container fade-in">
+                <h3 class="graph-title">Iran Internet Traffic - January 2026</h3>
+                <p class="graph-subtitle">Normalized traffic volume (100% = normal levels)</p>
+                <div class="chart-wrapper">
+                    <canvas id="trafficChart"></canvas>
                 </div>
             </div>
 
-            <div class="critical-box fade-in" style="margin-top: 40px; background: rgba(244, 162, 97, 0.2); border: 1px solid rgba(244, 162, 97, 0.3);">
-                <div class="critical-label" style="color: var(--accent-orange);">Current Risk Assessment</div>
-                <p class="critical-text" style="color: rgba(255,255,255,0.8);">While connectivity appears normal today, the infrastructure for a complete blackout remains in place. All 4,026 routes pass through a single government-controlled gateway. A shutdown could occur within hours if ordered.</p>
+            <!-- IPv6 Graph -->
+            <div class="graph-container fade-in">
+                <h3 class="graph-title">IPv6 Address Space Announced</h3>
+                <p class="graph-subtitle">Millions of /48 prefixes visible globally</p>
+                <div class="chart-wrapper">
+                    <canvas id="ipv6Chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Crisis Timeline -->
+            <div class="crisis-timeline fade-in">
+                <h3 class="crisis-timeline-title">Timeline of the January 2026 Shutdown</h3>
+
+                <div class="crisis-event warning">
+                    <div class="crisis-time">Dec 31</div>
+                    <div class="crisis-details">
+                        <h4>HTTP/3 Blocking Begins</h4>
+                        <p>IranCell (AS44244) HTTP/3 usage drops from 40% to 5%. Preparation for shutdown.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event warning">
+                    <div class="crisis-time">Jan 3</div>
+                    <div class="crisis-details">
+                        <h4>TCI Protocol Restrictions</h4>
+                        <p>TCI (AS58224) HTTP/3 falls below 5%. Modern encrypted protocols blocked.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event info">
+                    <div class="crisis-time">Jan 5-7</div>
+                    <div class="crisis-details">
+                        <h4>Traffic Spike Before Shutdown</h4>
+                        <p>Traffic exceeds normal levels, possibly as users anticipate restrictions.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event">
+                    <div class="crisis-time">Jan 8, 11:50 UTC</div>
+                    <div class="crisis-details">
+                        <h4>IPv6 Routes Withdrawn</h4>
+                        <p>IPv6 address space drops <span class="crisis-stat">98.5%</span> from 48M to 737K /48 prefixes.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event">
+                    <div class="crisis-time">Jan 8, 13:30 UTC</div>
+                    <div class="crisis-details">
+                        <h4>IPv6 Traffic Near Zero</h4>
+                        <p>IPv6 share of human traffic drops from 12% to 2%.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event">
+                    <div class="crisis-time">Jan 8, 16:30 UTC</div>
+                    <div class="crisis-details">
+                        <h4>Major Traffic Drop</h4>
+                        <p>Overall traffic falls <span class="crisis-stat">90%</span> from normal levels.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event">
+                    <div class="crisis-time">Jan 8, 18:45 UTC</div>
+                    <div class="crisis-details">
+                        <h4>Total Blackout</h4>
+                        <p>Traffic drops to <span class="crisis-stat">effectively zero</span>. Iran is offline.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event info">
+                    <div class="crisis-time">Jan 9, 11:30 UTC</div>
+                    <div class="crisis-details">
+                        <h4>Universities Briefly Reconnected</h4>
+                        <p>University of Tehran, Sharif University, Tehran Medical, Tarbiat Modares briefly restored.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event">
+                    <div class="crisis-time">Jan 9, 15:00 UTC</div>
+                    <div class="crisis-details">
+                        <h4>University Access Cut Again</h4>
+                        <p>Brief connectivity window closed. Shutdown continues.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-event">
+                    <div class="crisis-time">Jan 10+</div>
+                    <div class="crisis-details">
+                        <h4>Ongoing Blackout</h4>
+                        <p>Traffic remains at <span class="crisis-stat">&lt;0.01%</span> of normal levels. Shutdown continues.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Stats -->
+            <div class="stats-grid fade-in">
+                <div class="stat-card danger">
+                    <div class="stat-card-label">Current Traffic</div>
+                    <div class="stat-card-value">~0%</div>
+                    <div class="stat-card-note">Effectively offline</div>
+                </div>
+                <div class="stat-card danger">
+                    <div class="stat-card-label">IPv6 Visibility</div>
+                    <div class="stat-card-value">-98.5%</div>
+                    <div class="stat-card-note">Routes withdrawn</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Affected Networks</div>
+                    <div class="stat-card-value">3+</div>
+                    <div class="stat-card-note">MCCI, IranCell, TCI</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Duration</div>
+                    <div class="stat-card-value">5+ days</div>
+                    <div class="stat-card-note">Since Jan 8</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1410,18 +1545,16 @@
             <span class="section-number fade-in">Understanding the Problem</span>
             <h2 class="story-title fade-in">What is an internet blackout?</h2>
 
-            <p class="story-text fade-in">The internet isn't one thing. It's thousands of separate networks all agreeing to pass traffic to each other. Your home WiFi is a network. Your mobile carrier is a network. Google runs networks. So does every country.</p>
-
-            <p class="story-text fade-in">When you visit a website hosted in another country, your request hops through multiple networks to get there. Each network knows which neighbors it can reach, and they pass your data along like a chain of messengers.</p>
+            <p class="story-text fade-in">The internet isn't one thing. It's thousands of separate networks all agreeing to pass traffic to each other. When you visit a website hosted in another country, your request hops through multiple networks to get there.</p>
 
             <div class="analogy-box fade-in">
                 <div class="analogy-label">Think of it this way</div>
                 <p class="analogy-text">The internet is like a city of buildings connected by roads. Each building (network) has its own rooms and people. The roads let traffic flow between buildings. Normally, if one road closes, you can take another route.</p>
             </div>
 
-            <p class="story-text fade-in">Most countries have <strong>multiple connections</strong> to the global internet through different providers in different locations. This redundancy makes the internet resilient. If one path fails, traffic finds another way.</p>
+            <p class="story-text fade-in">Most countries have <strong>multiple connections</strong> to the global internet. This redundancy makes the internet resilient. If one path fails, traffic finds another way.</p>
 
-            <p class="story-text fade-in">In Iran, this redundancy has been systematically eliminated. All international traffic now flows through <strong>one single point</strong>&mdash;making a nationwide blackout trivially easy to execute.</p>
+            <p class="story-text fade-in">In Iran, this redundancy has been systematically eliminated. All international traffic flows through <strong>one single point</strong>&mdash;making a nationwide blackout trivially easy to execute.</p>
         </div>
     </section>
 
@@ -1431,52 +1564,45 @@
             <span class="section-number fade-in">The Vulnerability</span>
             <h2 class="story-title fade-in">A single point of failure for 87 million people</h2>
 
-            <p class="story-text fade-in">All of Iran's international internet traffic passes through one gateway: <strong>AS49666</strong>, operated by the state-controlled Telecommunication Infrastructure Company (TIC). Every mobile user, every home connection, every business&mdash;all dependent on this single point.</p>
+            <p class="story-text fade-in">All of Iran's international internet traffic passes through one gateway: <strong>AS49666</strong>, operated by the state-controlled Telecommunication Infrastructure Company (TIC).</p>
 
             <div class="chokepoint-visual fade-in">
-                <div class="chokepoint-title">Iran's Network Architecture (January 2026)</div>
+                <div class="chokepoint-title">Iran's Network Architecture - Currently Offline</div>
                 <div class="chokepoint-diagram">
                     <div class="isp-row">
-                        <div class="isp-node">
+                        <div class="isp-node offline">
                             <div class="isp-icon">📱</div>
-                            <div class="isp-name">MCI</div>
-                            <div class="isp-type">Mobile</div>
-                            <div class="isp-users">905 prefixes</div>
+                            <div class="isp-name">MCCI</div>
+                            <div class="isp-type">AS197207</div>
+                            <div class="isp-status">Offline</div>
                         </div>
-                        <div class="isp-node">
+                        <div class="isp-node offline">
                             <div class="isp-icon">📱</div>
-                            <div class="isp-name">Irancell</div>
-                            <div class="isp-type">Mobile</div>
-                            <div class="isp-users">461 prefixes</div>
+                            <div class="isp-name">IranCell</div>
+                            <div class="isp-type">AS44244</div>
+                            <div class="isp-status">Offline</div>
                         </div>
-                        <div class="isp-node">
-                            <div class="isp-icon">🏠</div>
-                            <div class="isp-name">Shatel</div>
-                            <div class="isp-type">Fixed ISP</div>
-                            <div class="isp-users">184 prefixes</div>
-                        </div>
-                        <div class="isp-node">
-                            <div class="isp-icon">📱</div>
-                            <div class="isp-name">Rightel</div>
-                            <div class="isp-type">Mobile</div>
-                            <div class="isp-users">90 prefixes</div>
+                        <div class="isp-node offline">
+                            <div class="isp-icon">🏢</div>
+                            <div class="isp-name">TCI</div>
+                            <div class="isp-type">AS58224</div>
+                            <div class="isp-status">Offline</div>
                         </div>
                     </div>
 
                     <div class="connections-down">
-                        <div class="conn-line"></div>
-                        <div class="conn-line"></div>
-                        <div class="conn-line"></div>
-                        <div class="conn-line"></div>
+                        <div class="conn-line severed"></div>
+                        <div class="conn-line severed"></div>
+                        <div class="conn-line severed"></div>
                         <div class="conn-funnel"></div>
                     </div>
 
                     <div class="chokepoint-gate">
-                        <div class="gate-warning">Single Point of Failure</div>
-                        <div class="gate-icon">⚠️</div>
+                        <div class="gate-warning">Routes Withdrawn</div>
+                        <div class="gate-icon">🚫</div>
                         <div class="gate-name">TIC Gateway</div>
                         <div class="gate-asn">AS49666</div>
-                        <div class="gate-owner">16 downstream networks dependent</div>
+                        <div class="gate-owner">Connection severed</div>
                     </div>
 
                     <div class="intl-connection"></div>
@@ -1500,13 +1626,13 @@
                         </div>
                     </div>
 
-                    <div class="world-label">Global Internet (12 upstream providers)</div>
+                    <div class="world-label">Global Internet (Unreachable)</div>
                 </div>
             </div>
 
             <div class="critical-box fade-in">
-                <div class="critical-label">Why this matters</div>
-                <p class="critical-text">With only one gateway, disconnecting an entire nation requires just one action. There's no redundancy, no backup path, no resilience. When this gateway stops announcing routes, Iran disappears from the internet.</p>
+                <div class="critical-label">What's happening now</div>
+                <p class="critical-text">The gateway has withdrawn its BGP route announcements. Global routers no longer know how to reach Iran. Traffic has nowhere to go&mdash;Iran has been erased from the internet.</p>
             </div>
         </div>
     </section>
@@ -1517,46 +1643,41 @@
             <span class="section-number fade-in">The Technical Reality</span>
             <h2 class="story-title fade-in">How a blackout actually happens</h2>
 
-            <p class="story-text fade-in">The internet uses a protocol called <strong>BGP</strong> (Border Gateway Protocol) to know how to route traffic. Think of BGP as a global address book that every network constantly updates. When a network wants to be reachable, it "announces" its addresses to its neighbors.</p>
+            <p class="story-text fade-in">The internet uses <strong>BGP</strong> (Border Gateway Protocol) to know how to route traffic. When a network wants to be reachable, it "announces" its addresses to neighbors.</p>
 
-            <p class="story-text fade-in">During a blackout, Iranian networks <strong>stop announcing their addresses</strong>. The rest of the world's routers gradually forget how to reach Iran. It's not blocking&mdash;it's erasure.</p>
+            <p class="story-text fade-in">During a blackout, Iranian networks <strong>stop announcing their addresses</strong>. The rest of the world's routers forget how to reach Iran. It's not blocking&mdash;it's erasure.</p>
 
             <div class="bgp-visual fade-in">
-                <h3 class="bgp-title">What happens to BGP during a blackout</h3>
-                <p class="bgp-subtitle">Simplified view of route announcements</p>
+                <h3 class="bgp-title">What happened on January 8, 2026</h3>
+                <p class="bgp-subtitle">The technical mechanism of the current blackout</p>
 
                 <div class="bgp-comparison">
                     <div class="bgp-state normal">
                         <div class="bgp-state-header">
                             <div class="bgp-state-icon">✓</div>
-                            <div class="bgp-state-title">Normal State (Now)</div>
+                            <div class="bgp-state-title">Before (Jan 7)</div>
                         </div>
                         <div class="bgp-message">
-                            <span class="keyword">ANNOUNCE</span> prefix <span class="value">185.143.232.0/22</span><br>
-                            <span class="keyword">PATH:</span> AS49666 → AS6762 → ...<br>
-                            <span class="keyword">NEXT_HOP:</span> <span class="value">185.143.232.1</span>
+                            <span class="keyword">ANNOUNCE</span> <span class="value">48 million /48s</span><br>
+                            <span class="keyword">IPv6 TRAFFIC:</span> <span class="value">12%</span> of total<br>
+                            <span class="keyword">STATUS:</span> <span class="value">Reachable</span>
                         </div>
-                        <p class="bgp-result"><strong>Result:</strong> Global routers know how to reach Iranian networks</p>
+                        <p class="bgp-result"><strong>Result:</strong> Global routers knew how to reach Iran</p>
                     </div>
 
                     <div class="bgp-state shutdown">
                         <div class="bgp-state-header">
                             <div class="bgp-state-icon">✕</div>
-                            <div class="bgp-state-title">During Blackout</div>
+                            <div class="bgp-state-title">After (Jan 8)</div>
                         </div>
                         <div class="bgp-message">
-                            <span class="keyword">WITHDRAW</span> prefix <span class="withdrawn">185.143.232.0/22</span><br>
-                            <span class="keyword">PATH:</span> <span class="withdrawn">[removed]</span><br>
-                            <span class="keyword">NEXT_HOP:</span> <span class="withdrawn">[none]</span>
+                            <span class="keyword">WITHDRAW</span> <span class="withdrawn">98.5% of routes</span><br>
+                            <span class="keyword">IPv6 REMAINING:</span> <span class="withdrawn">737K /48s</span><br>
+                            <span class="keyword">STATUS:</span> <span class="withdrawn">Unreachable</span>
                         </div>
-                        <p class="bgp-result"><strong>Result:</strong> Iran is erased from global routing tables. Traffic has nowhere to go.</p>
+                        <p class="bgp-result"><strong>Result:</strong> Iran erased from global routing tables</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="analogy-box fade-in">
-                <div class="analogy-label">Think of it this way</div>
-                <p class="analogy-text">Imagine a country being erased from every GPS and map in the world simultaneously. People wouldn't refuse to go there&mdash;they simply couldn't find it. That's what BGP withdrawal does.</p>
             </div>
         </div>
     </section>
@@ -1564,26 +1685,26 @@
     <!-- Part 4: Historical Pattern -->
     <section class="story-section dark">
         <div class="container">
-            <span class="section-number fade-in">What Has Happened</span>
-            <h2 class="story-title fade-in">Timeline: From 2019 to January 2026</h2>
+            <span class="section-number fade-in">The Pattern</span>
+            <h2 class="story-title fade-in">This has happened before</h2>
 
-            <p class="story-text fade-in">This infrastructure has been used repeatedly to silence dissent. Here's the documented pattern of blackouts and the current state.</p>
+            <p class="story-text fade-in">The January 2026 blackout follows a documented pattern. This infrastructure has been used repeatedly to silence dissent.</p>
 
             <div class="timeline-visual fade-in">
-                <h3 class="timeline-title">Documented Blackouts and Current Status</h3>
-                <p class="timeline-subtitle">Key events from 2019 to present</p>
+                <h3 class="timeline-title">History of Iran's Internet Blackouts</h3>
+                <p class="timeline-subtitle">From 2019 to today</p>
 
                 <div class="timeline">
                     <div class="timeline-track"></div>
 
                     <div class="timeline-event">
                         <div class="timeline-dot">
-                            <div class="dot danger"></div>
+                            <div class="dot warning"></div>
                             <div class="timeline-time">Nov 2019</div>
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-event-title">Total Blackout - 7 Days</div>
-                            <div class="timeline-event-desc">Following fuel price protests. Visibility dropped to <span class="timeline-percent">5%</span> within 6 hours. Near-complete isolation for a week.</div>
+                            <div class="timeline-event-desc">Fuel price protests. Visibility dropped to <span class="timeline-percent">5%</span>. First major test of the chokepoint.</div>
                         </div>
                     </div>
 
@@ -1594,7 +1715,7 @@
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-event-title">"Digital Curfew" - 13 Days</div>
-                            <div class="timeline-event-desc">After Mahsa Amini protests. Daily mobile shutdowns 4PM-midnight. <span class="timeline-percent">100+ hours</span> of cumulative blackout.</div>
+                            <div class="timeline-event-desc">Mahsa Amini protests. Daily mobile shutdowns 4PM-midnight. <span class="timeline-percent">100+ hours</span> cumulative.</div>
                         </div>
                     </div>
 
@@ -1605,34 +1726,32 @@
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-event-title">Ongoing Restrictions</div>
-                            <div class="timeline-event-desc">Continuous blocking of platforms, VPNs, and encrypted protocols. Regional outages during unrest.</div>
+                            <div class="timeline-event-desc">Continuous blocking of platforms, VPNs, encrypted protocols. Regional outages.</div>
                         </div>
                     </div>
 
                     <div class="timeline-event">
                         <div class="timeline-dot">
-                            <div class="dot"></div>
+                            <div class="dot danger"></div>
                             <div class="timeline-time">Jan 2026</div>
                         </div>
                         <div class="timeline-content">
-                            <div class="timeline-event-title">Current State - Infrastructure Ready</div>
-                            <div class="timeline-event-desc">Visibility at <span class="timeline-percent" style="background: rgba(42, 157, 143, 0.1); color: var(--accent-teal);">99.7%</span> but single chokepoint remains. 4,026 prefixes through AS49666. Blackout capability intact.</div>
+                            <div class="timeline-event-title">Current Blackout - Ongoing</div>
+                            <div class="timeline-event-desc">Traffic at <span class="timeline-percent">~0%</span>. IPv6 routes <span class="timeline-percent">-98.5%</span>. Most severe disruption on record.</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <p class="story-text fade-in">The pattern is clear: when protests occur, the internet goes dark. The infrastructure exists specifically to enable this.</p>
         </div>
     </section>
 
-    <!-- Part 5: How it was built -->
+    <!-- Part 5: Evolution -->
     <section class="story-section">
         <div class="container">
             <span class="section-number fade-in">How We Got Here</span>
             <h2 class="story-title fade-in">The systematic elimination of redundancy</h2>
 
-            <p class="story-text fade-in">Iran didn't always have this vulnerability. Over a decade, the number of international gateways was deliberately reduced from five to one, concentrating all control in state hands.</p>
+            <p class="story-text fade-in">Iran didn't always have this vulnerability. Over a decade, international gateways were reduced from five to one.</p>
 
             <div class="evolution-visual fade-in">
                 <h3 class="evolution-title">International gateway count over time</h3>
@@ -1649,7 +1768,6 @@
                             <div class="door-icon"></div>
                         </div>
                         <div class="evolution-label">5 gateways</div>
-                        <div class="evolution-event">Distributed</div>
                     </div>
 
                     <div class="evolution-item">
@@ -1661,7 +1779,6 @@
                             <div class="door-icon"></div>
                         </div>
                         <div class="evolution-label">4 gateways</div>
-                        <div class="evolution-event">Consolidating</div>
                     </div>
 
                     <div class="evolution-item danger">
@@ -1671,7 +1788,6 @@
                             <div class="door-icon"></div>
                         </div>
                         <div class="evolution-label">2 gateways</div>
-                        <div class="evolution-event">NIN launched</div>
                     </div>
 
                     <div class="evolution-item danger">
@@ -1680,21 +1796,28 @@
                             <div class="door-icon"></div>
                         </div>
                         <div class="evolution-label">1 gateway</div>
-                        <div class="evolution-event">First blackout</div>
+                        <div class="evolution-event">1st blackout</div>
                     </div>
 
                     <div class="evolution-item danger">
+                        <div class="evolution-year">2022</div>
+                        <div class="evolution-doors">
+                            <div class="door-icon"></div>
+                        </div>
+                        <div class="evolution-label">1 gateway</div>
+                        <div class="evolution-event">Curfews</div>
+                    </div>
+
+                    <div class="evolution-item current">
                         <div class="evolution-year">2026</div>
                         <div class="evolution-doors">
                             <div class="door-icon"></div>
                         </div>
                         <div class="evolution-label">1 gateway</div>
-                        <div class="evolution-event">Still vulnerable</div>
+                        <div class="evolution-event">Now offline</div>
                     </div>
                 </div>
             </div>
-
-            <p class="story-text fade-in">The "National Information Network" (NIN), launched in 2017, was marketed as improving domestic internet speed. In reality, it created a two-tier system: domestic services continue during blackouts while international access is severed.</p>
         </div>
     </section>
 
@@ -1704,90 +1827,21 @@
             <span class="section-number fade-in">Circumvention</span>
             <h2 class="story-title fade-in" style="color: white;">How people try to stay connected</h2>
 
-            <p class="story-text fade-in">Despite the chokepoint architecture, people continue to find ways around restrictions. However, each method has significant limitations.</p>
-
-            <div class="dpi-visual fade-in">
-                <div class="dpi-title">Deep Packet Inspection (DPI): The Other Layer of Control</div>
-                <div class="dpi-flow">
-                    <div class="dpi-step">
-                        <div class="dpi-step-icon">📱</div>
-                        <div class="dpi-step-label">Your device</div>
-                    </div>
-                    <div class="dpi-arrow">→</div>
-                    <div class="dpi-step blocked">
-                        <div class="dpi-step-icon">🔍</div>
-                        <div class="dpi-step-label">DPI Inspection</div>
-                    </div>
-                    <div class="dpi-arrow">→</div>
-                    <div class="dpi-step">
-                        <div class="dpi-step-icon">🚪</div>
-                        <div class="dpi-step-label">Gateway</div>
-                    </div>
-                    <div class="dpi-arrow">→</div>
-                    <div class="dpi-step">
-                        <div class="dpi-step-icon">🌍</div>
-                        <div class="dpi-step-label">Internet</div>
-                    </div>
-                </div>
-            </div>
-
-            <p class="story-text fade-in">Even when the gateway is "open," Deep Packet Inspection analyzes traffic patterns to identify and block VPNs, Tor, and other tools.</p>
+            <p class="story-text fade-in">During blackouts, these methods become critical&mdash;though none are fully reliable when BGP routes are withdrawn.</p>
 
             <div class="bypass-grid fade-in">
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🌀</div>
-                        <div>
-                            <div class="bypass-title">DNS Tunneling</div>
-                            <div class="bypass-difficulty hard">Technical / Slow</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Encodes data inside DNS queries. DNS is essential for basic internet function, so it's harder to block completely.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Data is encoded into fake DNS lookups. A server outside Iran decodes these and fetches real content. Tools: iodine, dnscat2.</div>
-                    </div>
-                    <div class="bypass-limitation">
-                        <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Extremely slow (&lt;50 kbps). Only useful for text.</div>
-                    </div>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🧅</div>
-                        <div>
-                            <div class="bypass-title">Tor with Pluggable Transports</div>
-                            <div class="bypass-difficulty medium">Moderate difficulty</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Tor's "pluggable transports" (obfs4, meek, Snowflake) disguise traffic to look like normal HTTPS or video calls.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Connects to "bridges" that obfuscate traffic. Snowflake uses WebRTC (video call protocol) to tunnel through.</div>
-                    </div>
-                    <div class="bypass-limitation">
-                        <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Bridge IPs get blocked. Connection unreliable. Requires setup.</div>
-                    </div>
-                </div>
-
                 <div class="bypass-card">
                     <div class="bypass-header">
                         <div class="bypass-icon">📡</div>
                         <div>
                             <div class="bypass-title">Satellite Internet (Starlink)</div>
-                            <div class="bypass-difficulty hard">High risk / Expensive</div>
+                            <div class="bypass-difficulty hard">High risk / Only option during total blackout</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Satellite connections bypass terrestrial infrastructure entirely. Starlink has activated service over Iran.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Dishes communicate directly with satellites, skipping ground-based chokepoints entirely.</div>
-                    </div>
+                    <p class="bypass-desc">Satellite connections bypass terrestrial infrastructure entirely. The only method that works during a complete BGP withdrawal.</p>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Equipment must be smuggled. Dishes detectable. Possession illegal. Iran uses jamming.</div>
+                        <div class="bypass-limitation-text">Equipment must be smuggled. Dishes detectable. Possession illegal. Active jamming reported.</div>
                     </div>
                 </div>
 
@@ -1796,17 +1850,28 @@
                         <div class="bypass-icon">🔗</div>
                         <div>
                             <div class="bypass-title">Mesh Networks (Briar, Bridgefy)</div>
-                            <div class="bypass-difficulty easy">Requires nearby users</div>
+                            <div class="bypass-difficulty medium">Works offline / Local only</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Phone-to-phone communication via Bluetooth or WiFi, without internet. Messages hop between devices.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Apps create encrypted local networks. Messages pass through nearby phones until reaching recipients.</div>
-                    </div>
+                    <p class="bypass-desc">Phone-to-phone communication via Bluetooth or WiFi. Works without any internet connection.</p>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Only local communication. Requires many users nearby. Can't access global internet.</div>
+                        <div class="bypass-limitation-text">Only local communication. Can't access global internet. Requires nearby users.</div>
+                    </div>
+                </div>
+
+                <div class="bypass-card">
+                    <div class="bypass-header">
+                        <div class="bypass-icon">🧅</div>
+                        <div>
+                            <div class="bypass-title">Tor with Pluggable Transports</div>
+                            <div class="bypass-difficulty hard">Only works when gateway is open</div>
+                        </div>
+                    </div>
+                    <p class="bypass-desc">Obfs4, meek, Snowflake disguise traffic. Useful during partial blocks, not during total BGP withdrawal.</p>
+                    <div class="bypass-limitation">
+                        <div class="bypass-limitation-label">Limitation</div>
+                        <div class="bypass-limitation-text">Requires some connectivity. Currently ineffective during total blackout.</div>
                     </div>
                 </div>
 
@@ -1815,43 +1880,20 @@
                         <div class="bypass-icon">🛡️</div>
                         <div>
                             <div class="bypass-title">Psiphon / Lantern</div>
-                            <div class="bypass-difficulty easy">User friendly</div>
+                            <div class="bypass-difficulty medium">Only works when gateway is open</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Purpose-built circumvention tools that automatically try multiple bypass techniques and rotate servers.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Combines VPN, SSH tunneling, and obfuscation. Maintains thousands of servers, auto-switches when blocked.</div>
-                    </div>
+                    <p class="bypass-desc">Purpose-built circumvention tools. Effective during partial blocks, not during total shutdown.</p>
                     <div class="bypass-limitation">
                         <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Downloads blocked. Must get APK through unofficial channels. Speed varies.</div>
-                    </div>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">🎭</div>
-                        <div>
-                            <div class="bypass-title">Domain Fronting</div>
-                            <div class="bypass-difficulty hard">Mostly blocked</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Makes traffic appear to go to allowed services (like Google) by exploiting CDN routing.</p>
-                    <div class="bypass-how">
-                        <div class="bypass-how-label">How it works</div>
-                        <div class="bypass-how-text">Outer connection shows "google.com" but encrypted header requests blocked site. CDN routes accordingly.</div>
-                    </div>
-                    <div class="bypass-limitation">
-                        <div class="bypass-limitation-label">Limitation</div>
-                        <div class="bypass-limitation-text">Google, Amazon disabled this in 2018. Few viable domains remain.</div>
+                        <div class="bypass-limitation-text">Requires some connectivity. Download in advance.</div>
                     </div>
                 </div>
             </div>
 
-            <div class="critical-box fade-in" style="background: rgba(42, 157, 143, 0.15); border: 1px solid rgba(42, 157, 143, 0.3);">
-                <div class="critical-label" style="color: var(--accent-teal);">Preparation is key</div>
-                <p class="critical-text" style="color: rgba(255,255,255,0.8);">No single method is reliable. The best approach is to have <strong>multiple tools ready</strong> before a blackout occurs. Download Tor, Psiphon, and mesh apps in advance. Share via Bluetooth when app stores are blocked.</p>
+            <div class="critical-box fade-in" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3);">
+                <div class="critical-label" style="color: var(--accent-red);">Current Reality</div>
+                <p class="critical-text" style="color: rgba(255,255,255,0.8);">During a total BGP withdrawal like now, <strong>only satellite connections work</strong>. VPNs, Tor, and other tools require the gateway to be announcing routes. Mesh networks enable local communication only.</p>
             </div>
         </div>
     </section>
@@ -1859,32 +1901,32 @@
     <!-- Summary -->
     <section class="summary-section">
         <div class="wide-container">
-            <h2 class="summary-title fade-in">The Ongoing Threat</h2>
+            <h2 class="summary-title fade-in">What You Need to Know</h2>
 
             <div class="summary-grid">
                 <div class="summary-card fade-in">
-                    <div class="summary-icon coral">⚠️</div>
-                    <h3>Vulnerability Remains</h3>
-                    <p>As of January 2026, all 4,026 network routes still pass through a single gateway. The infrastructure for a complete blackout is fully operational.</p>
+                    <div class="summary-icon red">🚨</div>
+                    <h3>This Is Happening Now</h3>
+                    <p>Since January 8, 2026, Iran's internet traffic has been near zero. 87 million people are cut off from the world.</p>
                 </div>
 
                 <div class="summary-card fade-in">
                     <div class="summary-icon teal">🗺️</div>
                     <h3>Erasure, Not Blocking</h3>
-                    <p>During blackouts, Iran doesn't "block" the internet&mdash;it disappears from global routing tables. The world's routers literally forget how to reach it.</p>
+                    <p>Iran isn't blocking traffic&mdash;it has withdrawn its routes from global tables. The world's routers literally don't know how to reach it.</p>
                 </div>
 
                 <div class="summary-card fade-in">
                     <div class="summary-icon gold">👁️</div>
-                    <h3>Monitoring Matters</h3>
-                    <p>Organizations like RIPE, OONI, and IODA provide visibility into network health. This documentation helps hold authorities accountable.</p>
+                    <h3>Visibility Matters</h3>
+                    <p>Organizations like Cloudflare, RIPE, OONI, and IODA are documenting this in real-time. This record is crucial for accountability.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>Data sources: <a href="https://stat.ripe.net" target="_blank">RIPEstat</a>, <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA (Georgia Tech)</a>, <a href="https://ooni.org" target="_blank">OONI</a></p>
+        <p>Data sources: <a href="https://blog.cloudflare.com/iran-protests-internet-shutdown/" target="_blank">Cloudflare</a>, <a href="https://stat.ripe.net" target="_blank">RIPEstat</a>, <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA</a>, <a href="https://ooni.org" target="_blank">OONI</a></p>
         <p style="margin-top: 12px; opacity: 0.7;">Last updated January 13, 2026</p>
     </footer>
 
@@ -1905,6 +1947,108 @@
 
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
+
+        // Traffic Chart
+        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+        new Chart(trafficCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6', 'Jan 7', 'Jan 8', 'Jan 9', 'Jan 10', 'Jan 11', 'Jan 12', 'Jan 13'],
+                datasets: [{
+                    label: 'Traffic Volume',
+                    data: [100, 98, 95, 97, 105, 110, 108, 10, 0.5, 0.3, 0.2, 0.1, 0.1],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#ef4444'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        max: 120,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // IPv6 Chart
+        const ipv6Ctx = document.getElementById('ipv6Chart').getContext('2d');
+        new Chart(ipv6Ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 7', 'Jan 8 00:00', 'Jan 8 06:00', 'Jan 8 11:50', 'Jan 8 13:30', 'Jan 8 18:00', 'Jan 9', 'Jan 10', 'Jan 11', 'Jan 12', 'Jan 13'],
+                datasets: [{
+                    label: 'IPv6 /48 Prefixes (Millions)',
+                    data: [48, 48, 48, 0.74, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                    borderColor: '#f97316',
+                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#f97316'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        max: 55,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)',
+                            callback: function(value) {
+                                return value + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
