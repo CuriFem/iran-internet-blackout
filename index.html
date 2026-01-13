@@ -1331,13 +1331,15 @@
         </div>
     </section>
 
-    <!-- Section 6: Bypass methods -->
+    <!-- Section 6: Connectivity options -->
     <section class="article-section">
         <div class="container">
             <div class="section-number reveal">Part 7</div>
-            <h2 class="section-title reveal">Can people get around it?</h2>
+            <h2 class="section-title reveal">Why most workarounds don't help</h2>
 
-            <p class="section-text reveal">During a total shutdown, most circumvention tools don't work. VPNs, Tor, and similar tools require some internet connection to function. When routes are withdrawn, there's nothing to circumvent—traffic has nowhere to go.</p>
+            <p class="section-text reveal">People often ask why VPNs or other tools can't restore access during a shutdown. The answer lies in understanding the difference between <strong>censorship</strong> and <strong>disconnection</strong>.</p>
+
+            <p class="section-text reveal">Censorship means traffic is being inspected and selectively blocked. Disconnection means the routes don't exist at all. Most tools are designed for the first scenario—they're useless in the second.</p>
         </div>
 
         <div class="container-wide">
@@ -1347,11 +1349,10 @@
                         <div class="bypass-icon">📡</div>
                         <div>
                             <div class="bypass-name">Satellite Internet</div>
-                            <div class="bypass-status works">Only option during total blackout</div>
+                            <div class="bypass-status works">Bypasses terrestrial infrastructure</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Starlink and other satellite services bypass terrestrial infrastructure entirely. The only method that works when BGP routes are withdrawn.</p>
-                    <div class="bypass-warning"><strong>Risk:</strong> Equipment must be smuggled. Dishes are detectable. Possession is illegal. Active jamming has been reported.</div>
+                    <p class="bypass-desc">Satellite services like Starlink don't rely on ground-based networks. They're the only technology that remains functional when a country's BGP routes are completely withdrawn.</p>
                 </div>
 
                 <div class="bypass-card">
@@ -1359,54 +1360,38 @@
                         <div class="bypass-icon">🔗</div>
                         <div>
                             <div class="bypass-name">Mesh Networks</div>
-                            <div class="bypass-status limited">Local communication only</div>
+                            <div class="bypass-status limited">Local only, no internet</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Apps like Briar and Bridgefy allow phone-to-phone communication via Bluetooth or WiFi, without any internet connection.</p>
-                    <div class="bypass-warning"><strong>Limitation:</strong> Can only reach nearby users. No access to global internet or outside information.</div>
+                    <p class="bypass-desc">Phone-to-phone communication via Bluetooth or WiFi allows local coordination without internet. However, this provides no access to the global internet or outside information.</p>
                 </div>
 
                 <div class="bypass-card">
                     <div class="bypass-header">
                         <div class="bypass-icon">🛡️</div>
                         <div>
-                            <div class="bypass-name">VPNs and Tor</div>
-                            <div class="bypass-status blocked">Ineffective during total blackout</div>
+                            <div class="bypass-name">VPNs and Encryption Tools</div>
+                            <div class="bypass-status blocked">Require existing connectivity</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Normally useful for bypassing censorship, but these tools require some connectivity to function.</p>
-                    <div class="bypass-warning"><strong>Current status:</strong> Cannot connect. Must be downloaded before blackouts for use during partial restrictions.</div>
-                </div>
-
-                <div class="bypass-card">
-                    <div class="bypass-header">
-                        <div class="bypass-icon">📻</div>
-                        <div>
-                            <div class="bypass-name">Psiphon / Lantern</div>
-                            <div class="bypass-status blocked">Requires connectivity</div>
-                        </div>
-                    </div>
-                    <p class="bypass-desc">Purpose-built circumvention tools that are effective during partial blocks and protocol restrictions.</p>
-                    <div class="bypass-warning"><strong>When useful:</strong> During partial restrictions only. Download in advance.</div>
+                    <p class="bypass-desc">These tools help when traffic is being filtered or inspected. But they require some underlying connection to work. During a total BGP withdrawal, there's no connection to encrypt.</p>
                 </div>
 
                 <div class="bypass-card">
                     <div class="bypass-header">
                         <div class="bypass-icon">🔀</div>
                         <div>
-                            <div class="bypass-name">DNS Tunneling</div>
-                            <div class="bypass-status limited">Works during partial blocks only</div>
+                            <div class="bypass-name">Protocol-Level Techniques</div>
+                            <div class="bypass-status limited">Only during partial blocks</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Encodes internet traffic inside DNS queries. Since DNS is essential for basic network functions, it's often allowed even when other traffic is blocked or inspected by DPI.</p>
-                    <div class="bypass-warning"><strong>How it works:</strong> Tools like iodine, dnscat2, or dns2tcp encode data in DNS queries to a server you control. The traffic looks like normal DNS lookups, bypassing Deep Packet Inspection. Slow but effective when DPI is blocking VPNs.</div>
+                    <p class="bypass-desc">Techniques like DNS tunneling can bypass Deep Packet Inspection by hiding traffic in allowed protocols. But they still require some route to the outside world to exist.</p>
                 </div>
-
-                </div>
+            </div>
 
             <div class="highlight-box reveal" style="margin-top: 32px; border-left-color: var(--accent-ochre);">
-                <div class="highlight-label" style="color: var(--accent-ochre);">Important distinction</div>
-                <p class="highlight-text">DNS tunneling and domain fronting work when there's <strong>some connectivity</strong> but traffic is being filtered by DPI. During a <strong>total BGP withdrawal</strong> (like now), no circumvention tool that requires internet connectivity will work—the routes simply don't exist.</p>
+                <div class="highlight-label" style="color: var(--accent-ochre);">The key limitation</div>
+                <p class="highlight-text">During a <strong>total BGP withdrawal</strong>, no software-based circumvention tool works. The routes simply don't exist. Only infrastructure that bypasses terrestrial networks entirely—like satellites—can maintain connectivity.</p>
             </div>
         </div>
     </section>
