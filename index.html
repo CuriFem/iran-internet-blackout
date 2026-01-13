@@ -1357,7 +1357,9 @@
 
             <p class="section-text reveal">People often ask why VPNs or other tools can't restore access during a shutdown. The answer lies in understanding the difference between <strong>censorship</strong> and <strong>disconnection</strong>.</p>
 
-            <p class="section-text reveal">Censorship means traffic is being inspected and selectively blocked. Disconnection means the routes don't exist at all. Most tools are designed for the first scenario—they're useless in the second.</p>
+            <p class="section-text reveal">Censorship means traffic is being inspected and selectively blocked. Disconnection means the routes don't exist at all. Most tools are designed for the first scenario.</p>
+
+            <p class="section-text reveal"><strong>However, no shutdown is 100% sealed.</strong> The current data shows ~82% of IPv4 routes withdrawn—not 100%. Some paths leak through: government and business lines that stay up, ISPs with partial connectivity, and protocols like DNS that can't be fully blocked without breaking internal services. People inside Iran are exploiting these leaks.</p>
         </div>
 
         <div class="container-wide">
@@ -1389,27 +1391,27 @@
                         <div class="bypass-icon">🛡️</div>
                         <div>
                             <div class="bypass-name">VPNs and Encryption Tools</div>
-                            <div class="bypass-status blocked">Require existing connectivity</div>
+                            <div class="bypass-status limited">Work through remaining leaks</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">These tools help when traffic is being filtered or inspected. But they require some underlying connection to work. During a total BGP withdrawal, there's no connection to encrypt.</p>
+                    <p class="bypass-desc">VPNs require some underlying route to exist. During partial shutdowns, they can work through remaining connections—government lines, business networks, or ISPs with incomplete blocks. Reports indicate some users inside Iran are connecting via VPNs through these leaks.</p>
                 </div>
 
                 <div class="bypass-card">
                     <div class="bypass-header">
                         <div class="bypass-icon">🔀</div>
                         <div>
-                            <div class="bypass-name">Protocol-Level Techniques</div>
-                            <div class="bypass-status limited">Only during partial blocks</div>
+                            <div class="bypass-name">DNS Tunneling (dnstt)</div>
+                            <div class="bypass-status limited">Exploits DNS leaks</div>
                         </div>
                     </div>
-                    <p class="bypass-desc">Techniques like DNS tunneling can bypass Deep Packet Inspection by hiding traffic in allowed protocols. But they still require some route to the outside world to exist.</p>
+                    <p class="bypass-desc">Tools like dnstt hide traffic inside DNS queries. Since DNS is rarely 100% blocked (it would break internal services), some queries leak through. Very slow, but works when VPNs are blocked. Requires a server outside Iran.</p>
                 </div>
             </div>
 
             <div class="highlight-box reveal" style="margin-top: 32px; border-left-color: var(--accent-ochre);">
-                <div class="highlight-label" style="color: var(--accent-ochre);">The key limitation</div>
-                <p class="highlight-text">During a <strong>total BGP withdrawal</strong>, no software-based circumvention tool works. The routes simply don't exist. Only infrastructure that bypasses terrestrial networks entirely—like satellites—can maintain connectivity.</p>
+                <div class="highlight-label" style="color: var(--accent-ochre);">The reality</div>
+                <p class="highlight-text">No shutdown is hermetically sealed. While ~82-98% of routes are withdrawn, small leaks remain. VPNs and DNS tunnels exploit these gaps. The connection is severely degraded—slow, unreliable, and risky—but not impossible for those with technical knowledge and the right tools.</p>
             </div>
         </div>
     </section>
