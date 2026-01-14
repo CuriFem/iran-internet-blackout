@@ -1035,8 +1035,8 @@
             </div>
 
             <div class="highlight-box reveal">
-                <div class="highlight-label">What this means — A "Stealth Outage"</div>
-                <p class="highlight-text">IPv6 routes were withdrawn (98.5% gone). But IPv4 routes remain <em>announced</em>—they appear "UP" on IODA and other monitoring tools. Yet traffic doesn't flow. This is firewall-level blocking with whitelisting: routes exist, but only approved traffic passes. A more sophisticated form of shutdown that's harder to detect and document.</p>
+                <div class="highlight-label">What this means</div>
+                <p class="highlight-text">A dual-protocol approach: IPv6 erased from routing tables, IPv4 kept visible but silenced. Monitoring tools show "normal" while actual connectivity is near-zero.</p>
             </div>
         </div>
     </section>
@@ -1052,11 +1052,9 @@
             <p class="section-text reveal">This system is called <strong>BGP</strong> (Border Gateway Protocol). In past shutdowns, Iran withdrew its routes—making the country invisible to global routers. The January 2026 shutdown is different and more sophisticated.</p>
 
             <div class="highlight-box reveal">
-                <div class="highlight-label">The key insight: A dual-method shutdown</div>
-                <p class="highlight-text">IPv6 was <strong>erased</strong> (routes withdrawn—98.5% gone). But IPv4 was <strong>silenced</strong>—routes remain announced, but traffic is blocked at the network level. This "stealth outage" means monitoring tools see IPv4 as "UP" while actual connectivity is near-zero. Only whitelisted government and business traffic passes through.</p>
+                <div class="highlight-label">The key insight</div>
+                <p class="highlight-text">Iran didn't just withdraw routes—it created a "stealth outage." BGP monitoring shows IPv4 as functional, but traffic analysis reveals the block. You need both data sources to see the full picture.</p>
             </div>
-
-            <p class="section-text reveal">This dual approach is harder to detect and document. Traditional BGP monitoring shows IPv4 as "working"—you need traffic analysis to see the block. It's a more sophisticated form of control.</p>
         </div>
     </section>
 
@@ -1189,7 +1187,7 @@
 
             <div class="highlight-box reveal" style="border-left-color: var(--accent-forest);">
                 <div class="highlight-label" style="color: var(--accent-forest);">Key point</div>
-                <p class="highlight-text">This shutdown uses two methods: IPv6 routes are <em>withdrawn</em> (traditional deletion from the map). IPv4 routes remain <em>announced</em> but traffic is blocked at the network level (whitelisting). Only approved government and business traffic passes through. VPNs and DNS tunnels can sometimes exploit these whitelisted paths.</p>
+                <p class="highlight-text">DNS knowledge doesn't help when routes are withdrawn (IPv6) or traffic is blocked (IPv4). The infrastructure itself is the barrier, not name resolution.</p>
             </div>
         </div>
     </section>
@@ -1277,7 +1275,7 @@
             <div class="section-number reveal">Part 6</div>
             <h2 class="section-title reveal">This has happened before</h2>
 
-            <p class="section-text reveal">Iran has historically had only two international gateways: <strong>TIC</strong> (AS12880, AS49666, AS48159) and <strong>IPM</strong> (AS6736). Going back further, it was just IPM. This limited architecture—combined with increasing state control—makes coordinated shutdowns straightforward.</p>
+            <p class="section-text reveal">Iran's limited gateway architecture has enabled increasingly sophisticated shutdowns over time.</p>
 
             <div class="evolution-row reveal">
                 <div class="evolution-item">
@@ -1364,7 +1362,7 @@
 
             <p class="section-text reveal">Censorship means traffic is being inspected and selectively blocked. Disconnection means the routes don't exist at all. Most tools are designed for the first scenario.</p>
 
-            <p class="section-text reveal"><strong>However, this shutdown uses whitelisting, not total erasure.</strong> IPv4 routes remain announced—meaning paths technically exist. Only approved traffic (government, business, whitelisted services) passes through the firewall. Some VPNs and DNS tunnels can sometimes slip through these whitelisted channels. People inside Iran are exploiting these gaps.</p>
+            <p class="section-text reveal"><strong>However, this shutdown isn't hermetically sealed.</strong> Some paths remain for approved traffic. VPNs and DNS tunnels can sometimes slip through these gaps.</p>
         </div>
 
         <div class="container-wide">
@@ -1415,8 +1413,8 @@
             </div>
 
             <div class="highlight-box reveal" style="margin-top: 32px; border-left-color: var(--accent-ochre);">
-                <div class="highlight-label" style="color: var(--accent-ochre);">The reality: Stealth outage with whitelisting</div>
-                <p class="highlight-text">IPv4 routes are UP but traffic is blocked—a "stealth outage" that's harder to detect. Only whitelisted traffic passes through. VPNs and DNS tunnels can sometimes exploit these approved channels. Connection is extremely slow and unreliable, but not impossible for those with the right tools and technical knowledge.</p>
+                <div class="highlight-label" style="color: var(--accent-ochre);">The reality</div>
+                <p class="highlight-text">Connection is possible but extremely slow and unreliable. Those with technical knowledge and the right tools are getting through—but it's not easy.</p>
             </div>
         </div>
     </section>
@@ -1660,7 +1658,7 @@
                 <div class="summary-card reveal">
                     <div class="summary-icon">🗺️</div>
                     <h3>Stealth outage</h3>
-                    <p>IPv6 routes were withdrawn. But IPv4 routes appear "UP"—traffic is blocked at the network level with whitelisting. A sophisticated method that's harder to detect and document.</p>
+                    <p>A new, more sophisticated shutdown method. BGP monitoring shows "normal" while traffic analysis reveals the block. Harder to detect and document.</p>
                 </div>
 
                 <div class="summary-card reveal">
