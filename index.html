@@ -1142,31 +1142,13 @@
             <div class="section-number reveal">Part 4</div>
             <h2 class="section-title reveal">What about DNS and websites?</h2>
 
-            <p class="section-text reveal">People often ask: "Can't you just use a different DNS server?" or "What if I already know the IP address?" Here's why that doesn't help during a total shutdown.</p>
+            <p class="section-text reveal">People often ask: "Can't you just use a different DNS server?" or "What if I already know the IP address?" </p>
 
             <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 32px;">How websites normally work</h3>
             <p class="section-text reveal">When you type "google.com" in your browser, your device asks a DNS server: "What's the IP address for google.com?" Once it gets the answer, it connects to that IP address. This is like looking up a phone number in a directory, then calling it.</p>
 
-            <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 40px;">The DNS timeline</h3>
-            <p class="section-text reveal">DNS manipulation was one of the first steps before the full shutdown:</p>
 
-            <div class="data-grid reveal" style="margin-top: 24px;">
-                <div class="data-card">
-                    <div class="data-card-label">Dec 31, 2025</div>
-                    <div class="data-card-value" style="font-size: 1.2rem;">DoH blocked</div>
-                    <div class="data-card-note">Encrypted DNS (DNS-over-HTTPS) stopped working, forcing users back to unencrypted DNS.</div>
-                </div>
-                <div class="data-card">
-                    <div class="data-card-label">Jan 3, 2026</div>
-                    <div class="data-card-value" style="font-size: 1.2rem;">DoT blocked</div>
-                    <div class="data-card-note">DNS-over-TLS also blocked. All DNS queries now visible to censorship systems.</div>
-                </div>
-                <div class="data-card alert">
-                    <div class="data-card-label">Jan 8, 2026</div>
-                    <div class="data-card-value" style="font-size: 1.2rem;">Routes gone</div>
-                    <div class="data-card-note">DNS becomes irrelevant, even with IP addresses, traffic can't reach Iran.</div>
-                </div>
-            </div>
+    
 
             <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 40px;">Can you access Iranian websites from outside?</h3>
             <p class="section-text reveal"><strong>Partial access.</strong> Some Iranian websites may still load, but you're likely seeing cached or older versions served by CDNs, not real-time data from servers inside Iran. Direct connections to Iranian IP addresses are blocked or severely degraded.</p>
