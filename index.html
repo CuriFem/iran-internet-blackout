@@ -860,7 +860,7 @@
             <div class="hero-kicker">January 2026 Crisis</div>
             <h1 class="hero-headline">Understanding Iran's Internet Blackout</h1>
             <p class="hero-deck">A clear explanation of what's happening, how it works, and why 87 million people are cut off from the world. Written so anyone can understand.</p>
-            <p class="hero-meta">Last updated <time datetime="2026-01-13">January 14, 2026</time></p>
+            <p class="hero-meta">Last updated <time datetime="2026-01-16">January 16, 2026</time></p>
         </div>
     </section>
 
@@ -873,7 +873,7 @@
                 <p class="status-text">Since January 8, 2026, internet traffic from Iran has dropped to near-zero. This is a <strong>"stealth outage"</strong>: IPv4 routes appear UP on monitoring tools, but traffic is blocked at the network level. IPv6 was fully withdrawn. Only whitelisted services pass through.</p>
                 <div class="status-stats">
                     <div class="status-stat">
-                        <div class="status-stat-value">-98.5%</div>
+                        <div class="status-stat-value">-94%</div>
                         <div class="status-stat-label">IPv6 routes withdrawn</div>
                     </div>
                     <div class="status-stat">
@@ -962,7 +962,7 @@
             <div class="chart-box reveal">
                 <div class="chart-header">
                     <h3 class="chart-title">BGP Route Visibility: Stealth Outage</h3>
-                    <p class="chart-subtitle">IPv6 withdrawn, IPv4 UP but traffic blocked, January 7–10, 2026</p>
+                    <p class="chart-subtitle">IPv6 withdrawn, IPv4 UP but traffic blocked, January 7–16, 2026 (Source: RIPE RIS)</p>
                 </div>
                 <div class="chart-area">
                     <svg class="svg-chart" viewBox="0 0 650 230" preserveAspectRatio="xMidYMid meet">
@@ -990,46 +990,51 @@
                         <text class="chart-axis" x="44" y="164" text-anchor="end">25%</text>
                         <text class="chart-axis" x="44" y="200" text-anchor="end">0%</text>
 
-                        <!-- X-axis -->
-                        <text class="chart-axis" x="90" y="218">Jan 7</text>
-                        <text class="chart-axis" x="230" y="218">Jan 8</text>
-                        <text class="chart-axis" x="370" y="218">Jan 9</text>
-                        <text class="chart-axis" x="510" y="218">Jan 10</text>
+                        <!-- X-axis: Jan 7-16 -->
+                        <text class="chart-axis" x="70" y="218">Jan 7</text>
+                        <text class="chart-axis" x="180" y="218">Jan 8</text>
+                        <text class="chart-axis" x="290" y="218">Jan 10</text>
+                        <text class="chart-axis" x="400" y="218">Jan 12</text>
+                        <text class="chart-axis" x="510" y="218">Jan 14</text>
+                        <text class="chart-axis" x="595" y="218">Jan 16</text>
 
-                        <!-- IPv6 Area -->
-                        <path fill="url(#ipv6-gradient)" d="M90,45 L160,45 L230,45 L300,190 L370,195 L440,195 L510,195 L580,195 L580,200 L90,200 Z"/>
+                        <!-- IPv6 Area: 100% (y=40) → 10% (y=184) → 6% (y=190) -->
+                        <path fill="url(#ipv6-gradient)" d="M70,40 L125,40 L180,184 L235,187 L290,189 L345,189 L400,190 L455,190 L510,190 L565,190 L610,190 L610,200 L70,200 Z"/>
 
-                        <!-- IPv4 Area -->
-                        <path fill="url(#ipv4-gradient)" d="M90,45 L160,45 L230,48 L300,130 L370,135 L440,133 L510,135 L580,135 L580,200 L90,200 Z"/>
+                        <!-- IPv4 Area: 100% (y=40) → 96% (y=46) stays flat -->
+                        <path fill="url(#ipv4-gradient)" d="M70,40 L125,40 L180,41 L235,46 L290,46 L345,46 L400,47 L455,47 L510,47 L565,47 L610,47 L610,200 L70,200 Z"/>
 
                         <!-- IPv6 Line -->
-                        <path style="fill: none; stroke: #c45a3b; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;" d="M90,45 L160,45 L230,45 L300,190 L370,195 L440,195 L510,195 L580,195"/>
+                        <path style="fill: none; stroke: #c45a3b; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;" d="M70,40 L125,40 L180,184 L235,187 L290,189 L345,189 L400,190 L455,190 L510,190 L565,190 L610,190"/>
 
                         <!-- IPv4 Line -->
-                        <path style="fill: none; stroke: #c49a3b; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;" d="M90,45 L160,45 L230,48 L300,130 L370,135 L440,133 L510,135 L580,135"/>
+                        <path style="fill: none; stroke: #c49a3b; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;" d="M70,40 L125,40 L180,41 L235,46 L290,46 L345,46 L400,47 L455,47 L510,47 L565,47 L610,47"/>
 
-                        <!-- IPv6 crash point -->
-                        <circle cx="300" cy="190" r="5" fill="#c45a3b"/>
+                        <!-- IPv6 crash point on Jan 8 -->
+                        <circle cx="180" cy="184" r="5" fill="#c45a3b"/>
 
-                        <!-- IPv4 crash point -->
-                        <circle cx="300" cy="130" r="5" fill="#c49a3b"/>
+                        <!-- Data points -->
+                        <circle cx="70" cy="40" r="3" fill="#c45a3b"/>
+                        <circle cx="610" cy="190" r="3" fill="#c45a3b"/>
+                        <circle cx="70" cy="40" r="3" fill="#c49a3b"/>
+                        <circle cx="610" cy="47" r="3" fill="#c49a3b"/>
 
                         <!-- Annotations -->
-                        <line stroke="#9a9488" stroke-width="1" stroke-dasharray="3,3" x1="300" y1="190" x2="300" y2="60"/>
-                        <text class="chart-annotation" x="308" y="70">Jan 8: Routes withdrawn</text>
+                        <line stroke="#9a9488" stroke-width="1" stroke-dasharray="3,3" x1="180" y1="184" x2="180" y2="55"/>
+                        <text class="chart-annotation" x="188" y="50">Jan 8: 433→43 prefixes (-90%)</text>
 
                         <!-- IPv6 label -->
-                        <text style="fill: #c45a3b; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;" x="520" y="188">IPv6: -98.5%</text>
+                        <text style="fill: #c45a3b; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;" x="520" y="188">IPv6: -94%</text>
 
                         <!-- IPv4 label -->
                         <text style="fill: #c49a3b; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;" x="520" y="128">IPv4: UP* (blocked)</text>
 
                         <!-- Legend -->
                         <rect x="70" y="8" width="12" height="12" rx="2" fill="#c45a3b"/>
-                        <text class="chart-axis" x="86" y="18">IPv6 routes withdrawn (98.5%)</text>
+                        <text class="chart-axis" x="86" y="18">IPv6: 433→26 prefixes (-94%)</text>
 
                         <rect x="280" y="8" width="12" height="12" rx="2" fill="#c49a3b"/>
-                        <text class="chart-axis" x="296" y="18">IPv4: routes UP, traffic blocked</text>
+                        <text class="chart-axis" x="296" y="18">IPv4: 8,209→7,857 (-4%, traffic blocked)</text>
                     </svg>
                 </div>
             </div>
@@ -1470,7 +1475,7 @@
     <!-- Footer -->
     <footer>
         <p>Data sources: <a href="https://blog.cloudflare.com/iran-protests-internet-shutdown/" target="_blank">Cloudflare</a> · <a href="https://netblocks.org" target="_blank">NetBlocks</a> · <a href="https://stat.ripe.net" target="_blank">RIPE</a> · <a href="https://ioda.inetintel.cc.gatech.edu" target="_blank">IODA</a> · <a href="https://ooni.org" target="_blank">OONI</a></p>
-        <p class="footer-update">Last updated January 14, 2026</p>
+        <p class="footer-update">Last updated January 16, 2026</p>
     </footer>
 
     <script>

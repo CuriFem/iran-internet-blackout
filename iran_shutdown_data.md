@@ -95,6 +95,41 @@
 
 ---
 
+## January 2026 Shutdown
+
+### Timeline (UTC)
+
+| Date/Time (UTC) | Event |
+|-----------------|-------|
+| Dec 31, 2025 | HTTP/3 traffic on IranCell drops from 40% to 5% |
+| Jan 3, 2026 | DNS-over-TLS (DoT) blocked |
+| Jan 5-7, 2026 | Traffic spikes as users download circumvention tools |
+| Jan 8, 11:50 | IPv6 routes withdrawn (98.5% drop) |
+| Jan 8, 18:45 | Total blackout - traffic drops to effectively zero |
+| Jan 9, 11:30 | Universities briefly reconnected, then cut again |
+| Jan 10+ | Blackout continues at <0.01% of normal |
+
+### Metrics (Verified via RIPE RIS, Jan 16 2026)
+
+| Date | IPv4 Prefixes | IPv6 Prefixes |
+|------|---------------|---------------|
+| Jan 7 | 8,209 | 433 |
+| Jan 8 | 8,181 | 43 |
+| Jan 9 | 7,880 | 33 |
+| Jan 10 | 7,904 | 29 |
+| Jan 16 | 7,857 | 26 |
+
+- **IPv6 withdrawal**: 94% (433 → 26 prefixes)
+- **IPv4 status**: -4% (8,209 → 7,857) - Routes UP but traffic blocked (stealth outage)
+- **People affected**: 87 million
+- **Method**: Dual-protocol approach - IPv6 erased, IPv4 whitelisted
+
+### Key Difference from Previous Shutdowns
+
+This is a "stealth outage" - BGP monitoring shows IPv4 routes as UP, but traffic is blocked at the network level. Only whitelisted services pass through. Requires both BGP and traffic analysis to detect.
+
+---
+
 ## Key ASNs in Iran's Internet Architecture
 
 | ASN | Name | Role | Prefixes (current) |
@@ -106,6 +141,36 @@
 | AS44244 | Irancell | Mobile operator | 461 |
 | AS31549 | Shatel | Fixed ISP | 185 |
 | AS42337 | Respina | ISP (149 downstream) | 725 |
+| AS57218 | Rightel | Mobile operator | 90 |
+
+### International Upstreams (via TIC-GW)
+
+| ASN | Name | Power Score |
+|-----|------|-------------|
+| AS6762 | Telecom Italia Sparkle | 57,102 |
+| AS3257 | GTT Communications | 46,388 |
+| AS33891 | Core-Backbone | 27,906 |
+| AS5511 | Orange S.A. | 23,254 |
+| AS6453 | TATA Communications | 19,049 |
+| AS29049 | Delta Telecom | 138,447 |
+
+---
+
+## Architecture Overview
+
+### Centralized Gateway Model
+
+- **Chokepoint**: AS49666 (TIC-GW)
+- **Two international gateways**: TIC and IPM (AS6736)
+- **Control capabilities**: Total shutdown, selective blocking, time-based curfew, protocol blocking, DPI
+
+### Tier Structure
+
+| Tier | Name | ASNs |
+|------|------|------|
+| 1 | International Gateway | AS49666 |
+| 2 | Backbone Providers | AS58224, AS12880, AS42337, AS48159 |
+| 3 | ISPs and Mobile Operators | AS197207, AS44244, AS31549, AS25184, AS43754, AS57218 |
 
 ---
 
@@ -129,3 +194,19 @@
 
 5. **Google Transparency Report**
    - Traffic data drop correlation
+
+6. **Cloudflare Radar**
+   - Live traffic and trends data
+   - Protocol-level analysis
+
+7. **NetBlocks**
+   - Real-time network monitoring
+   - Outage verification
+
+---
+
+## Notes
+
+- No active RIPE Atlas measurement probes in Iran as of January 2026
+- The National Information Network (NIN/SHOMA) allows some domestic services during shutdowns
+- Shutdown is asymmetric: civilian population blocked, state infrastructure remains online
